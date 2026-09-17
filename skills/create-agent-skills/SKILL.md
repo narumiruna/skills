@@ -56,7 +56,8 @@ List only conflicts or compatibility work that affects use.
    - Use `references/` for details loaded only when needed.
    - Use `scripts/` for repeated work that must follow the same steps.
    - Use `assets/` for material copied into or used by outputs.
-   - Keep every local document or script referenced by any file in the skill inside the directory containing `SKILL.md`; a nested file may use `../` only when the resolved target remains inside that directory.
+   - Keep every bundled local document or script linked or imported by a skill file inside the directory containing `SKILL.md`; a nested resource may use `../` only when the resolved target remains inside that directory.
+   - Do not apply this boundary to task inputs, outputs, target-repository files, or system paths.
    - Do not add a skill README, changelog, installation guide, or quick reference unless the framework requires it.
 5. Use the repository's official scaffold when one exists, and keep edits inside the skill and required discovery files.
 6. Write or check `SKILL.md` with the following rules.
