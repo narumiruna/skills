@@ -24,6 +24,20 @@ npx skills add narumiruna/skills
 
 Standard discovery exposes active skills only; deprecated skills live outside `skills/` and remain available solely for repository reference or explicit local use.
 
+### Local checkout with GNU Stow
+
+Use this when you want `~/.agents/skills` to track a local checkout. Install [just](https://just.systems/) and [GNU Stow](https://www.gnu.org/software/stow/), then run:
+
+```shell
+just install
+```
+
+This links the repository's `skills/` directory to `~/.agents/skills`. Remove the managed link with:
+
+```shell
+just uninstall
+```
+
 ## 🧭 How To Use In Codex
 
 - Run `/skills` to inspect the installed collection.
