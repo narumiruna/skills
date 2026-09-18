@@ -22,7 +22,7 @@ Use this when you want the collection without linking a local checkout:
 npx skills add narumiruna/skills
 ```
 
-Standard discovery exposes active skills only; deprecated skills live outside `skills/` and remain available solely for repository reference or explicit local use.
+Standard installation discovers active skills from both `skills/default/` and `skills/optional/`; deprecated skills live outside `skills/` and remain available solely for repository reference or explicit local use.
 
 ### Local checkout with GNU Stow
 
@@ -32,7 +32,7 @@ Use this when you want `~/.agents/skills` to track a local checkout. Install [ju
 just install
 ```
 
-This links the repository's `skills/` directory to `~/.agents/skills`. Remove the managed link with:
+This links each skill in `skills/default/` directly into `~/.agents/skills/`. Skills in `skills/optional/` remain available for selective installation but are not linked by this recipe. Remove the managed links with:
 
 ```shell
 just uninstall
@@ -48,7 +48,20 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 
 ## 🧰 Skill Catalog
 
-All active skills live directly under `skills/<skill-name>/`.
+### Default Skills
+
+Default skills live under `skills/default/<skill-name>/` and are linked by `just install`.
+
+| Skill | Use it for |
+| --- | --- |
+| `create-agent-skills` | Creating, naming, reviewing, revising, and explicitly scoring lean, discoverable agent skills. |
+| `prompt-gpt` | Creating, revising, and reviewing prompts using references for the user-specified or detected runtime model, or general principles when unknown or not covered. |
+| `write-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
+| `write-plans` | Drafting, executing, and tracking lean implementation plans with acceptance evidence, then deleting them when complete. |
+
+### Optional Skills
+
+Optional skills live under `skills/optional/<skill-name>/` and remain available for selective installation.
 
 | Skill | Use it for |
 | --- | --- |
@@ -57,7 +70,6 @@ All active skills live directly under `skills/<skill-name>/`.
 | `audit-code-security` | Evidence-led, security-first, read-only code audits with verified findings and bounded tool use. |
 | `author-marp-slides` | Focused Marp/Marpit authoring, templates, themes, and rendered checks. |
 | `calibrate-writing-style` | Explicit-invocation interviews that refine reusable English and Taiwan Traditional Chinese writing-style prompts. |
-| `create-agent-skills` | Creating, naming, reviewing, revising, and explicitly scoring lean, discoverable agent skills. |
 | `create-mermaid-diagrams` | Editable Mermaid diagrams with optional consumer-ready SVG rendering. |
 | `create-slide-decks` | Complete Marp decks with coordinated narrative, colors, visuals, and rendering. |
 | `create-svg-illustrations` | Accessible, portable SVG diagrams and illustrations for target artifacts. |
@@ -71,12 +83,9 @@ All active skills live directly under `skills/<skill-name>/`.
 | `improve-codebase-architecture` | Evidence-led codebase architecture assessment and behavior-preserving refactoring. |
 | `manage-python-with-uv` | uv projects, scripts, dependencies, checks, builds, and authorized publishing. |
 | `operate-ghostty` | Inspecting, launching, configuring, validating, and troubleshooting Ghostty. |
-| `prompt-gpt` | Creating, revising, and reviewing prompts using references for the user-specified or detected runtime model, or general principles when unknown or not covered. |
 | `review-code` | Evidence-led ordinary code review with baseline security checks and authorized hardening handoff. |
 | `use-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |
-| `write-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
 | `write-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
-| `write-plans` | Drafting, executing, and tracking lean implementation plans with acceptance evidence, then deleting them when complete. |
 | `write-roadmap` | Creating, revising, reviewing, and tracking evidence-grounded strategic roadmaps, then deleting them when complete. |
 
 ## 🗄️ Deprecated Skills

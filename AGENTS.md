@@ -9,7 +9,7 @@ Follow global defaults; this file contains only repository-specific additions an
 - Explain the main idea simply before adding necessary detail.
 - Keep information accurate.
 - Make documented rules specific and verifiable.
-- Follow the model-selection policy in `./skills/prompt-gpt/SKILL.md` when creating, revising, or reviewing skills and other agent-facing prompts.
+- Follow the model-selection policy in `./skills/default/prompt-gpt/SKILL.md` when creating, revising, or reviewing skills and other agent-facing prompts.
 - Keep external positioning, installation flows, and skill discovery in `README.md`, and keep maintainer workflow in this file.
 - Update the README catalog when a skill is added, deprecated, renamed, recategorized, or materially changes its trigger.
 - Update installation documentation and executable recipes only in the files that own the affected flow.
@@ -32,7 +32,7 @@ Follow global defaults; this file contains only repository-specific additions an
 - Ask before writing to external systems, taking destructive or costly actions, or materially expanding the scope.
 - Ask before running `scripts/download_human_interface_guidelines.py` because its default mode downloads a large external corpus; when maintaining the archiver, enumerate the DocC navigator and page JSON under `/tutorials/data/` instead of recursively downloading HTML.
 - Treat ignored `build/` content as generated output; do not hand-edit or commit it.
-- Treat `skills/` as the active source of truth; `.agents/skills` is a tracked local-discovery symlink to it, not a second copy to edit.
+- Treat `skills/default/` and `skills/optional/` as the active source roots; `.agents/skills` is a tracked local-discovery symlink to `skills/default/`, not a second copy to edit.
 - Do not introduce root-level marketplace or plugin metadata unless corresponding repository files and workflows exist.
 
 ## Testing
@@ -46,8 +46,8 @@ Follow global defaults; this file contains only repository-specific additions an
 
 ## Repository structure
 
-- Keep active skills directly in `skills/<skill-name>/SKILL.md`; do not add category directories.
-- Keep deprecated skills in `deprecated/<skill-name>/SKILL.md`, outside standard discovery.
+- Keep default skills directly in `skills/default/<skill-name>/SKILL.md` and optional skills directly in `skills/optional/<skill-name>/SKILL.md`; do not add deeper category directories.
+- Keep deprecated skills in `deprecated/<skill-name>/SKILL.md`, outside active discovery.
 - Keep optional supporting material inside its skill directory under `references/`, `scripts/`, `assets/`, or `agents/`.
 - Keep source slides and visual examples under `examples/`.
 
