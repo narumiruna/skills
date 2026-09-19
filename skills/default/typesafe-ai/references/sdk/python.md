@@ -1,101 +1,101 @@
-> ## Documentation Index
-> Fetch the complete documentation index at: https://docs.typesafe.ai/llms.txt
-> Use this file to discover all available pages before exploring further.
+# Python SDK
 
-# TypeSafe Python SDK
+Use the official `typesafe-sdk` package for synchronous or asynchronous Python calls.
+Confirm details against the installed package types when exact options, retries, exceptions, or version-specific behavior matter.
 
-> Install the TypeSafe Python SDK and get started with asynchronous or synchronous API calls.
+## Install and configure
 
-<a id="typesafe-python-sdk" />
+```sh
+uv add typesafe-sdk
+```
 
-Browse the [Python SDK source on GitHub](https://github.com/typesafe-ai/typesafe-sdk-python).
+Set `TYPESAFE_API_KEY` in the server environment.
+Do not place the key in source code or client-side applications.
 
-Asynchronous and synchronous Python clients for the [TypeSafe](https://typesafe.ai) API. Learn how to use TypeSafe [here](https://docs.typesafe.ai/).
+## Synchronous client
 
-<h2 id="quickstart">
-  Quickstart
-</h2>
+```python
+from typesafe_sdk import Choice, Noul, Score, TypeSafeClient
 
-1. Install the SDK:
+questions = {
+    "billing": Noul(
+        instructions="Is `document` about billing?",
+    ),
+    "tone": Choice(
+        instructions="What is the customer's tone in `document`?",
+        criteria={
+            "calm": None,
+            "frustrated": None,
+            "angry": None,
+        },
+    ),
+    "urgency": Score(
+        instructions="How urgent is `document`?",
+        criteria=["Can wait", "This week", "Today"],
+    ),
+}
 
-   <Tabs>
-     <Tab title="uv">
-       ```sh theme={null}
-       uv add typesafe-sdk
-       ```
-     </Tab>
+with TypeSafeClient() as client:
+    response = client.system_one(
+        state={"document": "I was charged twice. Please fix this ASAP."},
+        questions=questions,
+    )
 
-     <Tab title="pip">
-       ```sh theme={null}
-       pip install typesafe-sdk
-       ```
-     </Tab>
-   </Tabs>
-2. Set `TYPESAFE_API_KEY` in your environment (create it [here](https://console.typesafe.ai/))
-3. Call the System One API:
+print(response.answers["billing"].noul)
+print(response.answers["tone"].choice)
+print(response.answers["urgency"].score)
+```
 
-   <Tabs>
-     <Tab title="Async">
-       With [AsyncTypeSafeClient](/sdk/python/api/clients/async):
+The model argument is optional in the SDK source snapshot and defaults to `jev-latest`.
+Pass it explicitly when the application must pin or select a model.
 
-       ```python theme={null}
-       from typesafe_sdk import AsyncTypeSafeClient, Choice, Noul, Score
+## Asynchronous client
+
+```python
+from typesafe_sdk import AsyncTypeSafeClient, Choice
 
 
-       async def main() -> None:
-           async with AsyncTypeSafeClient() as client:
-               response = await client.system_one(
-                   state={"document": "I was charged twice. Please fix this ASAP."},
-                   questions={
-                       "billing": Noul(instructions="Is this ticket about billing?"),
-                       "tone": Choice(
-                           instructions="What is the customer's tone?",
-                           criteria={"calm": None, "frustrated": None, "angry": None},
-                       ),
-                       "urgency": Score(
-                           instructions="How urgent is this ticket?",
-                           criteria=["can wait", "this week", "today"],
-                       ),
-                   },
-               )
+async def classify(message: str) -> str:
+    async with AsyncTypeSafeClient() as client:
+        response = await client.system_one(
+            state={"message": message},
+            questions={
+                "route": Choice(
+                    instructions="Which route fits `message`?",
+                    criteria={
+                        "billing": "Payments and refunds",
+                        "technical": "Bugs and integrations",
+                        "other": "Neither supplied route fits",
+                    },
+                )
+            },
+        )
 
-           print(response.nouls["billing"].noul)
-           print(response.choices["tone"].choice)
-           print(response.scores["urgency"].score)
-       ```
-     </Tab>
+    return response.answers["route"].choice
+```
 
-     <Tab title="Sync">
-       With [TypeSafeClient](/sdk/python/api/clients/sync):
+## Read typed answers
 
-       ```python theme={null}
-       from typesafe_sdk import Choice, Noul, Score, TypeSafeClient
+Answers are available by ID through `response.answers`.
+The source snapshot also documents grouped mappings:
 
-       with TypeSafeClient() as client:
-           response = client.system_one(
-               state={"document": "I was charged twice. Please fix this ASAP."},
-               questions={
-                   "billing": Noul(instructions="Is this ticket about billing?"),
-                   "tone": Choice(
-                       instructions="What is the customer's tone?",
-                       criteria={"calm": None, "frustrated": None, "angry": None},
-                   ),
-                   "urgency": Score(
-                       instructions="How urgent is this ticket?",
-                       criteria=["can wait", "this week", "today"],
-                   ),
-               },
-           )
+```python
+response.nouls["billing"].noul
+response.choices["tone"].choice
+response.scores["urgency"].score
+```
 
-       print(response.nouls["billing"].noul)
-       print(response.choices["tone"].choice)
-       print(response.scores["urgency"].score)
-       ```
-     </Tab>
-   </Tabs>
+Choice and Score answers include `probabilities` and `confidence`.
+Score answers also include `legend`.
+The Python SDK uses integer keys for Score probability and legend mappings, while raw JSON uses string keys.
 
-<h2 id="usage">
-  Usage
-</h2>
+## Operational guidance
 
-Learn more in the [Usage guide](/sdk/python/usage).
+- Reuse client lifecycle patterns supported by the installed SDK instead of constructing unnecessary clients per item.
+- Batch independent questions that share state into one `system_one` call.
+- Keep retries bounded and inspect the installed SDK's `RetryPolicy` when defaults matter.
+- Catch SDK-specific authentication, validation, rate-limit, connection, and timeout exceptions at the application boundary.
+- Log usage and failures without recording credentials or sensitive state.
+- Validate question thresholds on target data.
+
+See [Question design](../question-design.md) for question construction and [Composition patterns](../composition-patterns.md) for batching and routing.

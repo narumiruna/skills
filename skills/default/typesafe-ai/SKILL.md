@@ -29,23 +29,22 @@ supplies programmable common sense where ordinary code needs semantic understand
 The live TypeSafe docs remain the source of truth when freshness matters.
 This skill gives direction; the docs carry concepts, prompting guidance, API contracts, SDK usage, models, limits, and worked examples.
 
-- Start with the [documentation index](references/llms.md) to discover relevant pages and cookbooks.
-  Use targeted reads rather than loading the entire index.
-- The bundled pages mirror their upstream paths under `references/`.
-  Follow links from the index and prefer a bundled page when it is available.
-- Before writing an integration, read the API or chosen SDK page and the question guidance relevant to the design.
+- Start with the [reference index](references/index.md) and load only the relevant local file.
+- The bundled references condense upstream pages into plain Markdown and remove site-specific components, duplicated boilerplate, and long demonstration output.
+  The index records the upstream source for each local reference.
+- Before writing an integration, read the API or chosen SDK reference and the question guidance relevant to the design.
   For a new workflow, also inspect the closest cookbook because it often shows a better decomposition than a generic classifier.
-- If bundled content appears stale or omits a needed page, consult the live site or the installed SDK types.
+- If a bundled summary appears stale or omits a needed detail, consult the upstream source listed in the index or the installed SDK types.
   State any access limitation and avoid inventing version-dependent details.
 
 | Task | Start here; follow the relevant details |
 | --- | --- |
-| Understand the programming model | [System One](references/concepts/system-one.md), [building guide](references/concepts/how-to-build-with-system-one.md) |
-| Explore what to build | [Use-case map](references/concepts/use-case-map.md), then relevant cookbooks from the index |
-| Prepare inputs and questions | [State](references/concepts/state.md), [primitives](references/primitives.md), then the chosen primitive's page |
-| Decide how to handle uncertainty | [Confidence](references/confidence.md) |
-| Write API code | [HTTP API](references/api.md), [Python SDK](references/sdk/python.md), or [JavaScript SDK](references/sdk/javascript.md) |
-| Update an older integration | [Migration guide](references/migrating-to-v1.md) and the installed SDK's current reference |
+| Understand the programming model | [System One and workflow concepts](references/concepts.md) |
+| Explore what to build | [Use-case shapes](references/concepts.md#where-it-fits), then a relevant cookbook from the index |
+| Prepare inputs and questions | [State](references/concepts.md#state) and [question design](references/question-design.md) |
+| Decide how to handle uncertainty | [Confidence and action policy](references/concepts.md#confidence-and-action-policy) |
+| Write API code | [HTTP API](references/api/http.md), [Python SDK](references/sdk/python.md), or [JavaScript SDK](references/sdk/javascript.md) |
+| Update an older integration | [v1 migration](references/api/migration-v1.md) and the installed SDK's current reference |
 
 ## Find the useful shape
 
@@ -60,25 +59,25 @@ including ideas that do not fit an established recipe.
 
 - **Route and fill known arguments.** A request can select a handler and its typed
   parameters. Ask useful branch-specific questions up front and consume only the
-  relevant answers. Explore [function calling](references/cookbooks/function_calling.md)
-  and [speculative fan-out](references/patterns/fan-out.md).
+  relevant answers. Explore [function calling](references/cookbooks/routing-and-extraction.md#function-calling)
+  and [speculative fan-out](references/composition-patterns.md#speculative-fan-out).
 - **Select instead of generate.** Find candidate values or source spans in code,
   use a judgment to select the intended one, then copy or normalize it. Code can
   also assemble source text into a formatted document or reading guide. Explore
-  [value extraction](references/cookbooks/pre_parsed_value_extraction_cookbook.md)
-  and [structure recovery](references/cookbooks/autoformat.md).
+  [value extraction](references/cookbooks/routing-and-extraction.md#pre-parsed-value-extraction)
+  and [structure recovery](references/cookbooks/routing-and-extraction.md#structure-recovery).
 - **Find and judge evidence.** Retrieve candidates, compare their relevance to a
-  query, and select useful context. Explore [reranking](references/cookbooks/rerank_typesafe.md)
-  and [hierarchical classification](references/cookbooks/hierarchical_classification.md).
+  query, and select useful context. Explore [reranking](references/cookbooks/retrieval-and-classification.md#reranking)
+  and [hierarchical classification](references/cookbooks/retrieval-and-classification.md#hierarchical-classification).
 - **Turn judgments into reusable data.** Score dimensions once, then let code or
   user controls change weights, thresholds, rankings, and views. With labeled
   outcomes, those signals can become classical ML features. Explore
-  [composite scoring](references/patterns/composite-scoring.md) and
-  [feature discovery](references/cookbooks/autoresearch_feature_discovery.md).
+  [composite scoring](references/composition-patterns.md#composite-scoring) and
+  [feature discovery](references/cookbooks/verification-and-learning.md#feature-discovery).
 - **Verify and escalate.** Check specific claims or fields against their evidence;
   send uncertain or failing cases to a person or reasoning model. Explore
-  [citation checks](references/cookbooks/citation_check.md) and
-  [extraction cascades](references/cookbooks/sde_cascade.md).
+  [citation checks](references/cookbooks/verification-and-learning.md#citation-verification) and
+  [extraction cascades](references/cookbooks/verification-and-learning.md#structured-data-extraction-cascade).
 - **Respond to changing state.** Code can retain goals and observations while fresh
   judgments guide the next bounded step. Keep inferred state distinct from observed
   facts, and check freshness before applying a result to a changed situation.
@@ -93,9 +92,9 @@ Choose by what the answer means, then read the relevant primitive page:
 
 | Need | Primitive | Important distinction |
 | --- | --- | --- |
-| One of a defined set | [Choice](references/primitives/choice.md) | Picks one option; its distribution compares competing options |
-| Whether a condition holds | [Noul](references/primitives/noul.md) | Probability of yes; no separate confidence; use one per label when several may apply |
-| Degree along a described dimension | [Score](references/primitives/score.md) | Probability-weighted position on ordered levels; use comparable per-item Scores for graded ranking |
+| One of a defined set | [Choice](references/question-design.md#choice) | Picks one option; its distribution compares competing options |
+| Whether a condition holds | [Noul](references/question-design.md#noul) | Probability of yes; no separate confidence; use one per label when several may apply |
+| Degree along a described dimension | [Score](references/question-design.md#score) | Probability-weighted position on ordered levels; use comparable per-item Scores for graded ranking |
 
 Give each question enough relevant **state** to answer: source text, identities,
 relationships, policies, and current facts. Prefer named JSON fields when context
