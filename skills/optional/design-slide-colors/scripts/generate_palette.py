@@ -4,58 +4,26 @@
 # ///
 """Generate slide color palettes from brand colors or strategies."""
 
-import re
 import shlex
 import sys
 from colorsys import hls_to_rgb, rgb_to_hls
 from pathlib import Path
 from typing import Any, cast
 
+from check_contrast import (
+    contrast_ratio,
+    hex_to_rgb,
+    relative_luminance as relative_luminance,
+)
+
 SCRIPT_PATH = Path(__file__).resolve()
 CONTRAST_CHECKER_PATH = SCRIPT_PATH.with_name("check_contrast.py")
-
-
-def hex_to_rgb(hex_color: str) -> tuple[int, int, int]:
-    """Convert a three-channel hexadecimal color to an RGB tuple."""
-    normalized = hex_color.removeprefix("#")
-    if re.fullmatch(r"[0-9A-Fa-f]{6}", normalized) is None:
-        raise ValueError(
-            f"Invalid hex color: {hex_color!r} (expected #RRGGBB or RRGGBB)"
-        )
-    r = int(normalized[0:2], 16)
-    g = int(normalized[2:4], 16)
-    b = int(normalized[4:6], 16)
-    return (r, g, b)
 
 
 def rgb_to_hex(rgb: tuple[int, int, int]) -> str:
     """Convert RGB tuple to hex color."""
     r, g, b = [max(0, min(255, int(x))) for x in rgb]
     return f"#{r:02x}{g:02x}{b:02x}"
-
-
-def relative_luminance(rgb: tuple[int, int, int]) -> float:
-    """Calculate WCAG relative luminance for an RGB color."""
-
-    def adjust(value: int) -> float:
-        channel = value / 255.0
-        return (
-            channel / 12.92
-            if channel <= 0.03928
-            else ((channel + 0.055) / 1.055) ** 2.4
-        )
-
-    red, green, blue = rgb
-    return 0.2126 * adjust(red) + 0.7152 * adjust(green) + 0.0722 * adjust(blue)
-
-
-def contrast_ratio(color1: str, color2: str) -> float:
-    """Calculate the WCAG contrast ratio between two hex colors."""
-    luminance1 = relative_luminance(hex_to_rgb(color1))
-    luminance2 = relative_luminance(hex_to_rgb(color2))
-    lighter = max(luminance1, luminance2)
-    darker = min(luminance1, luminance2)
-    return (lighter + 0.05) / (darker + 0.05)
 
 
 def adjust_lightness(hex_color: str, factor: float) -> str:
@@ -237,74 +205,13 @@ SVG_PALETTES = {
 }
 
 
-PALETTE_METADATA = {
+SLIDE_PALETTES = {
     "code-blue": {
         "name": "Code-Focused Blue",
         "category": "Dark Technical",
         "best_for": "Code-heavy presentations, technical demos, system architecture",
         "notes": "Inspired by VS Code theme; familiar to developers",
-    },
-    "terminal-dark": {
-        "name": "Terminal Dark",
-        "category": "Dark Technical",
-        "best_for": "Candidate for terminal, CLI, and DevOps presentations",
-        "notes": "Verify every assigned pairing and the exported deck on the target projector",
-    },
-    "midnight-professional": {
-        "name": "Midnight Professional",
-        "category": "Dark Technical",
-        "best_for": "Professional technical presentations with a softer feel",
-        "notes": "Less harsh than pure black backgrounds",
-    },
-    "clean-corporate": {
-        "name": "Clean Corporate",
-        "category": "Light Professional",
-        "best_for": "Business presentations, documentation, formal settings",
-        "notes": "Conservative and widely acceptable",
-    },
-    "modern-minimal": {
-        "name": "Modern Minimal",
-        "category": "Light Professional",
-        "best_for": "Modern tech companies, product presentations, startups",
-        "notes": "Material Design inspired; clean and modern",
-    },
-    "warm-professional": {
-        "name": "Warm Professional",
-        "category": "Light Professional",
-        "best_for": "Creative presentations, design reviews, brand-focused decks",
-        "notes": "Warm palette for approachable, friendly tone",
-    },
-    "minimal-teal": {
-        "name": "Minimal with Teal Focus",
-        "category": "Accent-Driven",
-        "best_for": "Story-driven presentations, keynotes, single-message slides",
-        "notes": "Minimal design; let content breathe; use accent sparingly (5-10% of elements)",
-    },
-    "grayscale-red": {
-        "name": "Gray Scale with Red Accent",
-        "category": "Accent-Driven",
-        "best_for": "High-impact messages, problem-solution narratives, urgent topics",
-        "notes": "Red accent should be reserved for 1-2 key elements per slide",
-    },
-    "data-viz": {
-        "name": "Data Visualization Candidate (Categorical)",
-        "category": "Specialized",
-        "best_for": "Starting point for charts, graphs, and multi-category data",
-        "notes": "Verify series distinguishability with target charts, labels, and color-vision simulation",
-    },
-    "accessibility": {
-        "name": "High Contrast Candidate",
-        "category": "Specialized",
-        "best_for": "Starting point for slides with strong contrast requirements",
-        "notes": "Validate each actual pairing, noncolor cue, export, and assistive path before use",
-    },
-}
-
-
-def generate_preset_palette(preset: str) -> dict[str, str]:
-    """Generate preset palette by name."""
-    presets = {
-        "code-blue": {
+        "colors": {
             "Background": "#1E1E1E",
             "Surface": "#252526",
             "Primary": "#569CD6",
@@ -313,7 +220,13 @@ def generate_preset_palette(preset: str) -> dict[str, str]:
             "Text Primary": "#D4D4D4",
             "Text Secondary": "#858585",
         },
-        "terminal-dark": {
+    },
+    "terminal-dark": {
+        "name": "Terminal Dark",
+        "category": "Dark Technical",
+        "best_for": "Candidate for terminal, CLI, and DevOps presentations",
+        "notes": "Verify every assigned pairing and the exported deck on the target projector",
+        "colors": {
             "Background": "#0C0C0C",
             "Surface": "#1A1A1A",
             "Primary": "#61AFEF",
@@ -322,7 +235,13 @@ def generate_preset_palette(preset: str) -> dict[str, str]:
             "Text Primary": "#ABB2BF",
             "Text Secondary": "#5C6370",
         },
-        "midnight-professional": {
+    },
+    "midnight-professional": {
+        "name": "Midnight Professional",
+        "category": "Dark Technical",
+        "best_for": "Professional technical presentations with a softer feel",
+        "notes": "Less harsh than pure black backgrounds",
+        "colors": {
             "Background": "#1B2B34",
             "Surface": "#253340",
             "Primary": "#6699CC",
@@ -331,7 +250,13 @@ def generate_preset_palette(preset: str) -> dict[str, str]:
             "Text Primary": "#CDD3DE",
             "Text Secondary": "#A7ADBA",
         },
-        "clean-corporate": {
+    },
+    "clean-corporate": {
+        "name": "Clean Corporate",
+        "category": "Light Professional",
+        "best_for": "Business presentations, documentation, formal settings",
+        "notes": "Conservative and widely acceptable",
+        "colors": {
             "Background": "#FAFAFA",
             "Surface": "#FFFFFF",
             "Primary": "#2E75B6",
@@ -340,7 +265,13 @@ def generate_preset_palette(preset: str) -> dict[str, str]:
             "Text Primary": "#2C2C2C",
             "Text Secondary": "#666666",
         },
-        "modern-minimal": {
+    },
+    "modern-minimal": {
+        "name": "Modern Minimal",
+        "category": "Light Professional",
+        "best_for": "Modern tech companies, product presentations, startups",
+        "notes": "Material Design inspired; clean and modern",
+        "colors": {
             "Background": "#F5F5F5",
             "Surface": "#FFFFFF",
             "Primary": "#1976D2",
@@ -349,7 +280,13 @@ def generate_preset_palette(preset: str) -> dict[str, str]:
             "Text Primary": "#212121",
             "Text Secondary": "#616161",
         },
-        "warm-professional": {
+    },
+    "warm-professional": {
+        "name": "Warm Professional",
+        "category": "Light Professional",
+        "best_for": "Creative presentations, design reviews, brand-focused decks",
+        "notes": "Warm palette for approachable, friendly tone",
+        "colors": {
             "Background": "#FFF8F0",
             "Surface": "#FFFFFF",
             "Primary": "#D84315",
@@ -358,7 +295,13 @@ def generate_preset_palette(preset: str) -> dict[str, str]:
             "Text Primary": "#3E2723",
             "Text Secondary": "#795548",
         },
-        "minimal-teal": {
+    },
+    "minimal-teal": {
+        "name": "Minimal with Teal Focus",
+        "category": "Accent-Driven",
+        "best_for": "Story-driven presentations, keynotes, single-message slides",
+        "notes": "Minimal design; let content breathe; use accent sparingly (5-10% of elements)",
+        "colors": {
             "Background": "#FFFFFF",
             "Surface": "#F8F9FA",
             "Primary": "#343A40",
@@ -367,7 +310,13 @@ def generate_preset_palette(preset: str) -> dict[str, str]:
             "Text Primary": "#212529",
             "Text Secondary": "#6C757D",
         },
-        "grayscale-red": {
+    },
+    "grayscale-red": {
+        "name": "Gray Scale with Red Accent",
+        "category": "Accent-Driven",
+        "best_for": "High-impact messages, problem-solution narratives, urgent topics",
+        "notes": "Red accent should be reserved for 1-2 key elements per slide",
+        "colors": {
             "Background": "#F0F0F0",
             "Surface": "#FFFFFF",
             "Primary": "#2F2F2F",
@@ -376,7 +325,13 @@ def generate_preset_palette(preset: str) -> dict[str, str]:
             "Text Primary": "#1A1A1A",
             "Text Secondary": "#757575",
         },
-        "data-viz": {
+    },
+    "data-viz": {
+        "name": "Data Visualization Candidate (Categorical)",
+        "category": "Specialized",
+        "best_for": "Starting point for charts, graphs, and multi-category data",
+        "notes": "Verify series distinguishability with target charts, labels, and color-vision simulation",
+        "colors": {
             "Background": "#FFFFFF",
             "Surface": "#F8F9FA",
             "Category 1": "#4E79A7",
@@ -388,7 +343,13 @@ def generate_preset_palette(preset: str) -> dict[str, str]:
             "Text Primary": "#2C2C2C",
             "Text Secondary": "#666666",
         },
-        "accessibility": {
+    },
+    "accessibility": {
+        "name": "High Contrast Candidate",
+        "category": "Specialized",
+        "best_for": "Starting point for slides with strong contrast requirements",
+        "notes": "Validate each actual pairing, noncolor cue, export, and assistive path before use",
+        "colors": {
             "Background": "#FFFFFF",
             "Surface": "#F5F5F5",
             "Primary": "#0052CC",
@@ -397,12 +358,16 @@ def generate_preset_palette(preset: str) -> dict[str, str]:
             "Text Primary": "#000000",
             "Text Secondary": "#42526E",
         },
-    }
+    },
+}
 
-    if preset not in presets:
+
+def generate_preset_palette(preset: str) -> dict[str, str]:
+    """Generate preset palette by name."""
+    if preset not in SLIDE_PALETTES:
         raise ValueError(f"Unknown preset: {preset}")
 
-    return presets[preset]
+    return cast(dict[str, str], SLIDE_PALETTES[preset]["colors"]).copy()
 
 
 def format_palette_markdown(palette: dict[str, str], preset_name: str = "") -> str:
@@ -410,8 +375,8 @@ def format_palette_markdown(palette: dict[str, str], preset_name: str = "") -> s
     output = []
 
     # Add palette name and metadata if it's a preset
-    if preset_name and preset_name in PALETTE_METADATA:
-        meta = PALETTE_METADATA[preset_name]
+    if preset_name and preset_name in SLIDE_PALETTES:
+        meta = SLIDE_PALETTES[preset_name]
         output.append(f"## {meta['name']}\n")
         output.append(f"**Category:** {meta['category']}")
         output.append(f"**Best for:** {meta['best_for']}")
@@ -473,7 +438,7 @@ def list_palettes() -> str:
 
     # Group palettes by category
     by_category = {}
-    for preset_id, meta in PALETTE_METADATA.items():
+    for preset_id, meta in SLIDE_PALETTES.items():
         category = meta["category"]
         if category not in by_category:
             by_category[category] = []

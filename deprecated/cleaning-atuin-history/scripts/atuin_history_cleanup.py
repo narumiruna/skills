@@ -4,7 +4,6 @@
 from __future__ import annotations
 
 import argparse
-import importlib.util
 import json
 import re
 import shlex
@@ -33,40 +32,6 @@ DEFAULT_CLEANUP_DUPKEEP = 3
 
 class AuditError(RuntimeError):
     """User-facing audit failure."""
-
-
-SCRIPT_DIR = Path(__file__).resolve().parent
-
-
-def load_transactional_module() -> Any:
-    """Load the sibling transactional helper module from disk."""
-    module_path = SCRIPT_DIR / "atuin_history_cleanup_transactional.py"
-    spec = importlib.util.spec_from_file_location(
-        "atuin_history_cleanup_transactional_runtime",
-        module_path,
-    )
-    if spec is None or spec.loader is None:
-        raise AuditError(f"Failed to load transactional helpers from {module_path}")
-    module = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(module)
-    return module
-
-
-transactional = load_transactional_module()
-
-transactional.CleanupError = AuditError
-build_cleanup_plan = transactional.build_cleanup_plan
-execute_cleanup_plan = transactional.execute_cleanup_plan
-get_current_host_uuid = transactional.get_current_host_uuid
-get_remote_sync_status = transactional.get_remote_sync_status
-read_history_ids = transactional.read_history_ids
-render_cleanup_report = transactional.render_cleanup_report
-resolve_backup_dir = transactional.resolve_backup_dir
-rollback_cleanup = transactional.rollback_cleanup
-run_cli_command = transactional.run_cli_command
-sqlite_backup = transactional.sqlite_backup
-verify_cleanup_result = transactional.verify_cleanup_result
-write_json_report = transactional.write_json_report
 
 
 @dataclass(frozen=True, slots=True)
@@ -773,25 +738,30 @@ def cleanup_typos(
             f"{pre_audit['typos']['returned_count']}. Increase --max-typos or narrow --before."
         )
 
+    import atuin_history_cleanup_transactional as transactional
+
     resolved_db_path = Path(pre_audit["db_path"])
-    remote = get_remote_sync_status()
-    current_host = get_current_host_uuid()
-    backup_root = resolve_backup_dir(resolved_db_path, backup_dir)
+    try:
+        remote = transactional.get_remote_sync_status()
+        current_host = transactional.get_current_host_uuid()
+        backup_root = transactional.resolve_backup_dir(resolved_db_path, backup_dir)
+    except transactional.CleanupError as exc:
+        raise AuditError(str(exc)) from exc
     snapshot_path = backup_root / "history.db.before"
     rollback_warnings: list[str] = []
     mutation_started = False
 
     try:
-        run_cli_command(
+        transactional.run_cli_command(
             ["atuin", "store", "push", "--tag", "history", "--host", current_host]
         )
-        sqlite_backup(resolved_db_path, snapshot_path)
-        write_json_report(backup_root / "pre_audit.json", pre_audit)
+        transactional.sqlite_backup(resolved_db_path, snapshot_path)
+        transactional.write_json_report(backup_root / "pre_audit.json", pre_audit)
 
         before_cutoff = parse_before(before)
         entries, _ = load_history_entries(resolved_db_path, before_cutoff)
-        plan = build_cleanup_plan(candidates, entries)
-        write_json_report(
+        plan = transactional.build_cleanup_plan(candidates, entries)
+        transactional.write_json_report(
             backup_root / "plan.json",
             {
                 "db_path": str(resolved_db_path),
@@ -802,7 +772,7 @@ def cleanup_typos(
         )
 
         mutation_started = True
-        execution = execute_cleanup_plan(plan)
+        execution = transactional.execute_cleanup_plan(plan)
         post_audit = audit_history(
             resolved_db_path,
             dupkeep=DEFAULT_CLEANUP_DUPKEEP,
@@ -810,16 +780,16 @@ def cleanup_typos(
             typo_window_seconds=typo_window_seconds,
             max_typos=max_typos,
         )
-        verification = verify_cleanup_result(
+        verification = transactional.verify_cleanup_result(
             snapshot_path,
             resolved_db_path,
             target_ids=[candidate["id"] for candidate in plan],
             post_audit=post_audit,
         )
         post_verify = {"post_audit": post_audit, "verification": verification}
-        write_json_report(backup_root / "post_verify.json", post_verify)
+        transactional.write_json_report(backup_root / "post_verify.json", post_verify)
 
-        run_cli_command(["atuin", "sync"])
+        transactional.run_cli_command(["atuin", "sync"])
 
         return {
             "status": "success",
@@ -832,9 +802,11 @@ def cleanup_typos(
             "current_host": current_host,
             "verification": verification,
         }
-    except AuditError as exc:
+    except (AuditError, transactional.CleanupError) as exc:
         if mutation_started and snapshot_path.exists():
-            rollback_warnings = rollback_cleanup(snapshot_path, resolved_db_path)
+            rollback_warnings = transactional.rollback_cleanup(
+                snapshot_path, resolved_db_path
+            )
 
         detail = str(exc)
         if rollback_warnings:
