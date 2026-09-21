@@ -54,6 +54,7 @@ Default skills live under `skills/default/<skill-name>/` and are linked by `just
 
 | Skill | Use it for |
 | --- | --- |
+| `configure-ghostty` | Configuring, validating, diagnosing, and operating Ghostty with version-aware file, keybinding, runtime, and launch guidance. |
 | `create-agent-skills` | Creating, naming, reviewing, revising, and explicitly scoring lean, discoverable agent skills. |
 | `prompt-gpt` | Creating, revising, and reviewing prompts using references for the user-specified or detected runtime model, or general principles when unknown or not covered. |
 | `write-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
@@ -82,7 +83,6 @@ Optional skills live under `skills/optional/<skill-name>/` and remain available 
 | `harden-code-paths` | Confirming and fixing code-path failure modes or verified security findings. |
 | `improve-codebase-architecture` | Evidence-led codebase architecture assessment and behavior-preserving refactoring. |
 | `manage-python-with-uv` | uv projects, scripts, dependencies, checks, builds, and authorized publishing. |
-| `operate-ghostty` | Inspecting, launching, configuring, validating, and troubleshooting Ghostty. |
 | `review-code` | Evidence-led ordinary code review with baseline security checks and authorized hardening handoff. |
 | `use-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |
 | `write-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
