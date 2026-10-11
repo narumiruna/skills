@@ -42,7 +42,11 @@ Check these items against part 1, section 1, section 9, and part 2.
 
 Check part 1, sections 2–4.
 
-- Limit ordinary multi-word nouns to three words (rule 2.1).
+- Limit multi-word nouns to three words (rule 2.1), subject to the technical-name treatment in rule 2.2.
+  These are groups of nouns and/or adjectives that modify a head noun, usually the last word, and function as one part of speech.
+  Do not apply this limit to an entire noun phrase with articles or prepositional phrases.
+  For example, “the pressure in the left tank” contains separate groups, “pressure” and “left tank,” not one six-word multi-word noun.
+  Use prepositions or clauses to clarify the relationships in overlong groups.
   For a longer established technical name, give the full name first, then use a clear shorter form or meaningful hyphenated groups (rule 2.2).
   Do not shorten an official name in a way that identifies a different item.
 - Use approved verb forms: infinitive, imperative, simple present, simple past, simple future, and past participles as adjectives (rules 3.1–3.3).

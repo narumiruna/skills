@@ -23,8 +23,10 @@ Use ASD-STE100 Issue 9 (2025-01-15) unless the user specifies another issue.
 
 ## Establish the Evidence
 
-Read [the Issue 9 application guide](references/issue-9-guide.md) before drafting or checking text.
+For Issue 9, read [the Issue 9 application guide](references/issue-9-guide.md) before drafting or checking text.
 It gives a paraphrased checklist, rule references, and the official source link; it is not the standard or a complete dictionary.
+For another requested issue, use that issue's source rules and dictionary instead of the bundled Issue 9 checklist.
+Do not assume that rule numbers, definitions, or exceptions are unchanged between issues.
 
 For an STE check, consult the applicable rules and dictionary entries in the official issue or a user-provided copy.
 Check each word's approved part of speech, meaning, and permitted form, not merely its presence in the dictionary.
@@ -40,7 +42,7 @@ Do not treat missing evidence as a confirmed violation or silently replace the r
 1. Extract the required actions, conditions, sequence, actors, technical names, measurements, limits, prohibitions, and hazards.
 2. Resolve terminology against the supplied source and project glossary.
    Keep exact identifiers, commands, code, quoted interface labels, and externally fixed titles unchanged.
-3. Apply the relevant checklist in the application guide.
+3. Apply the relevant rules from the selected issue, using the bundled application guide only for Issue 9.
    Restructure sentences when a word substitution changes the meaning or grammar.
 4. Compare the result with the source for omissions, changed obligations, reversed conditions, changed action order, and altered values or units.
 5. Check writing rules, sentence counts, vocabulary, and terminology separately.
