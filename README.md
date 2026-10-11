@@ -65,6 +65,7 @@ Optional skills live under `skills/optional/<skill-name>/` and remain available 
 
 | Skill | Use it for |
 | --- | --- |
+| `apply-asd-ste100` | Drafting, revising, and reviewing technical documentation with ASD-STE100 Issue 9 rule and vocabulary checks, or clarity principles without a compliance claim. |
 | `apply-imrad` | Evidence-traceable IMRaD fit checks, reviews, transformations, and drafts. |
 | `apply-tdd` | Scoping red-green-refactor with explicit production-path, test-data, and observable-behavior boundaries. |
 | `audit-code-security` | Evidence-led, security-first, read-only code audits with verified findings and bounded tool use. |
