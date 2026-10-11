@@ -47,6 +47,7 @@ Check part 1, sections 2–4.
   Do not shorten an official name in a way that identifies a different item.
 - Use approved verb forms: infinitive, imperative, simple present, simple past, simple future, and past participles as adjectives (rules 3.1–3.3).
   Avoid perfect or progressive constructions and complex auxiliary constructions (rule 3.4).
+  Do not reject the simple passive permitted by rule 3.6 merely because it uses an auxiliary and a past participle.
 - Restrict an `-ing` form to a technical noun or a modifier within a technical noun, subject to the rule's explanation (rule 3.5).
 - Use active voice for procedures.
   Descriptive writing permits passive voice only when the agent is unknown (rule 3.6).
@@ -77,6 +78,7 @@ Check part 1, section 6.
 
 Check part 1, section 7, together with the applicable safety specification.
 
+- Limit every sentence in warnings, cautions, and other safety instructions to 20 STE-counted words, including hazard and consequence explanations (rule 5.1).
 - Use the risk label supported by the actual risk analysis (rule 7.1).
   Injury or death requires a warning; equipment damage alone calls for a caution; combined risks require a warning.
 - Start with the preventive command or the condition the reader must know first (rule 7.2).
@@ -94,7 +96,10 @@ Check part 1, section 8 before reporting sentence lengths.
 - For a vertical list, count the introduction before the colon separately from each list item (rule 8.4).
   Apply the procedural or descriptive limit to each part.
 - Treat parenthesized text as one word in the outer sentence, but also count the text inside as a separate sentence (rule 8.5).
-- Count each number, number with its unit, abbreviation, alphanumeric identifier, quoted text, fixed title or heading, placard or label text, and proper name as one element under rule 8.6.
+- Count each number, number with its unit, abbreviation, alphanumeric identifier, quoted text, title, heading, and placard or label text as one word under rule 8.6.
+  The title and heading categories are not limited to fixed text.
+  Count each proper noun of an individual, group, organization, or geopolitical entity as one word.
+  Do not extend this proper-noun treatment to other categories merely because a name has multiple words.
   Do not count document numbering that identifies a paragraph or step.
 - Count hyphenated groups as one word (rule 8.7).
 - Keep fixed quoted text intact.
