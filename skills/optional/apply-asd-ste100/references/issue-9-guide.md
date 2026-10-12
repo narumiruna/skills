@@ -24,7 +24,7 @@ Check these items against part 1, section 1, section 9, and part 2.
 - For an approved word, verify the part of speech, approved meaning, permitted forms, and entry-specific help.
   A familiar English meaning can still be unapproved in STE (rules 1.2–1.4 and 9.2).
 - Use American English spelling unless an official directive requires another spelling (rule 1.14).
-- Keep one technical name for one item and check established terminology against company, industry, or subject-field sources (rules 1.8–1.11).
+- Use one consistent technical noun for each item or concept and check established terminology against company, industry, or subject-field sources (rules 1.8–1.11).
 - A technical noun must fit a category under rule 1.5.
   Record its source and category when its acceptance is uncertain.
   Do not use a technical noun as a verb (rule 1.7).
@@ -42,15 +42,15 @@ Check these items against part 1, section 1, section 9, and part 2.
 
 Check part 1, sections 2–4.
 
-- Limit multi-word nouns to three words (rule 2.1), subject to the technical-name treatment in rule 2.2.
+- Limit multi-word nouns to three words (rule 2.1), subject to the technical-noun treatment in rule 2.2.
   These are groups of nouns and/or adjectives that modify a head noun, usually the last word, and function as one part of speech.
   Do not apply this limit to an entire noun phrase with articles or prepositional phrases.
   For example, “the pressure in the left tank” contains separate groups, “pressure” and “left tank,” not one six-word multi-word noun.
   Use prepositions or clauses to clarify the relationships in overlong groups.
-  For a longer established technical name, give the full name first, then use a clear shorter form or meaningful hyphenated groups (rule 2.2).
+  For a longer established technical noun, give the full term first, then use a clear shorter form or meaningful hyphenated groups (rule 2.2).
   Do not shorten an official name in a way that identifies a different item.
 - Use approved verb forms: infinitive, imperative, simple present, simple past, simple future, and past participles as adjectives (rules 3.1–3.3).
-  Avoid perfect or progressive constructions and complex auxiliary constructions (rule 3.4).
+  Do not use perfect or progressive constructions or complex auxiliary constructions (rules 3.2 and 3.4).
   Do not reject the simple passive permitted by rule 3.6 merely because it uses an auxiliary and a past participle.
 - Restrict an `-ing` form to a technical noun or a modifier within a technical noun, subject to the rule's explanation (rule 3.5).
 - Use active voice for procedures.

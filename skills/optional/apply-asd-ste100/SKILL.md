@@ -1,6 +1,6 @@
 ---
 name: apply-asd-ste100
-description: Draft, revise, or review technical documentation using ASD-STE100 Issue 9 Simplified Technical English, with source-checked writing rules and vocabulary, or apply its clarity principles without claiming compliance.
+description: Draft, revise, or review technical documentation using ASD-STE100 Simplified Technical English for the requested issue (Issue 9 by default), with source-checked writing rules and vocabulary, or apply its clarity principles without claiming compliance.
 ---
 
 # Applying ASD-STE100
@@ -39,7 +39,7 @@ Do not treat missing evidence as a confirmed violation or silently replace the r
 
 ## Draft or Revise
 
-1. Extract the required actions, conditions, sequence, actors, technical names, measurements, limits, prohibitions, and hazards.
+1. Extract the required actions, conditions, sequence, actors, technical nouns and verbs, measurements, limits, prohibitions, and hazards.
 2. Resolve terminology against the supplied source and project glossary.
    Keep exact identifiers, commands, code, quoted interface labels, and externally fixed titles unchanged.
 3. Apply the relevant rules from the selected issue, using the bundled application guide only for Issue 9.
