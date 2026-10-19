@@ -58,7 +58,7 @@ Default skills live under `skills/default/<skill-name>/` and are linked by `just
 | `create-agent-skills` | Creating, naming, reviewing, revising, and explicitly scoring lean, discoverable agent skills. |
 | `prompt-gpt` | Creating, revising, and reviewing prompts using references for the user-specified or detected runtime model, or general principles when unknown or not covered. |
 | `write-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
-| `write-plans` | Drafting, executing, and tracking lean implementation plans with acceptance evidence, then deleting them when complete. |
+| `write-plans` | Drafting, executing, and tracking agent-executable implementation plans with completion evidence and separate external handoff, then deleting completed plans. |
 
 ### Optional Skills
 
