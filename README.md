@@ -54,6 +54,7 @@ Default skills live under `skills/default/<skill-name>/` and are linked by `just
 
 | Skill | Use it for |
 | --- | --- |
+| `apply-google-rust-style` | Writing, refactoring, and reviewing Rust with selected Google-specific import, API design, panic, and API evolution rules. |
 | `configure-ghostty` | Configuring, validating, diagnosing, and operating Ghostty with version-aware file, keybinding, runtime, and launch guidance. |
 | `create-agent-skills` | Creating, naming, reviewing, revising, and explicitly scoring lean, discoverable agent skills. |
 | `prompt-gpt` | Creating, revising, and reviewing prompts using references for the user-specified or detected runtime model, or general principles when unknown or not covered. |
