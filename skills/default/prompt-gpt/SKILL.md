@@ -77,7 +77,10 @@ Available references:
 - [GPT-5.4](references/gpt-5.4.md)
 - [GPT-5.5](references/gpt-5.5.md)
 - [GPT-5.6](references/gpt-5.6.md)
-- [GPT-6 Astra](references/gpt-6-astra.md)
+- [GPT-6 family](references/gpt-6.md): `gpt-6-astra`, `gpt-6.1-sol`, `gpt-6.1-terra`, `gpt-6-luna`, and `gpt-6-sol`.
+
+For current GPT-6 work, use the family guide.
+The [earlier GPT-6 Astra reference](references/gpt-6-astra.md) is retained for comparison.
 
 Use the selected guide for model-specific prompting, API compatibility, supported settings, and migration steps.
 For Programmatic Tool Calling, confirm support in the selected guide before consulting the [routing and validation guidance](references/gpt-5.6.md#programmatic-tool-calling).
