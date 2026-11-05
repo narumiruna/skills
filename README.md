@@ -114,3 +114,4 @@ Deprecated skills remain in `deprecated/<skill-name>/` for reference and are exc
 | `resolving-pr-review-comments` | Legacy explicit PR feedback workflow retained as a compatibility reference. |
 | `using-codebase-memory-cli` | Legacy CLI-only codebase graph workflow retained as a compatibility reference. |
 | `running-panel-review-loops` | Legacy multi-reviewer code review and authorized fix loop retained as a compatibility reference. |
+| `typesafe-ai` | Legacy TypeSafe System One integration workflow retained as a compatibility reference. |
