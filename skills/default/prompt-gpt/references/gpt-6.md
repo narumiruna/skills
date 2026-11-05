@@ -21,67 +21,15 @@ It does not establish other aliases or cover later models by name alone.
 - GPT-6.1 Sol, GPT-6.1 Terra, GPT-6 Luna, and GPT-6 Sol default to `medium`.
 - Use `reasoning.effort` in Responses or `reasoning_effort` in Chat Completions.
 
-## Prompting Best Practices
+## Model-Specific Behavior
 
-The official guide provides shared GPT-6 prompting examples based on behavior observed with GPT-6 Astra.
-Use them as a starting point and evaluate them with the selected model and workload.
-Do not present Astra behavior notes as measured behavior for every GPT-6 model.
+The [official prompting notes](https://developers.openai.com/api/docs/guides/latest-model#prompting-best-practices) report these behaviors for GPT-6 Astra, not measured results for every GPT-6 model:
 
-### Initiative and Follow-through
-
-Astra can ask for clarification or stop for review where earlier models would continue.
-Define the intended result, authorized actions, and completion conditions so the model can finish the task.
-For action requests, make clear that a plan or first implementation is not the completion point unless the workflow requires it.
-
-Adapt the guide's autonomy examples to the application's approval boundaries:
-
-```text
-For change requests, complete the authorized, in-scope work and required checks.
-Do not stop after a plan or partial implementation when the request requires a finished result.
-Before asking for approval, finish the authorized preparation needed to make the proposed action concrete and reviewable.
-Ask before external writes, destructive or costly actions, or a material expansion of scope unless that exact action is already authorized.
-Ask a focused question when missing information materially changes the result; otherwise, continue with reasonable assumptions.
-```
-
-### Instruction Following
-
-Astra can be sensitive to unclear or conflicting instructions in skills and `AGENTS.md` files.
-Audit those instructions when they cause unnecessary pauses or change the intended task.
-Make instruction priority explicit according to the host's instruction hierarchy.
-Skill guidance must not silently replace the user's explicit task or override higher-priority requirements.
-
-When a skill causes the model to ask for approval, stop early, or change direction, require it to identify and link the exact file, quote the relevant instruction, and explain how it applies.
-Distinguish an explicit requirement from the model's interpretation.
-
-### Personality and Writing Style
-
-Astra can produce detailed, formatted responses and recurring phrases.
-Specify observable writing choices that match the audience and product:
-
-- State the main point early, then give the necessary explanation and evidence.
-- Use familiar words, precise verbs, active voice, and one main idea per paragraph.
-- Use lists when the items are parallel, sequential, or easier to compare.
-- Include technical detail to the extent that it helps the reader understand the result.
-- Remove stock phrases, invented labels, and unsolicited contrasts or summaries.
-
-### Subagent Delegation
-
-Astra may delegate less often than the application needs.
-Specify when independent work should run in parallel and how much delegation the workflow permits.
-Use delegation when it can reduce elapsed time or improve quality, rather than on every task.
-Define who combines and checks the results.
-Keep messages between agents legible, with proper spacing between words and numbers.
-
-### Testing and Verification
-
-Astra can perform broader or more repeated checks than a small change requires.
-Set the required verification scope and completion point:
-
-```text
-Run checks appropriate to the change and complete all required validation.
-Do not add tests for reversible, low-impact changes that only repeat the implementation.
-After required checks pass, broaden or repeat verification only for new changes, failures, or unresolved concerns.
-```
+- More clarification and approval pauses than earlier models, including when the user expects continued work.
+- Greater sensitivity to unclear or conflicting instructions in skills and `AGENTS.md` files.
+- Detailed, formatted responses with recurring phrases.
+- Less subagent delegation than some workflows need.
+- Broader or more repeated verification than small changes require.
 
 ## API Compatibility
 
@@ -128,6 +76,3 @@ See [Fast mode compatibility](https://developers.openai.com/api/docs/guides/fast
   Move Chat Completions tool calls to Responses.
 - When moving from GPT-5.5 or earlier, replace `prompt_cache_retention` with `prompt_cache_options.ttl` set to `"30m"`.
   Review [prompt caching changes](https://developers.openai.com/api/docs/guides/prompt-caching#summary-of-model-differences), including cache boundaries and cache-write billing.
-- Evaluate prompt changes on the selected model before adoption.
-  Compare task success, answer completeness, required evidence, total tokens, latency, and cost.
-  Treat fewer calls or tokens as an improvement only when the result still meets the required quality level.
