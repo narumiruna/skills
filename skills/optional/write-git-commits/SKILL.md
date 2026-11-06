@@ -18,6 +18,9 @@ Inspect the selected diff before describing it. Draft, validate, or create a com
 
 Use `feat` for new capability, `fix` for incorrect behavior, `refactor` for behavior-preserving structure, and `docs` for documentation-only changes. Prefer no scope, body, or footer unless it improves meaning.
 
-Do not describe unstaged work, future plans, or unrelated cleanup. Follow repository-level Git and attribution rules rather than duplicating them here.
+For a draft or validation request, describe the selected diff even when it is unstaged; do not stage it merely to write a message.
+For an actual commit, describe only the re-inspected staged diff.
+Do not describe unselected work, future plans, or unrelated cleanup.
+Follow repository-level Git and attribution rules rather than duplicating them here.
 
 Read `references/conventional-commits.md` when type selection is ambiguous or exact breaking-change/footer syntax matters. Report the selected boundary and final message; if a commit was created, include its ID and remaining local changes.

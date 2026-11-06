@@ -31,7 +31,9 @@ Resolve this skill directory and run the script by absolute path:
 uv run python "$SKILL_DIR/scripts/atuin_history_cleanup.py" audit
 ```
 
-Use `--format json` for structured review. Optional scope flags include `--db-path`, `--dupkeep`, `--before`, `--typo-window-seconds`, and `--max-typos`.
+Use `--format json` for structured review.
+Optional scope flags include `--db-path`, `--dupkeep`, `--before`, `--typo-window-seconds`, and `--max-typos`.
+Cutoffs are rounded down to whole seconds so native Atuin commands and audit filtering use the same scope; use the reported `scope.before_iso` as the fixed cutoff for preview and approval.
 
 The audit reads selected history columns, groups duplicates by command/cwd/host, and proposes typo pairs only when session, time, arguments, exit status, frequency, and edit-distance evidence align. Treat its output as candidates, not proof that deletion is wanted.
 

@@ -1,11 +1,14 @@
 ---
 name: harden-code-paths
-description: Use when asked to proactively harden a specific code path by confirming and fixing plausible edge-case, boundary, failure-mode, or lifecycle bugs; to fix a confirmed security finding; or to check nearby same-pattern regression risks. Use audit-code-security first for broad threat analysis or unverified security alerts.
+description: Use when asked to proactively harden a specific code path by confirming and fixing plausible edge-case, boundary, failure-mode, or lifecycle bugs, or to fix a confirmed security finding. Use review-code for read-only regression checks and audit-code-security for broad threat analysis or unverified security alerts.
 ---
 
 # Hardening Code Paths
 
-Actively inspect the relevant code path, confirm plausible edge-case and failure-mode bugs, and fix or harden them. Do not wait for the user to enumerate cases. Accept confirmed security findings from `audit-code-security`; leave broad threat analysis and unverified alerts in that audit workflow rather than making speculative security changes.
+For check-only, review, or diagnosis requests, report findings without edits instead of running the fix loop.
+For requested hardening or fixes, actively inspect the relevant code path, confirm plausible edge-case and failure-mode bugs, and fix or harden them.
+Do not wait for the user to enumerate cases.
+Accept confirmed security findings from `audit-code-security`; leave broad threat analysis and unverified alerts in that audit workflow rather than making speculative security changes.
 
 ## Default Scope
 

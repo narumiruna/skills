@@ -24,7 +24,7 @@ A clear statement of the challenge
 
 <!-- _class: lead -->
 <!-- _backgroundColor: #20C997 -->
-<!-- _color: #FFFFFF -->
+<!-- _color: #2F2F2F -->
 
 ## The Solution
 

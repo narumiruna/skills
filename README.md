@@ -84,7 +84,7 @@ Optional skills live under `skills/optional/<skill-name>/` and remain available 
 | `explain-step-by-step` | Progressive, evidence-grounded mental models for complex material. |
 | `grill-designs` | Evidence-informed, one-decision-at-a-time design grilling. |
 | `ground-with-google-genai` | Grounded Google Search, Maps, and specific-URL research with Gemini. |
-| `harden-code-paths` | Confirming and fixing code-path failure modes or verified security findings. |
+| `harden-code-paths` | Confirming and fixing code-path failure modes or verified security findings, with bounded same-pattern checks. |
 | `improve-codebase-architecture` | Evidence-led codebase architecture assessment and behavior-preserving refactoring. |
 | `manage-python-with-uv` | uv projects, scripts, dependencies, checks, builds, and authorized publishing. |
 | `review-code` | Evidence-led ordinary code review with baseline security checks and authorized hardening handoff. |

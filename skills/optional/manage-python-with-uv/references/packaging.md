@@ -15,13 +15,15 @@ unzip -l dist/<package>-<version>-<tags>.whl
 tar -tzf dist/<package>-<version>.tar.gz
 ```
 
-Check required package data, metadata, licenses, and unexpected files. Test installation from the wheel outside the source checkout:
+Check required package data, metadata, licenses, and unexpected files.
+Test the built wheel in an isolated environment and disable checkout and `PYTHONPATH` imports:
 
 ```bash
-uv run --no-project --with dist/<package>-<version>-<tags>.whl \
-  python -c "import <import_name>"
+uv run --no-project --isolated --with dist/<package>-<version>-<tags>.whl \
+  python -I -c "import <import_name>; print(<import_name>.__file__)"
 ```
 
+Confirm that the printed import path belongs to the installed wheel environment.
 A `src/` layout can help prevent checkout-only imports but is not required. Diagnose missing files through the build-backend and package-data configuration rather than assuming one layout.
 
 ## Publish Boundary

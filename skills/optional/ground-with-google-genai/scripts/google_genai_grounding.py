@@ -24,9 +24,9 @@ MAX_URLS = 20
 
 def load_api_key() -> str | None:
     """Load a local .env file without overriding the process environment."""
-    from dotenv import load_dotenv
+    from dotenv import find_dotenv, load_dotenv
 
-    load_dotenv(override=False)
+    load_dotenv(find_dotenv(usecwd=True), override=False)
     return os.environ.get("GEMINI_API_KEY")
 
 
@@ -103,7 +103,15 @@ def build_interaction_request(
 
 def _summarize_tool_step(step: dict[str, Any]) -> dict[str, Any]:
     summary: dict[str, Any] = {"type": step.get("type")}
-    for key in ("is_error", "search_type", "queries", "latitude", "longitude"):
+    for key in (
+        "id",
+        "call_id",
+        "is_error",
+        "search_type",
+        "queries",
+        "latitude",
+        "longitude",
+    ):
         if key in step:
             summary[key] = step[key]
 
@@ -151,6 +159,29 @@ def _summarize_tool_step(step: dict[str, Any]) -> dict[str, Any]:
     return summary
 
 
+def _trailing_text_blocks(steps: Sequence[Any]) -> list[dict[str, Any]]:
+    """Select the same trailing text run as the SDK's output_text property."""
+    blocks: list[dict[str, Any]] = []
+    for step in reversed(steps):
+        if not isinstance(step, dict):
+            if blocks:
+                break
+            continue
+        if step.get("type") == "user_input":
+            break
+        content = step.get("content")
+        if step.get("type") != "model_output" or not content:
+            if blocks:
+                break
+            continue
+        for block in reversed(content):
+            if isinstance(block, dict) and block.get("type") == "text":
+                blocks.append(block)
+            elif blocks:
+                return blocks[::-1]
+    return blocks[::-1]
+
+
 def normalize_interaction(
     interaction: Any,
     *,
@@ -161,22 +192,28 @@ def normalize_interaction(
     raw = interaction.model_dump(mode="json", exclude_none=True)
     steps = raw.get("steps") or []
     citations: list[dict[str, Any]] = []
-    tool_steps: list[dict[str, Any]] = []
+    text_parts: list[str] = []
+    byte_offset = 0
+    for block in _trailing_text_blocks(steps):
+        text = block.get("text") or ""
+        text_parts.append(text)
+        for annotation in block.get("annotations") or []:
+            if not isinstance(annotation, dict):
+                continue
+            citation = annotation.copy()
+            for key in ("start_index", "end_index"):
+                if isinstance(citation.get(key), int):
+                    citation[key] += byte_offset
+            citations.append(citation)
+        # Citation indices are byte offsets, not character offsets.
+        byte_offset += len(text.encode("utf-8"))
 
+    tool_steps: list[dict[str, Any]] = []
     for step in steps:
         if not isinstance(step, dict):
             continue
         step_type = str(step.get("type", ""))
-        if step_type == "model_output":
-            for block in step.get("content") or []:
-                if not isinstance(block, dict) or block.get("type") != "text":
-                    continue
-                citations.extend(
-                    annotation
-                    for annotation in block.get("annotations") or []
-                    if isinstance(annotation, dict)
-                )
-        elif any(
+        if any(
             marker in step_type
             for marker in ("google_search", "google_maps", "url_context")
         ):
@@ -186,7 +223,7 @@ def normalize_interaction(
         "interaction_id": raw.get("id"),
         "mode": mode,
         "model": model,
-        "text": interaction.output_text or "",
+        "text": "".join(text_parts),
         "citations": citations,
         "tool_steps": tool_steps,
         "usage": raw.get("usage"),

@@ -407,18 +407,44 @@ def format_palette_markdown(palette: dict[str, str], preset_name: str = "") -> s
 
     output.append("\n## Usage Guidelines\n")
     output.append("Apply this palette to slides and SVGs consistently:\n")
-    output.append(
-        "- **Slides**: Use Background for slide backgrounds, Primary for titles"
-    )
-    output.append(
-        "- **SVG**: Use Primary for main elements, Secondary for supporting elements"
-    )
+    slide_usage = []
+    if "Background" in palette:
+        slide_usage.append("Background for slide backgrounds")
+    for role in ("Primary", "Text Primary"):
+        if role in palette:
+            slide_usage.append(f"{role} for titles")
+            break
+    if slide_usage:
+        output.append(f"- **Slides**: Use {', '.join(slide_usage)}")
 
-    # Only show text usage guideline if palette has text colors
-    if "Text Primary" in palette:
-        output.append(
-            "- **Text**: Use Text Primary for body, Text Secondary for captions"
+    svg_usage = [
+        f"{role} for {purpose}"
+        for role, purpose in (
+            ("Primary", "main elements"),
+            ("Secondary", "supporting elements"),
         )
+        if role in palette
+    ]
+    if svg_usage:
+        output.append(f"- **SVG**: Use {', '.join(svg_usage)}")
+
+    categories = [role for role in palette if role.startswith("Category")]
+    if categories:
+        output.append(
+            f"- **Charts**: Use {', '.join(categories)} for distinct data series, "
+            "with labels or patterns"
+        )
+
+    text_usage = [
+        f"{role} for {purpose}"
+        for role, purpose in (
+            ("Text Primary", "body"),
+            ("Text Secondary", "captions"),
+        )
+        if role in palette
+    ]
+    if text_usage:
+        output.append(f"- **Text**: Use {', '.join(text_usage)}")
 
     # Add validation section only for palettes with standard structure
     if "Text Primary" in palette and "Background" in palette:
