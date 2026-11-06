@@ -18,8 +18,12 @@ from pathlib import Path
 from typing import Any
 from urllib.parse import quote as url_quote
 
+# Atuin ranks all rows, including tombstones, before applying the cutoff.
 HISTORY_SELECT = """
-SELECT id, timestamp, exit, command, cwd, session, hostname
+SELECT id, timestamp, exit, command, cwd, session, hostname, deleted_at,
+       ROW_NUMBER() OVER (
+           PARTITION BY command, cwd, hostname ORDER BY timestamp DESC
+       ) AS duplicate_rank
 FROM history
 """
 
@@ -45,6 +49,8 @@ class HistoryEntry:
     cwd: str
     session: str | None
     hostname: str | None
+    deleted_at: int | None
+    duplicate_rank: int
 
 
 def shell_quote(value: str) -> str:
@@ -79,7 +85,10 @@ def add_shared_history_scope_args(parser: argparse.ArgumentParser) -> None:
     parser.add_argument(
         "--before",
         default="now",
-        help="Audit only rows at or before this timestamp. Accepts 'now', ISO-8601, or Unix epoch.",
+        help=(
+            "Audit rows at or before this timestamp at whole-second precision; "
+            "dedup ranks use all history. Accepts 'now', ISO-8601, or Unix epoch."
+        ),
     )
     parser.add_argument(
         "--typo-window-seconds",
@@ -162,52 +171,45 @@ def parse_timestamp(value: Any) -> datetime | None:
 
 
 def parse_before(value: str) -> datetime:
-    """Parse the audit cutoff timestamp."""
-    if value == "now":
-        return datetime.now(tz=UTC)
-
-    parsed = parse_timestamp(value)
+    """Resolve a whole-second cutoff shared by audit and native Atuin commands."""
+    parsed = datetime.now(tz=UTC) if value == "now" else parse_timestamp(value)
     if parsed is None:
         raise AuditError(
             f"Unsupported --before value: {value!r}. Use 'now', ISO-8601, or Unix epoch."
         )
-    return parsed
+    return parsed.replace(microsecond=0)
 
 
 def parse_history_db_path(atuin_info_output: str) -> Path:
-    """Best-effort parse of history.db from `atuin info`."""
-    candidates: list[str] = []
-
+    """Parse the complete history database path from `atuin info` labels."""
     for line in atuin_info_output.splitlines():
         stripped = line.strip()
         if not stripped or ":" not in stripped:
             continue
         label, value = stripped.split(":", 1)
         normalized_label = re.sub(r"\s+", " ", label.lower())
-        cleaned_value = value.strip().strip("'\"")
+        cleaned_value = value.strip()
+        if cleaned_value.startswith('"'):
+            try:
+                cleaned_value = json.loads(cleaned_value)
+            except json.JSONDecodeError:
+                continue
+        elif cleaned_value.startswith("'") and cleaned_value.endswith("'"):
+            cleaned_value = cleaned_value[1:-1]
         if not cleaned_value:
             continue
-        if "history" in normalized_label and (
-            "db" in normalized_label
-            or "database" in normalized_label
-            or "path" in normalized_label
+        if normalized_label == "client db path" or (
+            "history" in normalized_label
+            and (
+                "db" in normalized_label
+                or "database" in normalized_label
+                or "path" in normalized_label
+                or cleaned_value.endswith(".db")
+            )
         ):
-            candidates.append(cleaned_value)
-        elif cleaned_value.endswith(".db") and "history" in normalized_label:
-            candidates.append(cleaned_value)
+            return Path(cleaned_value).expanduser()
 
-    for candidate in candidates:
-        path = Path(candidate).expanduser()
-        if path.suffix == ".db":
-            return path
-
-    fallback_match = re.search(
-        r"(?P<path>(?:~|/)[^\s'\"`]*history\.db)", atuin_info_output
-    )
-    if fallback_match:
-        return Path(fallback_match.group("path")).expanduser()
-
-    raise AuditError("Could not find history.db in `atuin info` output.")
+    raise AuditError("Could not find the history database path in `atuin info` output.")
 
 
 def resolve_db_path(explicit_path: str | None) -> Path:
@@ -250,7 +252,7 @@ def parse_exit_code(value: Any) -> int | None:
 def load_history_entries(
     db_path: Path, before_cutoff: datetime
 ) -> tuple[list[HistoryEntry], dict[str, int]]:
-    """Load history rows from SQLite in read-only mode."""
+    """Load cutoff-scoped rows and global duplicate ranks in read-only mode."""
     sqlite_uri = f"file:{url_quote(str(db_path))}?mode=ro"
     total_rows = 0
     skipped_unparsed_timestamp = 0
@@ -279,8 +281,8 @@ def load_history_entries(
                 excluded_after_before += 1
                 continue
 
-            command = str(row["command"] or "").strip()
-            if not command:
+            command = str(row["command"] or "")
+            if not command.strip():
                 continue
 
             entries.append(
@@ -292,6 +294,8 @@ def load_history_entries(
                     cwd=str(row["cwd"] or ""),
                     session=str(row["session"]) if row["session"] else None,
                     hostname=str(row["hostname"]) if row["hostname"] else None,
+                    deleted_at=row["deleted_at"],
+                    duplicate_rank=row["duplicate_rank"],
                 )
             )
     finally:
@@ -428,7 +432,9 @@ def build_dedup_command(before_value: str, dupkeep: int, dry_run: bool) -> str:
 def analyze_duplicates(
     entries: list[HistoryEntry], before_value: str, dupkeep: int
 ) -> dict[str, Any]:
-    """Group duplicates by (command, cwd, hostname)."""
+    """Count removals before the cutoff using global ranks, including tombstones."""
+    before_cutoff = parse_before(before_value)
+    before_value = before_cutoff.isoformat(timespec="seconds")
     grouped: dict[tuple[str, str, str | None], list[HistoryEntry]] = defaultdict(list)
     for entry in entries:
         grouped[(entry.command, entry.cwd, entry.hostname)].append(entry)
@@ -436,7 +442,13 @@ def analyze_duplicates(
     groups: list[dict[str, Any]] = []
     for (command, cwd, hostname), group_entries in grouped.items():
         count = len(group_entries)
-        if count <= dupkeep:
+        deletable_count = sum(
+            entry.duplicate_rank > dupkeep
+            and entry.timestamp is not None
+            and entry.timestamp < before_cutoff
+            for entry in group_entries
+        )
+        if not deletable_count:
             continue
         latest_timestamp = max(
             entry.timestamp for entry in group_entries if entry.timestamp is not None
@@ -447,7 +459,7 @@ def analyze_duplicates(
                 "cwd": cwd,
                 "hostname": hostname,
                 "count": count,
-                "deletable_count": count - dupkeep,
+                "deletable_count": deletable_count,
                 "latest_timestamp": latest_timestamp.isoformat(),
             }
         )
@@ -477,7 +489,8 @@ def analyze_typos(
     typo_window_seconds: int,
     max_typos: int,
 ) -> dict[str, Any]:
-    """Find conservative typo-like retry pairs."""
+    """Find conservative typo-like retry pairs among live rows only."""
+    entries = [entry for entry in entries if entry.deleted_at is None]
     tokenized_commands: dict[str, list[str]] = {}
     first_token_frequency: Counter[str] = Counter()
 
@@ -612,6 +625,7 @@ def audit_history(
         raise AuditError("--max-typos must be at least 1.")
 
     before_cutoff = parse_before(before)
+    before_iso = before_cutoff.isoformat(timespec="seconds")
     resolved_db_path = resolve_db_path(str(db_path) if db_path is not None else None)
     entries, stats = load_history_entries(resolved_db_path, before_cutoff)
 
@@ -619,13 +633,13 @@ def audit_history(
         "db_path": str(resolved_db_path),
         "scope": {
             "before": before,
-            "before_iso": before_cutoff.isoformat(),
+            "before_iso": before_iso,
             "dupkeep": dupkeep,
             "typo_window_seconds": typo_window_seconds,
             "max_typos": max_typos,
         },
         "stats": stats,
-        "duplicates": analyze_duplicates(entries, before_cutoff.isoformat(), dupkeep),
+        "duplicates": analyze_duplicates(entries, before_iso, dupkeep),
         "typos": analyze_typos(entries, typo_window_seconds, max_typos),
     }
     return report
@@ -635,7 +649,8 @@ def format_duplicates_section(duplicates: dict[str, Any]) -> list[str]:
     """Render the duplicate summary for text output."""
     lines = [
         "Duplicates",
-        f"- Groups over dupkeep={duplicates['dupkeep']}: {duplicates['group_count']}",
+        f"- Groups with removals (dupkeep={duplicates['dupkeep']}): {duplicates['group_count']}",
+        "- Duplicate ranks include newer and deleted rows.",
         f"- Potential removals: {duplicates['deletable_count']}",
         f"- Preview: {duplicates['preview_command']}",
         f"- Apply: {duplicates['apply_command']}",
@@ -643,7 +658,7 @@ def format_duplicates_section(duplicates: dict[str, Any]) -> list[str]:
 
     groups: list[dict[str, Any]] = duplicates["groups"]
     if not groups:
-        lines.append("- No duplicate groups exceed the current threshold.")
+        lines.append("- No duplicate removals before the cutoff.")
         return lines
 
     visible_groups = groups[:TEXT_DUPLICATE_GROUP_LIMIT]

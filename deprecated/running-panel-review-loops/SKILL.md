@@ -28,7 +28,10 @@ If the review target or requested mutation mode remains materially ambiguous, as
 3. Treat a missing or invalid required review field as a reviewer failure and retry one transient reviewer failure once. Continue with a disclosed partial panel only when at least two independent substantive reviews remain. When scoring is active, disclose and omit an invalid score without discarding otherwise usable findings; never fabricate a score.
 4. Synthesize agreements and disagreements. When scoring is active, normalize valid scores to 0–10 and compute a mean only with at least two valid scores. Report whether a requested threshold was met, but never let a score or average override verified findings or determine acceptance.
 5. Verify every actionable claim against the source, affected flow, tests, and executable checks where feasible. Resolve disagreements through evidence rather than majority vote. Label theoretical or unverified risks and do not change behavior solely to satisfy them.
-6. In review-only mode, run focused checks appropriate to the complete reviewed snapshot and the repository gate when available, report the synthesis, and stop before edits. In review-fix mode, address only confirmed, in-scope findings. Add the smallest boundary or regression test when practical, apply the smallest coherent fix, then run those snapshot-level checks.
+6. In review-only mode, run only non-mutating checks against the complete reviewed snapshot; use an isolated copy for fixing gates, or report the gate as unavailable.
+   Report the synthesis and stop before edits.
+   In review-fix mode, address only confirmed, in-scope findings.
+   Add the smallest boundary or regression test when practical, apply the smallest coherent fix, then run those snapshot-level checks.
 7. Re-review the complete updated diff in the next iteration. Do not reuse stale scores or count a check run against an earlier snapshot as evidence for the current one.
 
 Do not churn on subjective non-blocking suggestions. Apply a non-blocking suggestion only when it is concrete, proportionate, behavior-preserving or requirement-backed, and improves verification or materially reduces risk.

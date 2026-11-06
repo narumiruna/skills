@@ -11,6 +11,8 @@ This workflow is excluded from active discovery but retained for repository refe
 Resolve the repository root and inspect `MEMORY.md` at the start of repository work and before non-trivial debugging, design, workflow, or skill maintenance.
 Missing memory is normal.
 Current repository evidence always overrides it.
+All memory writes, including curation of existing entries, require write authority for the current task.
+During read-only or plan-only work, report proposed curation or new entries instead of changing memory.
 
 ## Qualifying Entries
 
@@ -22,9 +24,12 @@ Do not record transient status, task history, broad summaries, speculation, gene
 
 ## Curate
 
-Perform lightweight curation whenever inspecting or updating memory. Using the evidence already gathered, merge, revise, remove, or sanitize entries that are demonstrably duplicated, misplaced, contradicted, stale, non-qualifying, or sensitive. Do not broaden a lightweight pass into a repository-wide audit.
+During authorized repository changes, perform lightweight curation when inspecting or updating memory.
+Using the evidence already gathered, merge, revise, remove, or sanitize entries that are demonstrably duplicated, misplaced, contradicted, stale, non-qualifying, or sensitive.
+Do not broaden a lightweight pass into a repository-wide audit.
 
-Perform full curation when the user explicitly requests it or concrete evidence suggests `MEMORY.md` may be stale. Check every entry against current repository evidence, authoritative guidance, and later explicit user preferences:
+When writes are authorized, perform full curation if the user requests it or concrete evidence suggests `MEMORY.md` may be stale.
+Check every entry against current repository evidence, authoritative guidance, and later explicit user preferences:
 
 - Keep entries that remain correct and qualifying.
 - Merge or rewrite entries that remain useful but are inaccurate, misplaced, or overlapping.
@@ -34,7 +39,7 @@ Perform full curation when the user explicitly requests it or concrete evidence 
 ## Create or Update
 
 - Do not create `MEMORY.md` merely because it is absent.
-- When the first qualifying entry emerges and repository writes are authorized, create the root file without asking solely about its absence. In read-only or plan-only work, carry the entry into the next authorized write step.
+- When the first qualifying entry emerges and repository writes are authorized, create the root file without asking solely about its absence.
 - Keep exactly these top-level sections:
 
 ```markdown

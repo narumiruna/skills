@@ -20,9 +20,11 @@ logger.add(
     sys.stderr,
     format="{time:YYYY-MM-DD HH:mm:ss} | {level: <8} | {message} | {extra}",
     level="INFO",
+    diagnose=False,
 )
 ```
 
+Disable exception-variable diagnostics to keep local values out of logs.
 Add file or external sinks only when the application requires them. Consider retention, sensitive fields, destination approval, and duplicate setup.
 
 ## Context

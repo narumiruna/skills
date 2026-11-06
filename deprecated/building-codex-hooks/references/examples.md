@@ -164,8 +164,11 @@ Use this pattern when the hook only needs to run an existing command and turn it
 import json
 import sys
 
-json.load(sys.stdin)
-print(json.dumps({"decision": "block", "reason": "Run one more pass over failing checks."}))
+payload = json.load(sys.stdin)
+if payload.get("stop_hook_active"):
+    print(json.dumps({}))
+else:
+    print(json.dumps({"decision": "block", "reason": "Run one more pass over failing checks."}))
 ```
 
 ## Practical Notes
