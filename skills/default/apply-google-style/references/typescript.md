@@ -1,23 +1,6 @@
----
-name: apply-google-typescript-style
-description: Write, refactor, or review TypeScript code using Google's TypeScript Style Guide, focusing on module boundaries, type choices, class and callback rules, and Google-specific restrictions rather than basic TypeScript syntax.
----
-
-# Apply Google TypeScript Style
+# Selected Google TypeScript Style Rules
 
 Use these selected rules from the [Google TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html) as an addition to standard TypeScript practice, not a complete copy of the guide.
-
-## Establish Scope
-
-- Inspect repository instructions, `tsconfig` files, framework contracts, build scripts, and formatter and lint configuration before applying the rules.
-- Respect explicit repository policies and required framework contracts.
-  - If they conflict with a Google rule, preserve the required behavior and report the deviation.
-  - Do not silently change compiler options, replace tooling, or break a framework-required default export to enforce this skill.
-- Keep review-only requests read-only, and keep changes within the requested scope.
-  Do not turn a bounded change into a repository-wide style migration.
-- Preserve the guide's distinction between requirements and recommendations: `prefer` and `avoid` are not absolute prohibitions.
-  Do not enforce incidental formatting choices from examples as rules.
-- Consult the linked source section when an exception or omitted rule affects the task; do not require a full guide download for routine work.
 
 ## Modules and Export Boundaries
 
@@ -124,9 +107,3 @@ Sources: [naming](https://google.github.io/styleguide/tsguide.html#naming) and [
   - Tooling-only exports do not require comments.
   - Do not repeat TypeScript types or modifiers in JSDoc tags, and put documentation before decorators.
 - Include clear call-site migration directions in `@deprecated` comments.
-
-## Verify
-
-Use the target repository's existing formatter, type checker, lints, and relevant tests.
-For reviews, cite the source rule, check its exceptions, and distinguish project-policy conflicts from defects.
-For changes, report affected paths, checks run, and any unverified behavior; do not claim full guide compliance from this selected subset.

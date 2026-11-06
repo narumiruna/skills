@@ -54,13 +54,14 @@ Default skills live under `skills/default/<skill-name>/` and are linked by `just
 
 | Skill | Use it for |
 | --- | --- |
-| `apply-google-rust-style` | Writing, refactoring, and reviewing Rust with selected Google-specific import, API design, panic, and API evolution rules. |
-| `apply-google-typescript-style` | Writing, refactoring, and reviewing TypeScript with selected Google rules for module boundaries, type choices, classes, callbacks, and feature restrictions. |
+| `apply-google-style` | Writing, refactoring, and reviewing code and documentation with all guides in Google's style guide index. |
 | `configure-ghostty` | Configuring, validating, diagnosing, and operating Ghostty with version-aware file, keybinding, runtime, and launch guidance. |
 | `create-agent-skills` | Creating, naming, reviewing, revising, and explicitly scoring lean, discoverable agent skills. |
 | `prompt-gpt` | Creating, revising, and reviewing prompts with GPT-specific behavior, API constraints, and migration references for the user-specified or detected runtime model. |
 | `write-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
 | `write-plans` | Drafting, executing, and tracking agent-executable implementation plans with completion evidence and separate external handoff, then deleting completed plans. |
+
+The former `apply-google-rust-style` and `apply-google-typescript-style` skills are merged into `apply-google-style`.
 
 ### Optional Skills
 
