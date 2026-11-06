@@ -22,18 +22,15 @@ The catalog below covers all 24 guides in the [Google Style Guides index](https:
 ## Select and Read the Guides
 
 - Select only the guides for the affected languages and formats.
-  Read the relevant source sections, not the full collection.
-- For Rust and TypeScript, load the linked local selected rules first.
-  Consult the upstream guide when an omitted rule, an exception, or a possible source change affects the task.
-- For other languages and formats, read the applicable sections of the linked guide before applying or reporting its rules.
+  Read their relevant source sections before applying or reporting rules; do not load the full collection.
 - Apply each rule only within its guide's stated language and context.
   Do not transfer restrictions between languages or treat framework and codebase policies as universal Google rules.
 - For Angular work, combine the framework guide with the TypeScript and HTML/CSS guides as applicable.
   Do not substitute JavaScript rules for conflicting TypeScript rules.
 - Use the upstream index to resolve moved guides or find newly added entries.
-  If a source cannot be read, identify the gap and continue only with available project rules or local selected rules; do not invent source requirements.
+  If a source cannot be read, identify the gap and continue only with available project rules; do not invent source requirements.
 
-| Language or format | Sources, scope, and local references |
+| Language or format | Sources and scope |
 | --- | --- |
 | Angular | [Angular Style Guide](https://angular.dev/style-guide) |
 | C++ | [C++ Style Guide](https://google.github.io/styleguide/cppguide.html) |
@@ -51,11 +48,11 @@ The catalog below covers all 24 guides in the [Google Style Guides index](https:
 | Objective-C/Objective-C++ | [Objective-C Style Guide](https://google.github.io/styleguide/objcguide.html) |
 | Python | [Python Style Guide](https://google.github.io/styleguide/pyguide.html) |
 | R | [R Style Guide](https://google.github.io/styleguide/Rguide.html), Google's differences from the [Tidyverse Style Guide](https://style.tidyverse.org/). |
-| Rust | [Rust Style Guide](https://google.github.io/styleguide/rustguide.html); [selected rules](references/rust.md) |
+| Rust | [Rust Style Guide](https://google.github.io/styleguide/rustguide.html) |
 | Shell/Bash | [Shell Style Guide](https://google.github.io/styleguide/shellguide.html) |
 | Swift | [Swift Style Guide](https://google.github.io/swift/) |
 | Tcl/Tk | [Dodekalogue](https://wiki.tcl-lang.org/page/Dodekalogue), a community Tcl syntax and semantics reference, not a Tk UI style policy. |
-| TypeScript | [TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html); [selected rules](references/typescript.md) |
+| TypeScript | [TypeScript Style Guide](https://google.github.io/styleguide/tsguide.html) |
 | Verilog/SystemVerilog | [Verilog Style Guide](https://google.github.io/styleguide/verilogguide.html), including synthesizable and testbench code. |
 | Vim script | [Vim script Style Guide](https://google.github.io/styleguide/vimscriptguide.html) and [full guide](https://google.github.io/styleguide/vimscriptfull.html). |
 | XML | [XML Document Format Style Guide](https://google.github.io/styleguide/xmlguide.html), primarily for new machine-oriented formats, not rich text or forced retroactive redesign. |
@@ -65,4 +62,4 @@ The catalog below covers all 24 guides in the [Google Style Guides index](https:
 - Use the target repository's existing formatter, type checker, lints, and relevant tests for the requested scope.
 - For reviews, cite the source rule and location, check its exceptions, and separate confirmed violations from recommendations and project-policy conflicts.
 - For changes, report affected paths, checks run, deviations, and any unverified behavior or unavailable source.
-- Do not claim full guide compliance from a selected rule summary or formatter output alone.
+- Do not claim full guide compliance from formatter output or a partial guide review alone.
