@@ -1,22 +1,13 @@
----
-name: apply-google-rust-style
-description: Write, refactor, or review Rust code using Google's Rust Style Guide, focusing on non-obvious import conventions, API design choices, panic restrictions, and API evolution rather than basic Rust rules.
----
-
-# Apply Google Rust Style
+# Selected Google Rust Style Rules
 
 Use these selected rules from the [Google Rust Style Guide](https://google.github.io/styleguide/rustguide.html) as an addition to standard Rust practice, not a complete copy of the guide.
 
-## Establish Scope
+## Rust Context
 
-- Inspect repository instructions, build system, toolchain, and formatter configuration before applying the rules.
 - Distinguish reusable library APIs from application code.
   API design rules are binding for libraries that adopt this guide, but are strong recommendations for applications, where direct solutions can be better.
-- Keep review-only requests read-only.
-  Do not turn a bounded change into a repository-wide style migration.
-- Load [codebase-specific rules](references/codebases.md) only for Chromium, Android, or Fuchsia work.
+- Load [codebase-specific rules](rust-codebases.md) only for Chromium, Android, or Fuchsia work.
   Do not apply their restrictions to ordinary Cargo projects.
-- Consult the linked source section when an exception or omitted rule affects the task; do not require a full guide download for routine work.
 
 ## Imports and Module Boundaries
 
@@ -76,9 +67,3 @@ Source: [other Rust features](https://google.github.io/styleguide/rustguide.html
   If only selected variants matter, prefer `if let` or `let ... else`, unless `match` is clearer.
 - Treat another owner's `#[doc(hidden)]` items as private.
 - Make a public function `const` only if it can remain `const`, or if there is a commitment to help callers migrate.
-
-## Verify
-
-Use the target repository's formatter, lints, and relevant tests.
-For reviews, cite the violated rule and check its exceptions before reporting a finding.
-For changes, report the affected paths, checks run, and any unverified behavior; do not claim full guide compliance from this selected subset.
