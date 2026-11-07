@@ -57,6 +57,7 @@ Default skills live under `skills/default/<skill-name>/` and are linked by `just
 | `apply-google-style` | Writing, refactoring, and reviewing code and documentation with all guides in Google's style guide index. |
 | `configure-ghostty` | Configuring, validating, diagnosing, and operating Ghostty with version-aware file, keybinding, runtime, and launch guidance. |
 | `create-agent-skills` | Creating, naming, reviewing, revising, and explicitly scoring lean, discoverable agent skills. |
+| `give-language-feedback` | Proactive, one-sentence grammar or wording feedback in any language alongside the main task, without requiring a language-help request. |
 | `prompt-gpt` | Creating, revising, and reviewing prompts with GPT-specific behavior, API constraints, and migration references for the user-specified or detected runtime model. |
 | `write-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
 | `write-plans` | Drafting, executing, and tracking agent-executable implementation plans with completion evidence and separate external handoff, then deleting completed plans. |
