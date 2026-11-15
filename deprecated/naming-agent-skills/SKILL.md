@@ -1,13 +1,13 @@
 ---
 name: naming-agent-skills
-description: Deprecated compatibility reference for choosing, reviewing, renaming, or standardizing agent skill names. Use the active create-agent-skills workflow for current naming and authorized repository rename work.
+description: Deprecated compatibility reference for choosing, reviewing, renaming, or standardizing agent skill names. Use the active write-agent-skills workflow for current naming and authorized repository rename work.
 metadata:
   internal: true
 ---
 
 # Naming Agent Skills (Deprecated Reference)
 
-Use `create-agent-skills` for the maintained workflow. This reference preserves the former `$naming-agent-skills` behavior for explicit local use.
+Use `write-agent-skills` for the maintained workflow. This reference preserves the former `$naming-agent-skills` behavior for explicit local use.
 
 Name the task and trigger the skill represents, not its implementation.
 

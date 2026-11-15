@@ -1,13 +1,13 @@
 ---
 name: scoring-agent-skills
-description: Deprecated compatibility reference for numerical agent-skill ratings and rubric-based comparisons. Use the active create-agent-skills workflow for current skill scoring, review, revision, and creation work.
+description: Deprecated compatibility reference for numerical agent-skill ratings and rubric-based comparisons. Use the active write-agent-skills workflow for current skill scoring, review, revision, and creation work.
 metadata:
   internal: true
 ---
 
 # Scoring Agent Skills (Deprecated Reference)
 
-Use `create-agent-skills` for the maintained workflow. Its explicitly requested Score mode preserves the former `$scoring-agent-skills` behavior and owns the current six-dimension rubric.
+Use `write-agent-skills` for the maintained workflow. Its explicitly requested Score mode preserves the former `$scoring-agent-skills` behavior and owns the current six-dimension rubric.
 
 Do not score an ordinary review unless the user explicitly asks for ratings, numerical scores, a rubric, or a scored comparison. A scoring request remains read-only unless revisions are also requested.
 
