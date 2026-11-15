@@ -1,11 +1,11 @@
 ---
-name: create-agent-skills
+name: write-agent-skills
 description: Create, name, rename, revise, or review agent skills for clear triggers, safe workflows, strong checks, lean content, and easy discovery, and score or numerically compare skills only when the user explicitly asks.
 ---
 
-# Creating Agent Skills
+# Writing Agent Skills
 
-Create or check a skill that another agent can find and use with little extra context.
+Create, name, rename, revise, review, or explicitly score a skill that another agent can find and use with little extra context.
 A review or score request is read-only unless the user also asks for changes.
 
 ## Writing Rules

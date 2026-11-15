@@ -58,13 +58,14 @@ Global skills live under `skills/global/<skill-name>/` and are linked by `just i
 | --- | --- |
 | `apply-google-style` | Writing, refactoring, and reviewing code and documentation with all guides in Google's style guide index. |
 | `configure-ghostty` | Configuring, validating, diagnosing, and operating Ghostty with version-aware file, keybinding, runtime, and launch guidance. |
-| `create-agent-skills` | Creating, naming, reviewing, revising, and explicitly scoring lean, discoverable agent skills. |
 | `give-language-feedback` | Proactive, one-sentence grammar or wording feedback in any language alongside the main task, without requiring a language-help request. |
 | `lean-verify` | Formalizing claims and constructing or checking Lean 4 proofs for mathematical theorems, program properties, algorithm correctness, and other formal-verification tasks in `~/.agents/lean`. |
 | `prompt-gpt` | Creating, revising, and reviewing prompts with GPT-specific behavior, API constraints, and migration references for the user-specified or detected runtime model. |
+| `write-agent-skills` | Creating, naming, renaming, reviewing, revising, and explicitly scoring lean, discoverable agent skills. |
 | `write-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
 | `write-plans` | Drafting, executing, and tracking agent-executable implementation plans with completion evidence and separate external handoff, then deleting completed plans. |
 
+The former `create-agent-skills` skill is now named `write-agent-skills`.
 The former `apply-google-rust-style` and `apply-google-typescript-style` skills are merged into `apply-google-style`.
 
 ### Optional Skills
@@ -117,8 +118,8 @@ Deprecated skills remain in `deprecated/<skill-name>/` for reference and are exc
 | `cleaning-atuin-history` | Legacy Atuin audit and exact-approval cleanup preparation. |
 | `building-codex-hooks` | Version-sensitive legacy Codex CLI hook reference. |
 | `writing-work-logs` | Legacy explicit-only Git-evidence work logs. |
-| `naming-agent-skills` | Merged into `create-agent-skills`; retained as a compatibility reference. |
-| `scoring-agent-skills` | Merged into `create-agent-skills`; retained as a compatibility reference. |
+| `naming-agent-skills` | Merged into `write-agent-skills`; retained as a compatibility reference. |
+| `scoring-agent-skills` | Merged into `write-agent-skills`; retained as a compatibility reference. |
 | `designing-user-interfaces` | Merged into `design-user-experiences`; retained as a compatibility reference. |
 | `researching-gourmet-venues` | Rarely used city dining workflow retained as a compatibility reference. |
 | `syncing-main-branch` | Legacy explicit-only main-branch synchronization workflow. |
