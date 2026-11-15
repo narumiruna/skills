@@ -46,6 +46,13 @@ hooks = [
     always_run = true
   },
   {
+    id = "lint-python-scripts",
+    name = "check Python script metadata and executable headers",
+    entry = "uv run scripts/lint_python_scripts.py",
+    language = "system",
+    files = "\\.py$"
+  },
+  {
     id = "normalize-skill-paths",
     name = "normalize skill paths",
     entry = "uv run --no-project scripts/normalize_skill_paths.py",

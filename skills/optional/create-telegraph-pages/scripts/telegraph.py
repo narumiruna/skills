@@ -1,4 +1,6 @@
-#!/usr/bin/env python3
+# /// script
+# dependencies = []
+# ///
 """Create Telegraph accounts and publish Telegraph pages with the standard library."""
 
 import argparse

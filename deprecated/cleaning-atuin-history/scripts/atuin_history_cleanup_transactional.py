@@ -1,3 +1,6 @@
+# /// script
+# dependencies = []
+# ///
 """Transactional helpers for Atuin typo cleanup."""
 
 from __future__ import annotations
