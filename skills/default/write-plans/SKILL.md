@@ -5,10 +5,17 @@ description: Draft, execute, or track lean implementation plans for non-trivial 
 
 # Writing Plans
 
-Save a drafted plan to the repository unless the user requests chat-only output.
-Default to `docs/plans/YYYY-MM-DD_<topic>-plan.md` with a concise lowercase kebab-case topic and update it in place during authorized execution.
+Save a drafted plan to a file unless the user requests chat-only output.
+Default to `~/.agents/plans/` in the user's home directory and update the plan in place during authorized execution.
+Use `<repo>_<scope>_<topic>.md` for work limited to one module, package, or skill, using its name as the scope.
+Otherwise, omit the scope and use `<repo>_<topic>.md`; do not use placeholder scopes such as `general` or `misc`.
+Separate fields with underscores and use concise lowercase kebab-case within each field; do not include dates in the filename.
 
 ## Plan Content
+
+Below the plan title, include `Created: YYYY-MM-DD` and `Updated: YYYY-MM-DD`, each on its own line.
+Set both fields to the current local date when creating the plan.
+Keep `Created` unchanged and set `Updated` to the current local date whenever the plan changes.
 
 Ground the plan in relevant repository evidence and state assumptions or unknowns only when they affect execution or validation.
 Always include `Goal`, `Plan`, and `Completion Checklist`.
