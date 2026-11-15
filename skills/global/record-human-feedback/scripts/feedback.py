@@ -1,4 +1,5 @@
 # /// script
+# requires-python = ">=3.10"
 # dependencies = []
 # ///
 """Record local human feedback events and summarize their frequencies."""
@@ -16,6 +17,7 @@ import uuid
 
 
 CATEGORIES = {
+    "explanation-request",
     "tool-preference",
     "missing-action",
     "missed-context",
