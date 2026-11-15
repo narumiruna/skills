@@ -46,9 +46,10 @@ Use the [Responses API](https://developers.openai.com/api/docs/guides/migrate-to
 
 ### Tools and Conversation State
 
-- **Async tool calling:** Set `async: true` on a function or custom tool to let GPT-6 continue independent work while the application runs it.
+- **Async tool calling:** Confirm model support in the [compatibility guide](https://developers.openai.com/api/docs/guides/async-tool-calling#compatibility) before setting `async: true` on a function or custom tool.
+  Support starts with GPT-6 Astra; do not enable it for `gpt-6-sol`.
+  The model can continue independent work while the application runs the tool.
   The application still executes the tool and returns its result with the original `call_id`.
-  See [Async tool calling](https://developers.openai.com/api/docs/guides/async-tool-calling).
 - **Mid-turn steering:** Over a WebSocket connection, the Responses API can preserve completed work and include new user instructions in a continuation.
   See [Mid-turn steering](https://developers.openai.com/api/docs/guides/steering) for events and tool-result handling.
 - **Reasoning changes:** Use `configuration_update` input items to change effort between responses in supported standard, single-agent requests.
