@@ -69,7 +69,7 @@ Preserve the user's language in text fields and use stable official names in `to
 Repository-relative example; do not run it against the real store as sample data:
 
 ```shell
-uv run --no-project --no-config global/skills/record-human-feedback/scripts/feedback.py record <<'JSON'
+uv run --no-project --no-config skills/record-human-feedback/scripts/feedback.py record <<'JSON'
 {
   "category": "explanation-request",
   "topic": "unexplained-terminology",
@@ -90,7 +90,7 @@ Do not upload, rewrite, delete, or promote events into `AGENTS.md`, skills, or o
 Use the same CLI's read-only summary when the user asks for frequencies or when an existing topic needs checking:
 
 ```shell
-uv run --no-project --no-config global/skills/record-human-feedback/scripts/feedback.py summary
+uv run --no-project --no-config skills/record-human-feedback/scripts/feedback.py summary
 ```
 
 The JSON output contains `total_events` and descending counts for `categories`, `topics`, and `tools`, with alphabetical tie-breaking.

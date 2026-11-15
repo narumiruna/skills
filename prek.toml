@@ -57,7 +57,7 @@ hooks = [
     name = "normalize skill paths",
     entry = "uv run --no-project scripts/normalize_skill_paths.py",
     language = "system",
-    files = "^(global|optional)/skills/",
+    files = "^(optional/)?skills/",
     types = ["text"]
   }
 ]

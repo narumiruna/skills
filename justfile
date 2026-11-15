@@ -2,12 +2,12 @@
 
 stow_flags := "--restow --verbose"
 stow_dir := justfile_directory()
-target := env('HOME') + "/.agents"
-package := "global"
+target := env('HOME') + "/.agents/skills"
+package := "skills"
 
 [default]
 install:
-    mkdir -p "{{ target }}/skills"
+    mkdir -p "{{ target }}"
     stow {{ stow_flags }} --dir "{{ stow_dir }}" --target "{{ target }}" {{ package }}
 
 uninstall:
