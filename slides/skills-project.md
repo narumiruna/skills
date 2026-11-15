@@ -143,7 +143,7 @@ section::after {
 
 | Area | Skills |
 |---|---|
-| **Python** | `manage-python-with-uv` |
+| **Code review** | `review-code` |
 | **Writing and research** | `apply-imrad`, `researching-gourmet-venues` |
 | **Slides and visuals** | `create-slide-decks`, `author-marp-slides`, `design-slide-colors`, `create-svg-illustrations`, `create-mermaid-diagrams` |
 | **Workflow maintenance** | `checking-cli-help`, `write-git-commits`, `write-agents-md` |
@@ -235,7 +235,7 @@ Then in Codex:
 
 ```text
 /skills
-$manage-python-with-uv
+$review-code
 $create-slide-decks
 $write-git-commits
 ```
