@@ -6,9 +6,10 @@ description: Draft, execute, or track lean implementation plans for non-trivial 
 # Writing Plans
 
 Save a drafted plan to a file unless the user requests chat-only output.
-Default to `~/.agents/plans/` in the user's home directory and update the plan in place during authorized execution.
-Use `<repo>_<scope>_<topic>.md` for work limited to one module, package, or skill, using its name as the scope.
-Otherwise, omit the scope and use `<repo>_<topic>.md`; do not use placeholder scopes such as `general` or `misc`.
+Default to `~/.agents/plans/<repo>/` in the user's home directory and update the plan in place during authorized execution.
+Use `<type>_<scope>_<topic>.md`, where `type` describes the work, such as `feat`, `fix`, `refactor`, or `docs`.
+The scope is optional; use a module, package, or skill name when useful, or omit it and use `<type>_<topic>.md`.
+Do not use placeholder scopes such as `general` or `misc`.
 Separate fields with underscores and use concise lowercase kebab-case within each field; do not include dates in the filename.
 
 ## Plan Content
