@@ -41,6 +41,7 @@ Follow global defaults; this file contains only repository-specific additions an
 - Run every changed bundled script through a non-destructive path that exercises the changed behavior; report the command and result, and identify any path that credentials, network access, or unavailable dependencies prevented you from verifying.
 - If one-off `uv run --with ...` validation fails because `~/.cache/uv` is read-only, set `UV_CACHE_DIR=/tmp/uv-cache`; request temporary network access only when an uncached dependency still cannot resolve.
 - Run `prek run -a` as the repository-wide formatting and lint gate, and report any failure before a pull request.
+- [UNREVIEWED] Run `prek run normalize-skill-paths -a` to replace `.cursor/` with `.agents/` in tracked text files under `skills/global/` and `skills/optional/`; this hook also runs in `prek run -a` and exits with status 1 after fixes so you can review the diff and rerun it.
 - Run `git diff --check` and inspect the final diff for unintended scope or repeated guidance.
 - For changes under `examples/slides/`, verify source assets and include the generated preview or screenshots in the pull request.
 
