@@ -12,3 +12,5 @@ install:
 
 uninstall:
     if [ -d "{{ target }}" ]; then stow --delete --verbose --dir "{{ stow_dir }}" --target "{{ target }}" {{ package }}; fi
+
+reinstall: uninstall install
