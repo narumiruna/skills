@@ -23,6 +23,11 @@ Follow global defaults; this file contains only repository-specific additions an
 - Retain explicit-invocation skills that provide useful mode shortcuts even when their behavior can be inferred; keep `explain-step-by-step` active.
 - Keep a skill's frontmatter description and README catalog entry aligned when its trigger or purpose changes.
 - Keep examples repository-relative and executable when practical.
+- Use uv with PEP 723 inline metadata for new or modified standalone Python scripts, following the [official script guide](https://docs.astral.sh/uv/guides/scripts/).
+  - Initialize new scripts with `uv init --script path/to/script.py` and declare dependencies in the `# /// script` block, using `dependencies = []` when none are required.
+  - Add or update third-party dependencies with `uv add --script path/to/script.py <package>`.
+  - Run scripts with `uv run path/to/script.py`.
+  - For direct execution, use `#!/usr/bin/env -S uv run --script` as the first line and set the executable bit; the shebang does not replace dependency metadata.
 - For user interfaces, apply Apple-derived design philosophy across platforms while translating platform-specific metrics and controls to target conventions; minimize cognitive load without sacrificing functional completeness, keep critical actions and state visible, and use predictable progressive disclosure for secondary complexity.
 
 ## Boundaries
