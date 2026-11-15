@@ -7,7 +7,8 @@ Reusable agent skills for coding, writing, research, and slide work. This repo i
 Install the collection:
 
 ```shell
-npx skills add narumiruna/skills
+npx skills add narumiruna/skills/global/skills
+npx skills add narumiruna/skills/optional/skills
 ```
 
 Then open Codex and run `/skills` to inspect what was installed. Invoke a skill explicitly with `$skill-name`, or describe the task normally and let Codex choose a match.
@@ -19,10 +20,11 @@ Then open Codex and run `/skills` to inspect what was installed. Invoke a skill 
 Use this when you want the collection without linking a local checkout:
 
 ```shell
-npx skills add narumiruna/skills
+npx skills add narumiruna/skills/global/skills
+npx skills add narumiruna/skills/optional/skills
 ```
 
-Standard installation discovers active skills from both `skills/global/` and `skills/optional/`; deprecated skills live outside `skills/` and remain available solely for repository reference or explicit local use.
+These commands discover active skills from `global/skills/` and `optional/skills/` separately; deprecated skills live in `deprecated/` and remain available solely for repository reference or explicit local use.
 
 ### Local checkout with GNU Stow
 
@@ -32,13 +34,13 @@ Use this when you want `~/.agents/skills` to track a local checkout. Install [ju
 just install
 ```
 
-This links each skill in `skills/global/` directly into `~/.agents/skills/`. Skills in `skills/optional/` remain available for selective installation but are not linked by this recipe. Remove the managed links with:
+This links each skill in `global/skills/` directly into `~/.agents/skills/`. Skills in `optional/skills/` remain available for selective installation but are not linked by this recipe. Remove the managed links with:
 
 ```shell
 just uninstall
 ```
 
-Before updating a Stow installation that uses the former `skills/default/` directory, run `just uninstall` from the old checkout, then update the checkout and run `just install`.
+Before updating an existing Stow installation after a source-directory move, run `just uninstall` from the old checkout, then update the checkout and run `just install`.
 
 ## 🧭 How To Use In Codex
 
@@ -52,7 +54,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 
 ### Global Skills
 
-Global skills live under `skills/global/<skill-name>/` and are linked by `just install`.
+Global skills live under `global/skills/<skill-name>/` and are linked by `just install`.
 
 | Skill | Use it for |
 | --- | --- |
@@ -71,7 +73,7 @@ The former `apply-google-rust-style` and `apply-google-typescript-style` skills 
 
 ### Optional Skills
 
-Optional skills live under `skills/optional/<skill-name>/` and remain available for selective installation.
+Optional skills live under `optional/skills/<skill-name>/` and remain available for selective installation.
 
 | Skill | Use it for |
 | --- | --- |
