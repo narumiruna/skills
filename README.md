@@ -93,6 +93,19 @@ Optional skills live under `skills/optional/<skill-name>/` and remain available 
 | `write-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
 | `write-roadmap` | Creating, revising, reviewing, and tracking evidence-grounded strategic roadmaps, then deleting them when complete. |
 
+### External Skills
+
+External skills recorded in [`skills-lock.json`](skills-lock.json):
+
+| Skill | Source repository |
+| --- | --- |
+| `chrome-extensions` | [GoogleChrome/modern-web-guidance][googlechrome-skills] |
+| `modern-web-guidance` | [GoogleChrome/modern-web-guidance][googlechrome-skills] |
+| `security-audit` | [cloudflare/security-audit-skill][cloudflare-skills] |
+
+[googlechrome-skills]: https://github.com/GoogleChrome/modern-web-guidance
+[cloudflare-skills]: https://github.com/cloudflare/security-audit-skill
+
 ## 🗄️ Deprecated Skills
 
 Deprecated skills remain in `deprecated/<skill-name>/` for reference and are excluded from standard discovery.
