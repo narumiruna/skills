@@ -33,3 +33,16 @@ hooks = [
   },
   { id = "ruff-format" }
 ]
+
+[[repos]]
+repo = "local"
+hooks = [
+  {
+    id = "skills-update",
+    name = "update project skills",
+    entry = "npx skills update --project",
+    language = "system",
+    pass_filenames = false,
+    always_run = true
+  }
+]
