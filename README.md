@@ -7,7 +7,7 @@ Reusable agent skills for coding, writing, research, and slide work. This repo i
 Install the collection:
 
 ```shell
-npx skills add narumiruna/skills/global/skills
+npx skills add narumiruna/skills/skills
 npx skills add narumiruna/skills/optional/skills
 ```
 
@@ -20,11 +20,11 @@ Then open Codex and run `/skills` to inspect what was installed. Invoke a skill 
 Use this when you want the collection without linking a local checkout:
 
 ```shell
-npx skills add narumiruna/skills/global/skills
+npx skills add narumiruna/skills/skills
 npx skills add narumiruna/skills/optional/skills
 ```
 
-These commands discover active skills from `global/skills/` and `optional/skills/` separately; deprecated skills live in `deprecated/` and remain available solely for repository reference or explicit local use.
+These commands discover active skills from `skills/` and `optional/skills/` separately; deprecated skills live in `deprecated/` and remain available solely for repository reference or explicit local use.
 
 ### Local checkout with GNU Stow
 
@@ -34,7 +34,7 @@ Use this when you want `~/.agents/skills` to track a local checkout. Install [ju
 just install
 ```
 
-This links each skill in `global/skills/` directly into `~/.agents/skills/`. Skills in `optional/skills/` remain available for selective installation but are not linked by this recipe. Remove the managed links with:
+This links each skill in `skills/` directly into `~/.agents/skills/`. Skills in `optional/skills/` remain available for selective installation but are not linked by this recipe. Remove the managed links with:
 
 ```shell
 just uninstall
@@ -54,7 +54,7 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 
 ### Global Skills
 
-Global skills live under `global/skills/<skill-name>/` and are linked by `just install`.
+Global skills live under `skills/<skill-name>/` and are linked by `just install`.
 
 | Skill | Use it for |
 | --- | --- |

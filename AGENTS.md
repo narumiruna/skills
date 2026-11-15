@@ -9,7 +9,7 @@ Follow global defaults; this file contains only repository-specific additions an
 - Explain the main idea simply before adding necessary detail.
 - Keep information accurate.
 - Make documented rules specific and verifiable.
-- Follow the model-selection policy in `./global/skills/prompt-gpt/SKILL.md` when creating, revising, or reviewing skills and other agent-facing prompts.
+- Follow the model-selection policy in `./skills/prompt-gpt/SKILL.md` when creating, revising, or reviewing skills and other agent-facing prompts.
 - Keep external positioning, installation flows, and skill discovery in `README.md`, and keep maintainer workflow in this file.
 - Update the README catalog when a skill is added, deprecated, renamed, recategorized, or materially changes its trigger.
 - Update installation documentation and executable recipes only in the files that own the affected flow.
@@ -37,7 +37,7 @@ Follow global defaults; this file contains only repository-specific additions an
 - Ask before writing to external systems, taking destructive or costly actions, or materially expanding the scope.
 - Ask before running `scripts/download_human_interface_guidelines.py` because its default mode downloads a large external corpus; when maintaining the archiver, enumerate the DocC navigator and page JSON under `/tutorials/data/` instead of recursively downloading HTML.
 - Treat ignored `build/` content as generated output; do not hand-edit or commit it.
-- Treat `global/skills/` and `optional/skills/` as the active source roots; `.agents/skills` is a tracked local-discovery symlink to `global/skills/`, not a second copy to edit.
+- Treat `skills/` and `optional/skills/` as the active source roots; `.agents/skills` is a tracked local-discovery symlink to `skills/`, not a second copy to edit.
 - Do not introduce root-level marketplace or plugin metadata unless corresponding repository files and workflows exist.
 
 ## Testing
@@ -52,7 +52,7 @@ Follow global defaults; this file contains only repository-specific additions an
 
 ## Repository structure
 
-- Keep global skills directly in `global/skills/<skill-name>/SKILL.md` and optional skills directly in `optional/skills/<skill-name>/SKILL.md`; do not add deeper category directories.
+- Keep global skills directly in `skills/<skill-name>/SKILL.md` and optional skills directly in `optional/skills/<skill-name>/SKILL.md`; do not add deeper category directories.
 - Keep deprecated skills in `deprecated/<skill-name>/SKILL.md`, outside active discovery.
 - Keep optional supporting material inside its skill directory under `references/`, `scripts/`, `assets/`, or `agents/`.
 - Keep source slides and visual examples under `examples/`.
