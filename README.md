@@ -74,7 +74,6 @@ Optional skills live under `skills/optional/<skill-name>/` and remain available 
 | --- | --- |
 | `apply-asd-ste100` | Drafting, revising, and reviewing technical documentation with ASD-STE100 rule and vocabulary checks for the requested issue (Issue 9 by default), or clarity principles without a compliance claim. |
 | `apply-imrad` | Evidence-traceable IMRaD fit checks, reviews, transformations, and drafts. |
-| `audit-code-security` | Evidence-led, security-first, read-only code audits with verified findings and bounded tool use. |
 | `author-marp-slides` | Focused Marp/Marpit authoring, templates, themes, and rendered checks. |
 | `calibrate-writing-style` | Explicit-invocation interviews that refine reusable English and Taiwan Traditional Chinese writing-style prompts. |
 | `create-mermaid-diagrams` | Editable Mermaid diagrams with optional consumer-ready SVG rendering. |
@@ -112,6 +111,7 @@ Deprecated skills remain in `deprecated/<skill-name>/` for reference and are exc
 
 | Skill | Notes |
 | --- | --- |
+| `audit-code-security` | Legacy read-only security audit workflow; use `security-audit` for maintained security guidance and audits. |
 | `checking-cli-help` | Legacy decision rule for focused command-help inspection. |
 | `cleaning-atuin-history` | Legacy Atuin audit and exact-approval cleanup preparation. |
 | `building-codex-hooks` | Version-sensitive legacy Codex CLI hook reference. |

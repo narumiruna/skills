@@ -1,9 +1,14 @@
 ---
 name: audit-code-security
-description: Perform read-only security audits, vulnerability assessments, or threat-focused reviews of diffs, pull requests, code paths, or explicitly scoped repositories when security is the primary objective or acceptance criterion. Use review-code for ordinary review with baseline security coverage and harden-code-paths for fixing confirmed findings.
+description: Deprecated compatibility reference for read-only security audits, vulnerability assessments, and threat-focused reviews. Use security-audit for maintained security guidance and audits.
+metadata:
+  internal: true
 ---
 
-# Auditing Code Security
+# Auditing Code Security (Deprecated Reference)
+
+This workflow is excluded from active discovery and retained for repository reference and explicit local compatibility.
+Use `security-audit` for maintained security guidance and audits.
 
 Treat audits, assessments, and diagnoses as read-only. An audit request does not authorize code changes, intrusive testing, credential use, or testing beyond the requested target.
 
