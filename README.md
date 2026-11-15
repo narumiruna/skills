@@ -4,12 +4,13 @@ Reusable agent skills for coding, writing, research, and slide work. This repo i
 
 ## 🚀 Quick Start
 
-Install the collection:
+Install the global skills:
 
 ```shell
 npx skills add narumiruna/skills/skills
-npx skills add narumiruna/skills/optional/skills
 ```
+
+Add category collections as needed with the commands in [Standard install](#standard-install-with-npx-skills).
 
 Then open Codex and run `/skills` to inspect what was installed. Invoke a skill explicitly with `$skill-name`, or describe the task normally and let Codex choose a match.
 
@@ -17,14 +18,21 @@ Then open Codex and run `/skills` to inspect what was installed. Invoke a skill 
 
 ### Standard install with `npx skills`
 
-Use this when you want the collection without linking a local checkout:
+Install the global skills and any category collections you need without linking a local checkout:
 
 ```shell
 npx skills add narumiruna/skills/skills
-npx skills add narumiruna/skills/optional/skills
+npx skills add narumiruna/skills/writing/skills
+npx skills add narumiruna/skills/research/skills
+npx skills add narumiruna/skills/visuals/skills
+npx skills add narumiruna/skills/design/skills
+npx skills add narumiruna/skills/code-quality/skills
+npx skills add narumiruna/skills/workflow/skills
 ```
 
-These commands discover active skills from `skills/` and `optional/skills/` separately; deprecated skills live in `deprecated/` and remain available solely for repository reference or explicit local use.
+Each command discovers skills from its selected source directory; deprecated skills live in `deprecated/` and remain available solely for repository reference or explicit local use.
+
+The former `optional/skills/` collection is now split across the six category roots below; replace its old install command with the categories you need.
 
 ### Local checkout with GNU Stow
 
@@ -34,7 +42,7 @@ Use this when you want `~/.agents/skills` to track a local checkout. Install [ju
 just install
 ```
 
-This links each skill in `skills/` directly into `~/.agents/skills/`. Skills in `optional/skills/` remain available for selective installation but are not linked by this recipe. Remove the managed links with:
+This links each skill in `skills/` directly into `~/.agents/skills/`. Category collections remain available for selective installation but are not linked by this recipe. Remove the managed links with:
 
 ```shell
 just uninstall
@@ -71,31 +79,70 @@ Global skills live under `skills/<skill-name>/` and are linked by `just install`
 The former `create-agent-skills` skill is now named `write-agent-skills`.
 The former `apply-google-rust-style` and `apply-google-typescript-style` skills are merged into `apply-google-style`.
 
-### Optional Skills
+### Category Skills
 
-Optional skills live under `optional/skills/<skill-name>/` and remain available for selective installation.
+Category skills live under `<category>/skills/<skill-name>/` and remain available for selective installation.
+
+#### Writing and Publishing
+
+Source: `writing/skills/`.
 
 | Skill | Use it for |
 | --- | --- |
 | `apply-asd-ste100` | Drafting, revising, and reviewing technical documentation with ASD-STE100 rule and vocabulary checks for the requested issue (Issue 9 by default), or clarity principles without a compliance claim. |
 | `apply-imrad` | Evidence-traceable IMRaD fit checks, reviews, transformations, and drafts. |
-| `author-marp-slides` | Focused Marp/Marpit authoring, templates, themes, and rendered checks. |
 | `calibrate-writing-style` | Explicit-invocation interviews that refine reusable English and Taiwan Traditional Chinese writing-style prompts. |
+| `create-telegraph-pages` | Preparing and publishing one explicitly authorized Telegra.ph article. |
+
+#### Research and Explanation
+
+Source: `research/skills/`.
+
+| Skill | Use it for |
+| --- | --- |
+| `explain-step-by-step` | Progressive, evidence-grounded mental models for complex material. |
+| `ground-with-google-genai` | Grounded Google Search, Maps, and specific-URL research with Gemini. |
+
+#### Slides and Visuals
+
+Source: `visuals/skills/`.
+
+| Skill | Use it for |
+| --- | --- |
+| `author-marp-slides` | Focused Marp/Marpit authoring, templates, themes, and rendered checks. |
 | `create-mermaid-diagrams` | Editable Mermaid diagrams with optional consumer-ready SVG rendering. |
 | `create-slide-decks` | Complete Marp decks with coordinated narrative, colors, visuals, and rendering. |
 | `create-svg-illustrations` | Accessible, portable SVG diagrams and illustrations for target artifacts. |
-| `create-telegraph-pages` | Preparing and publishing one explicitly authorized Telegra.ph article. |
 | `design-slide-colors` | Semantic slide palettes with usage rules and measured contrast evidence. |
+
+#### Planning and Experience Design
+
+Source: `design/skills/`.
+
+| Skill | Use it for |
+| --- | --- |
 | `design-user-experiences` | Design, review, or implement bounded interfaces and approval-gated end-to-end digital experiences. |
-| `explain-step-by-step` | Progressive, evidence-grounded mental models for complex material. |
 | `grill-designs` | Evidence-informed, one-decision-at-a-time design grilling. |
-| `ground-with-google-genai` | Grounded Google Search, Maps, and specific-URL research with Gemini. |
+| `write-roadmap` | Creating, revising, reviewing, and tracking evidence-grounded strategic roadmaps, then deleting them when complete. |
+
+#### Code Quality and Architecture
+
+Source: `code-quality/skills/`.
+
+| Skill | Use it for |
+| --- | --- |
 | `harden-code-paths` | Confirming and fixing code-path failure modes or verified security findings, with bounded same-pattern checks. |
 | `improve-codebase-architecture` | Evidence-led codebase architecture assessment and behavior-preserving refactoring. |
 | `review-code` | Evidence-led ordinary code review with baseline security checks and authorized hardening handoff. |
+
+#### Project and Git Workflow
+
+Source: `workflow/skills/`.
+
+| Skill | Use it for |
+| --- | --- |
 | `use-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |
 | `write-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
-| `write-roadmap` | Creating, revising, reviewing, and tracking evidence-grounded strategic roadmaps, then deleting them when complete. |
 
 ### External Skills
 
