@@ -41,7 +41,7 @@ just uninstall
 ## 🧭 How To Use In Codex
 
 - Run `/skills` to inspect the installed collection.
-- Type `$manage-python-with-uv`, `$apply-imrad`, or another skill name to invoke one explicitly.
+- Type `$review-code`, `$apply-imrad`, or another skill name to invoke one explicitly.
 - Describe the task normally and let Codex choose a matching skill.
 
 If Codex does not pick up a local skill change, restart Codex and try again.
@@ -72,7 +72,6 @@ Optional skills live under `skills/optional/<skill-name>/` and remain available 
 | --- | --- |
 | `apply-asd-ste100` | Drafting, revising, and reviewing technical documentation with ASD-STE100 rule and vocabulary checks for the requested issue (Issue 9 by default), or clarity principles without a compliance claim. |
 | `apply-imrad` | Evidence-traceable IMRaD fit checks, reviews, transformations, and drafts. |
-| `apply-tdd` | Scoping red-green-refactor with explicit production-path, test-data, and observable-behavior boundaries. |
 | `audit-code-security` | Evidence-led, security-first, read-only code audits with verified findings and bounded tool use. |
 | `author-marp-slides` | Focused Marp/Marpit authoring, templates, themes, and rendered checks. |
 | `calibrate-writing-style` | Explicit-invocation interviews that refine reusable English and Taiwan Traditional Chinese writing-style prompts. |
@@ -87,7 +86,6 @@ Optional skills live under `skills/optional/<skill-name>/` and remain available 
 | `ground-with-google-genai` | Grounded Google Search, Maps, and specific-URL research with Gemini. |
 | `harden-code-paths` | Confirming and fixing code-path failure modes or verified security findings, with bounded same-pattern checks. |
 | `improve-codebase-architecture` | Evidence-led codebase architecture assessment and behavior-preserving refactoring. |
-| `manage-python-with-uv` | uv projects, scripts, dependencies, checks, builds, and authorized publishing. |
 | `review-code` | Evidence-led ordinary code review with baseline security checks and authorized hardening handoff. |
 | `use-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |
 | `write-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
@@ -111,6 +109,8 @@ Deprecated skills remain in `deprecated/<skill-name>/` for reference and are exc
 | `iterating-ui-improvements` | Legacy explicit-only DevTools audit-fix-commit loop. |
 | `building-typer-clis` | Legacy Typer-specific CLI workflow retained as a compatibility reference. |
 | `configuring-python-logging` | Legacy Python logging configuration workflow retained as a compatibility reference. |
+| `manage-python-with-uv` | Legacy uv project, script, and authorized publishing workflow retained as a compatibility reference. |
+| `apply-tdd` | Legacy TDD workflow with production-path and test-isolation boundaries retained as a compatibility reference. |
 | `using-peewee-orm` | Legacy Peewee lifecycle workflow retained as a compatibility reference. |
 | `managing-git-worktrees` | Legacy loss-aware Git worktree lifecycle workflow retained as a compatibility reference. |
 | `maintaining-memory-md` | Legacy repository memory curation workflow retained as a compatibility reference. |

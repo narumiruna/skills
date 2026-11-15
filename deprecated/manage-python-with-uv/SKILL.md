@@ -1,9 +1,13 @@
 ---
 name: manage-python-with-uv
-description: Manage Python projects and standalone scripts with uv, including setup, dependencies, execution, quality gates, locking, builds, and release preparation. Use for `uv run`, `uv add`, inline script metadata, packaging, or an explicitly requested publish workflow.
+description: Deprecated internal reference for managing Python projects and standalone scripts with uv, including setup, dependencies, execution, quality gates, locking, builds, and authorized publishing.
+metadata:
+  internal: true
 ---
 
-# Python with uv
+# Python with uv (Deprecated Reference)
+
+This workflow is excluded from active discovery but retained for repository reference and explicit local compatibility.
 
 Use the repository's existing Python and verification choices first; use uv for dependency and execution operations unless a documented repository command wraps them.
 
