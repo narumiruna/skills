@@ -42,7 +42,7 @@
         <rect x="740" y="256" width="212" height="112" rx="16" fill="#F0FDFA" stroke="#0F766E" stroke-width="3" filter="url(#shadow-sm)"/>
         <text x="846" y="296" text-anchor="middle" font-size="24" font-weight="700">Invoke</text>
         <text x="846" y="326" text-anchor="middle" fill="#64748B">/skills</text>
-        <text x="846" y="344" text-anchor="middle" font-size="14" fill="#64748B">$manage-python-with-uv</text>
+        <text x="846" y="344" text-anchor="middle" font-size="14" fill="#64748B">$review-code</text>
         <text x="846" y="365" text-anchor="middle" font-size="14" fill="#64748B">$apply-imrad</text>
       </g>
 

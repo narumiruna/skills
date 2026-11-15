@@ -1,9 +1,13 @@
 ---
 name: apply-tdd
-description: "Use when implementing a non-trivial, observable behavior change with TDD under explicit ecosystem production-path and test-isolation boundaries. Do not apply red-first mechanically to static configuration, wiring, metadata, or production code outside the defined boundary."
+description: Deprecated internal reference for applying TDD to non-trivial, observable behavior changes with explicit production-path and test-isolation boundaries.
+metadata:
+  internal: true
 ---
 
-# Applying TDD
+# Applying TDD (Deprecated Reference)
+
+This workflow is excluded from active discovery but retained for repository reference and explicit local compatibility.
 
 Use tests as executable behavior specifications, not as a coverage ritual.
 
