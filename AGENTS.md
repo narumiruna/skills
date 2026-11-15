@@ -46,6 +46,7 @@ Follow global defaults; this file contains only repository-specific additions an
 - Run every changed bundled script through a non-destructive path that exercises the changed behavior; report the command and result, and identify any path that credentials, network access, or unavailable dependencies prevented you from verifying.
 - If one-off `uv run --with ...` validation fails because `~/.cache/uv` is read-only, set `UV_CACHE_DIR=/tmp/uv-cache`; request temporary network access only when an uncached dependency still cannot resolve.
 - Run `prek run -a` as the repository-wide formatting and lint gate, and report any failure before a pull request.
+- [UNREVIEWED] Run `prek run lint-python-scripts -a` to check PEP 723 metadata, dependency and Python version specifiers, and executable headers for every tracked `.py` file, including helpers and `deprecated/`; the linter does not infer dependencies from imports.
 - Run `git diff --check` and inspect the final diff for unintended scope or repeated guidance.
 - For changes under `examples/slides/`, verify source assets and include the generated preview or screenshots in the pull request.
 

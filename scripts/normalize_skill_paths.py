@@ -1,4 +1,6 @@
-#!/usr/bin/env python3
+# /// script
+# dependencies = []
+# ///
 """Replace Cursor directory references in skill text files.
 
 Run `prek run normalize-skill-paths -a` to scan all tracked active skill text

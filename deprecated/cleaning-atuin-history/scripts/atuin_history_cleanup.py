@@ -1,4 +1,6 @@
-#!/usr/bin/env python3
+# /// script
+# dependencies = []
+# ///
 """Audit Atuin history for duplicates and typo-like retries."""
 
 from __future__ import annotations

@@ -1,4 +1,7 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# dependencies = []
+# ///
 """Archive Apple's complete Human Interface Guidelines DocC corpus.
 
 The public HIG site is a DocC single-page application. Its HTML alone is only a
@@ -8,7 +11,7 @@ file reference used by those pages.
 
 Run from anywhere:
 
-    python scripts/download_human_interface_guidelines.py
+    uv run scripts/download_human_interface_guidelines.py
 
 The default destination is ``docs/human-interface-guidelines`` at the repository
 root. A manifest with SHA-256 hashes makes the archive auditable and allows a

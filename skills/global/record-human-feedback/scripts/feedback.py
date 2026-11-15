@@ -1,4 +1,6 @@
-#!/usr/bin/env python3
+# /// script
+# dependencies = []
+# ///
 """Record local human feedback events and summarize their frequencies."""
 
 import argparse
