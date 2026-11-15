@@ -56,7 +56,8 @@ List only conflicts or compatibility work that affects use.
 4. Keep only files with a clear job.
    - Use `SKILL.md` for the trigger and the instructions followed after the skill triggers.
    - Use `references/` for details loaded only when needed.
-   - Use `scripts/` for repeated work that must follow the same steps.
+   - Use `scripts/` instead of prompt instructions whenever a script can do the work.
+     - Keep only the guidance needed to run the script and use its output in `SKILL.md`.
    - Use `assets/` for material copied into or used by outputs.
    - Keep every bundled local document or script linked or imported by a skill file inside the directory containing `SKILL.md`; a nested resource may use `../` only when the resolved target remains inside that directory.
    - Do not apply this boundary to task inputs, outputs, target-repository files, or system paths.
