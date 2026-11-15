@@ -22,7 +22,7 @@ Use this when you want the collection without linking a local checkout:
 npx skills add narumiruna/skills
 ```
 
-Standard installation discovers active skills from both `skills/default/` and `skills/optional/`; deprecated skills live outside `skills/` and remain available solely for repository reference or explicit local use.
+Standard installation discovers active skills from both `skills/global/` and `skills/optional/`; deprecated skills live outside `skills/` and remain available solely for repository reference or explicit local use.
 
 ### Local checkout with GNU Stow
 
@@ -32,11 +32,13 @@ Use this when you want `~/.agents/skills` to track a local checkout. Install [ju
 just install
 ```
 
-This links each skill in `skills/default/` directly into `~/.agents/skills/`. Skills in `skills/optional/` remain available for selective installation but are not linked by this recipe. Remove the managed links with:
+This links each skill in `skills/global/` directly into `~/.agents/skills/`. Skills in `skills/optional/` remain available for selective installation but are not linked by this recipe. Remove the managed links with:
 
 ```shell
 just uninstall
 ```
+
+Before updating a Stow installation that uses the former `skills/default/` directory, run `just uninstall` from the old checkout, then update the checkout and run `just install`.
 
 ## 🧭 How To Use In Codex
 
@@ -48,9 +50,9 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 
 ## 🧰 Skill Catalog
 
-### Default Skills
+### Global Skills
 
-Default skills live under `skills/default/<skill-name>/` and are linked by `just install`.
+Global skills live under `skills/global/<skill-name>/` and are linked by `just install`.
 
 | Skill | Use it for |
 | --- | --- |
