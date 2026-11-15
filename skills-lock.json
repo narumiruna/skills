@@ -13,30 +13,6 @@
       "skillPath": "harness/pstack/claude-code/skills/correct/SKILL.md",
       "computedHash": "63f55b279f1298d3cabe91999063920cdc2a2f16a671cb8fbd87ddecc7fde216"
     },
-    "create-formal-verification-skill": {
-      "source": "cursor/plugins",
-      "sourceType": "github",
-      "skillPath": "harness/pstack/claude-code/skills/create-formal-verification-skill/SKILL.md",
-      "computedHash": "24ff958480cc5852a2738b6dc49ad1709294fc566372c96c5101618ffb8b16cf"
-    },
-    "create-verification-skill": {
-      "source": "cursor/plugins",
-      "sourceType": "github",
-      "skillPath": "harness/pstack/claude-code/skills/create-verification-skill/SKILL.md",
-      "computedHash": "31c6b5b22baa59f8963c21acef73ff225d557dc76b01465ea41abc870607c9de"
-    },
-    "maintain-formal-verification-skill": {
-      "source": "cursor/plugins",
-      "sourceType": "github",
-      "skillPath": "harness/pstack/claude-code/skills/maintain-formal-verification-skill/SKILL.md",
-      "computedHash": "c383b2f2322065c1c2b3adf9ae4532a846af1d5cedb49e3c6d1b8b2432e7910d"
-    },
-    "maintain-verification-skill": {
-      "source": "cursor/plugins",
-      "sourceType": "github",
-      "skillPath": "harness/pstack/claude-code/skills/maintain-verification-skill/SKILL.md",
-      "computedHash": "faab042b93816a301022006190fea0bc74f3f0d531c679fcce51c34329f00ce3"
-    },
     "modern-web-guidance": {
       "source": "GoogleChrome/modern-web-guidance",
       "sourceType": "github",

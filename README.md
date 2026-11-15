@@ -103,10 +103,6 @@ External skills recorded in [`skills-lock.json`](skills-lock.json):
 | --- | --- |
 | `chrome-extensions` | [GoogleChrome/modern-web-guidance][googlechrome-skills] |
 | `correct` | [cursor/plugins][cursor-skills] |
-| `create-formal-verification-skill` | [cursor/plugins][cursor-skills] |
-| `create-verification-skill` | [cursor/plugins][cursor-skills] |
-| `maintain-formal-verification-skill` | [cursor/plugins][cursor-skills] |
-| `maintain-verification-skill` | [cursor/plugins][cursor-skills] |
 | `modern-web-guidance` | [GoogleChrome/modern-web-guidance][googlechrome-skills] |
 | `security-audit` | [cloudflare/security-audit-skill][cloudflare-skills] |
 
