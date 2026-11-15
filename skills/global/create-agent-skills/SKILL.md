@@ -27,9 +27,11 @@ Do not turn a normal review into a scorecard.
 Name the task and trigger that the skill represents instead of naming its implementation.
 
 - Read the description and workflow to find the action, subject, domain, and any needed product name.
-- Prefer skill names in `[tool-]verb-object` form, using a base-form action verb and a specific object in lowercase kebab-case.
-- Add a tool prefix only when it clarifies the skill’s scope or distinguishes it from similar skills.
-- Allow multiword objects, such as `generate-release-notes`; use `review-code` without a tool prefix or `gh-review-pr` with one.
+- Use lowercase kebab-case and a base-form action verb, not its `-ing` form.
+- Prefer `verb-object`, such as `write-proofs` or `review-code`.
+- Add a tool prefix only when it clarifies the skill’s scope or distinguishes it from similar skills, such as `lean-write-proofs`.
+- Allow `tool-verb`, such as `lean-verify`, when the tool and action make the task clear without an object.
+- Allow multiword objects, such as `generate-release-notes`.
 - Use meaningful digits only when needed.
 - Use single hyphens, and do not put a hyphen at either end.
 - Keep the directory name and frontmatter `name` the same, and follow the framework's length limit.
