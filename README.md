@@ -73,6 +73,7 @@ Global skills live under `skills/<skill-name>/` and are linked by `just install`
 | `lean-verify` | Formalizing claims and constructing or checking Lean 4 proofs for mathematical theorems, program properties, algorithm correctness, and other formal-verification tasks in `~/.agents/lean`. |
 | `prompt-gpt` | Creating, revising, and reviewing prompts with GPT-specific behavior, API constraints, and migration references for the user-specified or detected runtime model. |
 | `record-human-feedback` | Recording human corrections, tool or workflow preferences, and follow-up explanation or simplification requests in `~/.agents/human-feedback/`, with response context and frequency summaries. |
+| `resolve-github-issues` | Investigating and fixing GitHub issues with bug reproduction or feature requirements, explicit approval before implementation, and evidence-backed verification. |
 | `review-pull-requests` | Complete read-only PR assessments and merge verdicts, with pinned commits, base/head bug reproduction, impact, risks, and verification. |
 | `write-agent-skills` | Creating, naming, renaming, reviewing, revising, and explicitly scoring lean, discoverable agent skills. |
 | `write-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
