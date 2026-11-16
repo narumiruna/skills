@@ -49,12 +49,20 @@ Do not publish packages, create version tags, or dispatch release workflows.
 
 ## Deliver the Pull Request
 
-1. Stage only the intended changes, inspect the staged diff, and commit them.
-2. Push the new branch to the verified repository and open a pull request against the verified base.
-   Include a concise summary, verification evidence, and relevant risks or unverified paths.
-3. If the implementation resolves an issue, include a GitHub closing keyword in the pull request description, such as `Closes #123`.
+1. If committing is authorized by the user, stage only the intended changes, inspect the staged diff, and commit them.
+   Otherwise, stop, report the branch and uncommitted changes, and ask for the needed approval.
+2. Run the focused and repository-required local checks in a clean disposable checkout of the exact delivery commit, without unrelated or uncommitted working-tree files.
+   Prepare only required dependencies and documented check inputs; do not copy local helper files from the original working tree.
+   Preserve the original working tree and remove the disposable checkout after verification.
+   If these local checks fail or cannot run, report the failures or blocker and do not publish until they pass.
+   Record checks that require a remote branch or pull request as pending and complete them after publication.
+3. Push the new branch and open a pull request only when those actions are authorized under **Authorization and Limits**.
+   Otherwise, stop after the local commit, report the branch and commits, and ask whether to push and open a pull request.
+   Use the verified repository and base, and include a concise summary, verification evidence, and relevant risks or unverified paths.
+4. If the implementation resolves an issue, include a GitHub closing keyword in the pull request description, such as `Closes #123`.
    Link related but unresolved issues without closing keywords.
-4. Verify the published branch and pull request target.
+5. Verify that the published branch matches the validated commit and the pull request targets the verified base.
+   Run or inspect the required remote checks; do not claim completion while required checks are pending or failing.
    Report the pull request URL, commits, checks, and any remaining risks or unverified paths.
 
 Finish only when evidence supports every plan requirement and completion criterion and the pull request has been opened.
