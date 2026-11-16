@@ -67,7 +67,7 @@ Report the exact tool, authentication, permission, or validation blocker if deli
    | PR state | Branch for fixes | Publication target |
    | --- | --- | --- |
    | Open | The PR's head branch | Existing PR |
-   | Merged with actionable in-scope items | Fetch the latest remote base and create a new branch; never reuse the merged head | New follow-up PR to the original base, linking the merged PR and addressed items |
+   | Merged with actionable in-scope items | Reuse the verified pending follow-up branch; if none exists, fetch the latest remote base and create a new branch from it; never reuse the merged head | Reuse the matching open follow-up PR, or open one to the original base, linking the merged PR and addressed items |
    | Merged with no actionable items | None | No new PR |
 
 2. Implement every actionable in-scope item on the selected branch.

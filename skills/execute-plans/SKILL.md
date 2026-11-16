@@ -30,6 +30,7 @@ Do not publish packages, create version tags, or dispatch release workflows.
 1. Read the full plan and repository instructions before changing files.
    Inspect the working tree, preserve unrelated work, and confirm the repository and base branch; ask if either is unclear.
 2. Create a focused new branch from that base and implement every requirement, including repository-permitted tests, documentation, and plausible in-scope failure cases.
+   During execution, apply `write-plans` tracking to the supplied plan, recording completed tasks and their acceptance evidence.
 3. Review the full diff for correctness, security, lifecycle safety, compatibility, regressions, and scope.
 4. Stage only intended changes, inspect the staged diff, and commit them.
 5. Run focused and required local checks in a clean disposable checkout of the exact delivery commit, using only committed source and documented prerequisites.

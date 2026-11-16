@@ -46,6 +46,7 @@ Remove those copies and sandboxes before presenting the plan.
    - **Feature:** Identify users, use cases, constraints, compatibility needs, and measurable acceptance criteria.
 4. Present an implementation plan covering scope, expected outcome, approach, risks, and verification.
    For a bug, lead with the reproduction result and evidence.
+   Do not implement until the user explicitly approves the plan, regardless of its verdict.
 
 ## After Approval
 
@@ -68,7 +69,7 @@ Choose exactly one phase-appropriate verdict below and explain it in one or two 
 
 | Phase | Verdict | Condition and next action |
 | --- | --- | --- |
-| Before approval | **Ready for approval** | Evidence supports the scope, approach, and verification plan; wait for explicit approval before implementation. |
+| Before approval | **Ready for approval** | Evidence supports the scope, approach, and verification plan. |
 | Before approval | **Needs more context** | Evidence or requirements are missing; state what is needed. |
 | Before approval | **No change recommended** | Evidence supports leaving the repository unchanged; explain why and identify unresolved issue claims. |
 | After approval | **Resolved** | Approved acceptance criteria are met and required verification passed. |
