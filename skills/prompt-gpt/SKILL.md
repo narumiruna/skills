@@ -9,8 +9,8 @@ description: Create, revise, or review prompts and agent instructions using GPT-
 
 - Use the model explicitly specified by the user; otherwise, detect the current model from trusted runtime metadata, such as `PI_MODEL` when provided by the host.
 - Do not infer model identity from the assistant's self-description or substitute an application's configured model for the runtime model.
-- If the selected model is covered by a [model reference](#model-guides), read its model coverage and prompting behavior first, accepting aliases or families only when the guide explicitly covers them.
-- Read API, integration, deployment, and migration sections only when the requested work needs those details.
+- If the selected model is covered by a [model reference](#model-guides), read its model coverage and prompting behavior first, regardless of section headings, accepting aliases or families only when the guide explicitly covers them.
+- Read API, integration, deployment, and migration details only when the requested work needs them.
 - If detection fails or no reference covers the selected model, do not load another model's guide or add model-specific assumptions.
 
 ## Model Guides
