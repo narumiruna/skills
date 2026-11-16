@@ -66,6 +66,7 @@ Global skills live under `skills/<skill-name>/` and are linked by `just install`
 
 | Skill | Use it for |
 | --- | --- |
+| `address-pr-feedback` | Triaging PR feedback, fixing in-scope issues, publishing fixes, and handling review threads, including follow-up pull requests after merge. |
 | `apply-google-style` | Writing, refactoring, and reviewing code and documentation with all guides in Google's style guide index. |
 | `configure-ghostty` | Configuring, validating, diagnosing, and operating Ghostty with version-aware file, keybinding, runtime, and launch guidance. |
 | `give-language-feedback` | Proactive, one-sentence grammar or wording feedback in any language alongside the main task, without requiring a language-help request. |
@@ -183,7 +184,7 @@ Deprecated skills remain in `deprecated/<skill-name>/` for reference and are exc
 | `using-peewee-orm` | Legacy Peewee lifecycle workflow retained as a compatibility reference. |
 | `managing-git-worktrees` | Legacy loss-aware Git worktree lifecycle workflow retained as a compatibility reference. |
 | `maintaining-memory-md` | Legacy repository memory curation workflow retained as a compatibility reference. |
-| `resolving-pr-review-comments` | Legacy explicit PR feedback workflow retained as a compatibility reference. |
+| `resolving-pr-review-comments` | Legacy explicit PR feedback workflow; use `address-pr-feedback` for the active workflow. |
 | `using-codebase-memory-cli` | Legacy CLI-only codebase graph workflow retained as a compatibility reference. |
 | `running-panel-review-loops` | Legacy multi-reviewer code review and authorized fix loop retained as a compatibility reference. |
 | `typesafe-ai` | Legacy TypeSafe System One integration workflow retained as a compatibility reference. |
