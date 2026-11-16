@@ -46,7 +46,6 @@ Remove those copies and sandboxes before presenting the plan.
    - **Feature:** Identify users, use cases, constraints, compatibility needs, and measurable acceptance criteria.
 4. Present an implementation plan covering scope, expected outcome, approach, risks, and verification.
    For a bug, lead with the reproduction result and evidence.
-   Wait for explicit approval.
 
 ## After Approval
 
@@ -60,40 +59,22 @@ Remove those copies and sandboxes before presenting the plan.
 6. Add a `bug` label only when a confirmed bug was reproduced, the repository uses that label, and the approved plan explicitly authorizes the metadata write.
 7. Summarize the solution, verification evidence, remaining risks, and unverified paths.
 
-## Report Format
+## Report and Phase Outcomes
 
-Include the following sections in both the implementation plan and the final summary, using `##` headings.
-Assess the proposed approach in the plan and the implemented solution in the summary.
+Use `## What looks good`, `## What looks bad`, and `## Verdict` in both the plan and final summary.
+Assess the proposed approach before approval and the implemented solution afterward.
+Note evidence-backed strengths and limitations without repeating risks; if no limitations are known, say so rather than inventing criticism.
+Choose exactly one phase-appropriate verdict below and explain it in one or two sentences consistent with the evidence and verification.
 
-### What looks good
+| Phase | Verdict | Condition and next action |
+| --- | --- | --- |
+| Before approval | **Ready for approval** | Evidence supports the scope, approach, and verification plan; wait for explicit approval before implementation. |
+| Before approval | **Needs more context** | Evidence or requirements are missing; state what is needed. |
+| Before approval | **No change recommended** | Evidence supports leaving the repository unchanged; explain why and identify unresolved issue claims. |
+| After approval | **Resolved** | Approved acceptance criteria are met and required verification passed. |
+| After approval | **Incomplete** | Implementation or required verification is unfinished; state what remains. |
+| After approval | **Blocked** | An external dependency, unavailable access, or required approval prevents progress; state what is needed. |
 
-Briefly note evidence-backed strengths in the approach, design, implementation, tests, or documentation.
-
-### What looks bad
-
-Briefly note evidence-backed limitations or tradeoffs.
-Do not repeat risks already reported elsewhere.
-If none are identified, state that explicitly; do not invent criticism.
-
-### Verdict
-
-Use exactly one status for the current phase:
-
-- Before approval:
-  - **Ready for approval:** Evidence supports the proposed scope, approach, and verification plan.
-    Wait for explicit approval before implementation.
-  - **Needs more context:** Missing evidence or requirements prevent a responsible plan.
-    State what is needed.
-  - **No change recommended:** Evidence supports leaving the repository unchanged.
-    Explain why and identify any unresolved issue claims.
-- After approval:
-  - **Resolved:** The approved acceptance criteria are met and required verification passed.
-  - **Incomplete:** Implementation or required verification remains unfinished.
-    State what remains.
-  - **Blocked:** An external dependency, unavailable access, or required approval prevents progress.
-    State what is needed to continue.
-
-Explain the verdict in one or two sentences consistent with the evidence, risks, and verification.
 A verdict does not authorize closing the issue or other external writes.
 
 Do not claim reproduction, root cause, completion, or passing checks without direct evidence.

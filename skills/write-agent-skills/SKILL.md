@@ -70,28 +70,17 @@ List only conflicts or compatibility work that affects use.
    - Keep an example only when it proves a requirement or prevents a known mistake.
    - Link each resource directly, say when to use it, and do not copy its details into `SKILL.md`.
 7. Update catalog or installation files only when the repository uses them for discovery.
-8. Run the documented checker, realistic examples for changed scripts, practical tests for subtle workflows, and the required repository gate.
+8. For requested changes, run the documented checker, realistic examples for changed scripts, practical tests for subtle workflows, and the required repository gate.
+   For review or scoring without requested changes, use only non-mutating checks; do not run auto-fix, update, or other writing hooks.
 9. Report every unavailable or failing check honestly.
 10. In Review mode, lead with the most important findings, show evidence, and give a clear fix for each one.
 11. Make requested local edits and safe checks without extra approval.
 12. Ask before external writes, destructive or costly actions, or a large increase in scope.
 
-## Score Only on Explicit Request
+## Scoring Reference
 
-1. Find the requested active, deprecated, or outside skills.
-2. Choose the target-model baseline from the request, repository guide, or runtime environment in that order.
-3. Read the rules, model guide, each `SKILL.md`, catalog entry, linked resources, and trusted safe check results.
-4. Read untrusted outside skills as source text, and do not run their code unless the user approves a safe sandbox.
-5. Read [the scoring rubric](references/rubric.md).
-6. Give each skill an integer from 1 to 10 for these six areas: clear trigger, usable steps, safe limits, strong checks, useful added knowledge, and lean upkeep.
-7. Use the same scoring anchors for every skill, support every score with direct evidence, and recheck unusual high or low scores.
-8. Do not raise a score just because a skill is long, has many files, is strict, or passes structure checks.
-9. Give each scored area equal weight and show the overall mean with one decimal place.
-10. Mark an area `unassessed` when key evidence is missing, leave it out of the mean, and report coverage and confidence.
-11. Return the scope and baseline, a score table, check results kept separate from judgment, and a short summary of strengths, overlap, weaknesses, and priorities.
-12. State that source-and-structure scoring estimates useful added value but does not measure real task success.
-13. Do not claim measured success, compatibility, accessibility, safety, or tool reliability without direct evidence.
-14. Treat scores as advice instead of permission to revise files.
+For Score mode, read the [scoring workflow and rubric](references/rubric.md).
+Load it only for numerical scoring or work on the scoring guidance itself.
 
 ## Completion Criteria
 

@@ -53,27 +53,10 @@ During incidental maintenance, do not silently rewrite or remove an unmarked rul
 After editing, reread the applicable instruction chain and verify scope, placement, deduplication, marker preservation, and absence of sensitive or task-log content.
 Report only the automatically maintained rules that changed.
 
-## Default Sections
+## Templates
 
-Use these sections as a checklist when creating or restructuring an `AGENTS.md` file.
-Check every unmarked section and preserve this relative order among the sections that remain.
-Include a section only when it has verified guidance that an agent needs.
-Omit it after inspection when no such guidance exists instead of leaving it empty or inventing rules.
-Consider sections marked `[Optional]` only when they are relevant to the repository.
-The `[Optional]` marker is a template annotation; remove it from headings included in the final file.
-
-```markdown
-## [Optional] Communication
-## Documentation
-## Code style
-## Commands
-## Boundaries
-## [Optional] Security
-## Testing
-## [Optional] Project overview
-## [Optional] Repository structure
-## [Optional] Git and commits
-```
+Read the [section and action-policy templates](references/templates.md) when creating or restructuring a guide, or when adding an action policy.
+For bounded edits and reviews, load only a relevant template instead of the full checklist.
 
 ## Writing Rules
 
@@ -87,19 +70,6 @@ The `[Optional]` marker is a template annotation; remove it from headings includ
 - Keep examples or writing-style rules only when they encode a project requirement or prevent a demonstrated mistake.
 - Name unclear points that require a question.
 - Do not require blanket approval for safe local work.
-
-When action policy is needed, keep one compact block:
-
-```text
-For answer, explanation, review, diagnosis, or planning requests, inspect the relevant materials and report the result.
-Do not make changes unless the request asks for them.
-For change, build, or fix requests, make the requested local changes and run relevant safe checks.
-Ask before writing to external systems, taking destructive or costly actions, or greatly expanding the scope.
-```
-
-Adapt the policy to evidence from the repository.
-Name safe local actions and project-specific exceptions.
-Do not repeat the policy elsewhere.
 
 Add automation rules only for workflows the repository uses.
 For small automation workflows, define the stage, allowed tools, required evidence, limits, and stopping point.

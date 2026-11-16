@@ -1,9 +1,13 @@
 ---
 name: write-plans
-description: Draft, execute, or track lean implementation plans for non-trivial migrations, refactors, PR splits, and other work with sequencing, tradeoffs, unknowns, or risks, using agent-executable tasks, completion evidence, and separate external handoff, then delete completed plans; use write-roadmap for strategic direction and skip small obvious tasks.
+description: Draft, revise, or track implementation plan files for non-trivial work with sequencing, tradeoffs, unknowns, or risks, including completion evidence, external handoff, and completed-plan cleanup; use execute-plans for implementation-to-PR delivery and write-roadmap for strategy.
 ---
 
 # Writing Plans
+
+This skill owns plan authoring, progress tracking, handoff, and cleanup, not implementation.
+Use `execute-plans` for an explicitly requested plan-to-PR workflow.
+Do not infer implementation or publication permission from a request to draft, revise, or track a plan.
 
 Save a drafted plan to a file unless the user requests chat-only output.
 Default to `~/.agents/plans/<repo>/` in the user's home directory and update the plan in place during authorized execution.
@@ -42,7 +46,7 @@ External handoff does not authorize external writes, costly operations, or reque
 
 ## Tracking and Completion
 
-During authorized execution:
+While tracking authorized implementation:
 
 - Check a task only after its acceptance method passes, adding concise evidence when completion is not obvious from repository state.
 - Leave failed or unavailable agent checks open; use External Handoff only for work outside the agent's capabilities or authorization.
