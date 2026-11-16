@@ -35,6 +35,8 @@ Do not publish packages, create version tags, or dispatch release workflows.
 4. Stage only intended changes, inspect the staged diff, and commit them.
 5. Run focused and required local checks in a clean disposable checkout of the exact delivery commit, using only committed source and documented prerequisites.
    Remove the disposable checkout afterward.
+   If plan tracking changes repository files after validation, commit those changes and repeat these checks on the new delivery commit before pushing.
+   Keep each result tied to the commit actually checked; report the final commit's evidence in the PR rather than making another plan update just to record its ID.
    If checks fail or cannot run, report the failure or blocker and stop before pushing.
 6. Push the validated commit to the verified repository and open a PR against the verified base.
    Include a concise summary, verification evidence, and relevant risks or unverified paths.
