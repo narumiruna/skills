@@ -69,7 +69,7 @@ Global skills live under `skills/<skill-name>/` and are linked by `just install`
 | `address-pr-feedback` | Triaging PR feedback, fixing in-scope issues, publishing fixes, and handling review threads, including follow-up pull requests after merge. |
 | `apply-google-style` | Writing, refactoring, and reviewing code and documentation with all guides in Google's style guide index. |
 | `configure-ghostty` | Configuring, validating, diagnosing, and operating Ghostty with version-aware file, keybinding, runtime, and launch guidance. |
-| `execute-plans` | Implementing a specified plan end to end on a focused new branch and delivering a pull request with checks and evidence for every requirement. |
+| `execute-plans` | Implementing a supplied plan as a requested full branch-to-PR workflow, with checks and evidence for every requirement; use `write-plans` to draft or track plan files. |
 | `give-language-feedback` | Proactive, one-sentence grammar or wording feedback in any language alongside the main task, without requiring a language-help request. |
 | `lean-verify` | Formalizing claims and constructing or checking Lean 4 proofs for mathematical theorems, program properties, algorithm correctness, and other formal-verification tasks in `~/.agents/lean`. |
 | `prompt-gpt` | Creating, revising, and reviewing prompts with GPT-specific behavior, API constraints, and migration references for the user-specified or detected runtime model. |
@@ -78,7 +78,7 @@ Global skills live under `skills/<skill-name>/` and are linked by `just install`
 | `review-pull-requests` | Complete read-only PR assessments and merge verdicts, with pinned commits, base/head bug reproduction, impact, risks, and verification. |
 | `write-agent-skills` | Creating, naming, renaming, reviewing, revising, and explicitly scoring lean, discoverable agent skills. |
 | `write-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
-| `write-plans` | Drafting, executing, and tracking agent-executable implementation plans with completion evidence and separate external handoff, then deleting completed plans. |
+| `write-plans` | Drafting, revising, and tracking implementation plan files, completion evidence, external handoff, and completed-plan cleanup; use `execute-plans` for implementation-to-PR delivery. |
 
 The former `create-agent-skills` skill is now named `write-agent-skills`.
 The former `apply-google-rust-style` and `apply-google-typescript-style` skills are merged into `apply-google-style`.

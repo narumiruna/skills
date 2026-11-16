@@ -28,11 +28,6 @@ For triage-only or review-only requests, inspect and report without making chang
 If publication is not authorized, ask before external writes.
 Do not request additional confirmation for actions already authorized.
 
-A merged pull request or deleted head branch is an expected state, not a blocker.
-Do not pause, return a plan, or present options solely because of either condition.
-For an authorized full workflow on a merged target with any actionable in-scope item, the task is incomplete until the fixes are pushed and a follow-up pull request is opened.
-Report its URL before returning unless a concrete tool, authentication, permission, approval, or validation failure prevents publication; report that exact blocker instead.
-
 ## Review Feedback
 
 1. Identify the target pull request without guessing, and confirm that the current checkout belongs to its repository.
@@ -63,15 +58,21 @@ Report its URL before returning unless a concrete tool, authentication, permissi
 
 ## Fix and Publish
 
-1. After completing the review ledger, inspect the pull request state:
-   - If it is open, implement every actionable item on its branch.
-   - If it is merged and has any actionable in-scope review comment or finding, fetch the latest remote base branch, create a new follow-up branch from it, and implement every actionable item.
-     Continue even if the original head branch was deleted.
-   - If it is merged and has no actionable items, do not create a branch or pull request.
-2. For implemented changes, run the relevant validation, then commit and push them.
-3. For a merged pull request, open a follow-up pull request to the original base branch.
-   Link the merged pull request and identify each item addressed.
-   Do not reuse or push to the merged pull request's branch.
+A merged PR or deleted head branch is expected, not a blocker.
+When authorized fixes are required, continue through validation and PR publication instead of stopping at a plan or local commits.
+Report the exact tool, authentication, permission, or validation blocker if delivery cannot finish.
+
+1. After completing the review ledger, choose the branch and publication target from the PR state:
+
+   | PR state | Branch for fixes | Publication target |
+   | --- | --- | --- |
+   | Open | The PR's head branch | Existing PR |
+   | Merged with actionable in-scope items | Fetch the latest remote base and create a new branch; never reuse the merged head | New follow-up PR to the original base, linking the merged PR and addressed items |
+   | Merged with no actionable items | None | No new PR |
+
+2. Implement every actionable in-scope item on the selected branch.
+   For implemented changes, run relevant validation, then commit and push.
+3. Open or update the publication target selected above when fixes were implemented.
 4. Reply with each outcome and its supporting evidence, then handle the thread according to its disposition.
    When a thread meets the resolution conditions below, use the platform's Resolve action or API to mark it resolved and verify the result.
    A reply that says it is resolved is not sufficient.

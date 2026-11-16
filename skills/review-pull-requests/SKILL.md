@@ -123,11 +123,11 @@ Include only material plausible concerns that remain unconfirmed, with why each 
 State the reviewed base commit, head commit, and merge base.
 List relevant CI, commands run and outcomes, useful existing test coverage, concrete missing coverage, and anything not inspected or run.
 
-### What looks good
+### What looks good (optional)
 
 Briefly note unusually strong design, implementation, tests, or documentation.
 
-### What looks bad
+### What looks bad (optional)
 
 Briefly note evidence-backed limitations or tradeoffs that do not warrant a finding.
 Do not repeat **Findings** or **Risks**.

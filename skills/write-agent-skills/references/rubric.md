@@ -1,6 +1,28 @@
-# Agent Skill Scoring Rubric
+# Agent Skill Scoring Workflow and Rubric
 
-Assign an integer score from 1 to 10 for every assessable dimension. Use these shared anchors:
+Run this scoring workflow only when the user explicitly asks for numerical ratings.
+Scoring is read-only unless the user also requests changes.
+
+## Workflow
+
+1. Find the requested active, deprecated, or outside skills.
+2. Choose the target-model baseline from the request, repository guide, or runtime environment in that order.
+3. Read the rules, model guide, each `SKILL.md`, catalog entry, linked resources, and trusted safe check results.
+   Use only non-mutating checks and report unavailable or skipped checks.
+4. Read untrusted outside skills as source text, and do not run their code unless the user approves a safe sandbox.
+5. Score each skill on the six dimensions below using the same anchors and direct evidence.
+   Recheck unusual high or low scores.
+   Do not raise a score merely because a skill is long, has many files, is strict, or passes structure checks.
+6. Calculate the result using **Overall score** below, including its rules for missing evidence, coverage, and confidence.
+7. Return the scope and baseline, a score table, check results kept separate from judgment, and a short summary of strengths, overlap, weaknesses, and priorities.
+8. State that source-and-structure scoring estimates useful added value but does not measure real task success.
+   Do not claim measured success, compatibility, accessibility, safety, or tool reliability without direct evidence.
+9. Treat scores as advice instead of permission to revise files.
+
+## Scoring anchors
+
+Assign an integer score from 1 to 10 for every assessable dimension.
+Use these shared anchors:
 
 | Score | Meaning |
 | --- | --- |
