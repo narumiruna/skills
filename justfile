@@ -1,16 +1,13 @@
-# Install this checkout's global skills into the local agent skills directory with GNU Stow.
+# Link this checkout's global skills directory into the local agent directory.
 
-stow_flags := "--restow --verbose"
-stow_dir := justfile_directory()
+skills_script := justfile_directory() + "/scripts/manage-skills.sh"
 target := env('HOME') + "/.agents/skills"
-package := "skills"
 
 [default]
 install:
-    mkdir -p "{{ target }}"
-    stow {{ stow_flags }} --dir "{{ stow_dir }}" --target "{{ target }}" {{ package }}
+    {{ quote(skills_script) }} install {{ quote(target) }}
 
 uninstall:
-    if [ -d "{{ target }}" ]; then stow --delete --verbose --dir "{{ stow_dir }}" --target "{{ target }}" {{ package }}; fi
+    {{ quote(skills_script) }} uninstall {{ quote(target) }}
 
-reinstall: uninstall install
+reinstall: install
