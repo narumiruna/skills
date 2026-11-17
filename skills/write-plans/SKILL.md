@@ -11,6 +11,7 @@ Do not infer implementation or publication permission from a request to draft, r
 
 Save a drafted plan to a file unless the user requests chat-only output.
 Default to `~/.agents/plans/<repo>/` in the user's home directory and update the plan in place during authorized execution.
+`<repo>` is the basename of the repository root directory.
 Use `<type>_<scope>_<topic>.md`, where `type` describes the work, such as `feat`, `fix`, `refactor`, or `docs`.
 The scope is optional; use a module, package, or skill name when useful, or omit it and use `<type>_<topic>.md`.
 Do not use placeholder scopes such as `general` or `misc`.
