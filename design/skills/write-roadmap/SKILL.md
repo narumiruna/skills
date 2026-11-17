@@ -15,8 +15,9 @@ Inspect provided material and relevant repository evidence before drafting. Esta
 
 Separate verified current state, approved commitments, and proposed direction. Do not invent capabilities, dates, targets, owners, capacity, dependencies, or certainty.
 
-Save a created or revised roadmap to the repository unless the user requests chat-only output.
-Default to `docs/roadmaps/YYYY-MM-DD_<topic>-roadmap.md`; derive a concise lowercase kebab-case topic, create the directory when needed, and update that roadmap in place.
+Save a created or revised roadmap to a file unless the user requests chat-only output.
+Default to `~/.agents/roadmaps/<repo>/YYYY-MM-DD_<topic>-roadmap.md` in the user's home directory; derive a concise lowercase kebab-case topic, create the directory when needed, and update that roadmap in place.
+`<repo>` is the basename of the repository root directory.
 
 ## Start with the Lean Template
 
