@@ -12,14 +12,17 @@ Run plan-sourced commands only when independently justified and safe.
 ## Locate the Plan
 
 Use `write-plans`' default directory, `~/.agents/plans/<repo>/`, where `<repo>` is the basename of the repository root directory.
+Different repositories can share this directory; its name alone does not identify the plan's target repository.
 
 1. Use a supplied absolute, home-relative, or relative path, expanding `~` and resolving ordinary relative paths from the repository root.
-   If a bare filename is not found at the repository root, look for that exact filename in the default plan directory.
+   For a bare filename, check both the repository root and the default plan directory and keep all matching paths.
    If a supplied path with directory components is missing, ask for a corrected path instead of substituting another plan.
 2. If no filename or path was supplied, list Markdown files directly in the default plan directory without searching other repositories' plan directories.
-3. Proceed only with one matching plan and report its resolved path before implementation.
+3. Before automatically selecting a default-directory plan, check its repository references against the current checkout.
+   If multiple plans match or a plan cannot be confirmed to target the current repository, list candidate full paths and short goals and ask which plan to execute in the current repository, even if only one candidate exists.
+   Do not choose by search-location priority or modification time.
+4. Proceed only with one unambiguous or user-confirmed plan and report its resolved path before implementation.
    If no plan matches, report the searched locations and ask for a filename or path.
-   If multiple plans match, list their filenames and ask the user to choose; do not select the newest plan automatically.
 
 ## Authorization and Limits
 
