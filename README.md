@@ -34,21 +34,45 @@ Each command discovers skills from its selected source directory; deprecated ski
 
 The former `optional/skills/` collection is now split across the six category roots below; replace its old install command with the categories you need.
 
-### Local checkout with GNU Stow
+### Local checkout with a directory symlink
 
-Use this when you want `~/.agents/skills` to track a local checkout. Install [just](https://just.systems/) and [GNU Stow](https://www.gnu.org/software/stow/), then run:
+Use this when you want `~/.agents/skills` to track a local checkout. Install
+[just](https://just.systems/), then run:
 
 ```shell
 just install
 ```
 
-This links each skill in `skills/` directly into `~/.agents/skills/`. Category collections remain available for selective installation but are not linked by this recipe. Remove the managed links with:
+This creates one symlink, `~/.agents/skills`, pointing to this checkout's entire
+`skills/` directory. GNU Stow is not required. Category collections are not
+included. Running `just install` again leaves the same link unchanged.
+
+If `~/.agents/skills` is already a real directory, `just install` asks how to
+handle it, including directories created by the previous Stow-based recipe:
+
+1. Back up: move the entire directory into a uniquely named
+   `~/.agents/skills.backup.XXXXXX/` directory, then create the symlink. The backup
+   contains the original `skills/` directory, and its location is printed.
+2. Delete: permanently remove the directory and all its contents, then create
+   the symlink.
+3. Cancel: stop without changing the directory.
+
+Pressing Enter, invalid input, or end-of-input also cancels. Cancellation exits
+with a nonzero status.
+
+`just reinstall` uses the same installation flow, so it also handles an existing
+directory. Existing files and unrelated symlinks are not replaced; move those
+aside before installing.
+
+Remove only this checkout's directory symlink, without changing its contents:
 
 ```shell
 just uninstall
 ```
 
-Before updating an existing Stow installation after a source-directory move, run `just uninstall` from the old checkout, then update the checkout and run `just install`.
+`just uninstall` refuses to remove directories or unrelated symlinks. Before
+moving the checkout, run `just uninstall`, then run `just install` from its new
+location.
 
 ## 🧭 How To Use In Codex
 
