@@ -69,7 +69,7 @@ Global skills live under `skills/<skill-name>/` and are linked by `just install`
 | `address-pr-feedback` | Triaging PR feedback, fixing in-scope issues, publishing fixes, and handling review threads, including follow-up pull requests after merge. |
 | `apply-google-style` | Writing, refactoring, and reviewing code and documentation with all guides in Google's style guide index. |
 | `configure-ghostty` | Configuring, validating, diagnosing, and operating Ghostty with version-aware file, keybinding, runtime, and launch guidance. |
-| `execute-plans` | Implementing a supplied plan as a requested full branch-to-PR workflow, with checks and evidence for every requirement; use `write-plans` to draft or track plan files. |
+| `execute-plans` | Implementing a selected plan as a requested full branch-to-PR workflow, with default-directory lookup when no full path is supplied and evidence for every requirement; use `write-plans` to draft or track plan files. |
 | `give-language-feedback` | Proactive, one-sentence grammar or wording feedback in any language alongside the main task, without requiring a language-help request. |
 | `lean-verify` | Formalizing claims and constructing or checking Lean 4 proofs for mathematical theorems, program properties, algorithm correctness, and other formal-verification tasks in `~/.agents/lean`. |
 | `prompt-gpt` | Creating, revising, and reviewing prompts with GPT-specific behavior, API constraints, and migration references for the user-specified or detected runtime model. |
