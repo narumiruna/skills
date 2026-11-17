@@ -37,7 +37,7 @@ The former `optional/skills/` collection is now split across the six category ro
 ### Local checkout with a directory symlink
 
 Use this when you want `~/.agents/skills` to track a local checkout. Install
-[just](https://just.systems/), then run:
+[just](https://just.systems/) and Bash, then run:
 
 ```shell
 just install
@@ -45,7 +45,9 @@ just install
 
 This creates one symlink, `~/.agents/skills`, pointing to this checkout's entire
 `skills/` directory. GNU Stow is not required. Category collections are not
-included. Running `just install` again leaves the same link unchanged.
+included. Running `just install` again leaves the same link unchanged. The
+recipes call [`scripts/manage-skills.sh`](scripts/manage-skills.sh) to manage
+the symlink.
 
 If `~/.agents/skills` is already a real directory, `just install` asks how to
 handle it, including directories created by the previous Stow-based recipe:
