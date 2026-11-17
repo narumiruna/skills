@@ -54,7 +54,9 @@ the symlink.
 
 Installation refuses to replace a directory that contains this checkout or its
 source `skills/` directory, including when the target equals either directory.
-This check resolves symlinks and runs before the menu, backup, or deletion.
+It also refuses to replace directories inside the source `skills/` directory.
+These checks resolve symlinks, ignore `CDPATH`, and run before the menu, backup,
+or deletion.
 
 For other existing real directories, `just install` asks how to handle them,
 including directories created by the previous Stow-based recipe:

@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Manage the local symlink to this checkout's global skills directory.
 set -euo pipefail
+# Resolve paths from the working directory, without CDPATH search entries.
+unset CDPATH
 
 if (( $# != 2 )) || [[ "$1" != "install" && "$1" != "uninstall" ]]; then
   printf 'Usage: %s <install|uninstall> <target>\n' "$0" >&2
@@ -19,11 +21,12 @@ case "$1" in
     if [[ -d "${target}" && ! -L "${target}" ]]; then
       physical_repo_dir="$(cd -- "${repo_dir}" && pwd -P)"
       physical_skills_dir="$(cd -- "${skills_dir}" && pwd -P)"
-      target_dir="$(cd -- "${target}" && pwd -P)"
+      target_dir="$(cd -P -- "${target}" && pwd -P)"
       if [[ "${physical_repo_dir}/" == "${target_dir%/}/"* ||
-        "${physical_skills_dir}/" == "${target_dir%/}/"* ]]; then
+        "${physical_skills_dir}/" == "${target_dir%/}/"* ||
+        "${target_dir%/}/" == "${physical_skills_dir%/}/"* ]]; then
         printf 'Refusing to replace %s: %s\n' "${target}" \
-          "it contains this checkout or its source skills directory." >&2
+          "it contains this checkout or overlaps its source skills directory." >&2
         exit 1
       fi
       printf '%s\n' "${target} already exists as a directory." \
