@@ -37,7 +37,10 @@ The former `optional/skills/` collection is now split across the six category ro
 ### Local checkout with a directory symlink
 
 Use this when you want `~/.agents/skills` to track a local checkout. Install
-[just](https://just.systems/) and Bash, then run:
+[just](https://just.systems/) and Bash. The `ln` command must support
+`--no-target-directory` (`-T`), as provided by GNU Coreutils and uutils coreutils.
+On systems with BSD `ln`, put a compatible Coreutils `ln` on `PATH` first. Then
+run:
 
 ```shell
 just install
@@ -49,8 +52,12 @@ included. Running `just install` again leaves the same link unchanged. The
 recipes call [`scripts/manage-skills.sh`](scripts/manage-skills.sh) to manage
 the symlink.
 
-If `~/.agents/skills` is already a real directory, `just install` asks how to
-handle it, including directories created by the previous Stow-based recipe:
+Installation refuses to replace a directory that contains this checkout,
+including when the directory is the checkout itself. This check resolves
+symlinked parent paths and runs before the menu, backup, or deletion.
+
+For other existing real directories, `just install` asks how to handle them,
+including directories created by the previous Stow-based recipe:
 
 1. Back up: move the entire directory into a uniquely named
    `~/.agents/skills.backup.XXXXXX/` directory, then create the symlink. The backup

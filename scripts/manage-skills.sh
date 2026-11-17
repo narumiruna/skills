@@ -17,6 +17,13 @@ case "$1" in
       exit 0
     fi
     if [[ -d "${target}" && ! -L "${target}" ]]; then
+      physical_repo_dir="$(cd -- "${repo_dir}" && pwd -P)"
+      target_dir="$(cd -- "${target}" && pwd -P)"
+      if [[ "${physical_repo_dir}/" == "${target_dir%/}/"* ]]; then
+        printf '%s\n' \
+          "Refusing to replace ${target}: it contains this checkout." >&2
+        exit 1
+      fi
       printf '%s\n' "${target} already exists as a directory." \
         "1. Back up" "2. Delete (permanently remove its contents)" "3. Cancel" >&2
       printf 'Choose [1-3] (default: 3): ' >&2
@@ -45,7 +52,7 @@ case "$1" in
       exit 1
     fi
     mkdir -p -- "$(dirname -- "${target}")"
-    if ! ln -sn -- "${skills_dir}" "${target}"; then
+    if ! ln -sT -- "${skills_dir}" "${target}"; then
       if [[ -L "${target}" && "$(readlink -- "${target}")" == "${skills_dir}" ]]; then
         exit 0
       fi
