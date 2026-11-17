@@ -1,9 +1,12 @@
 ---
 name: resolve-github-issues
-description: Investigate or fix a GitHub issue identified by URL or number, with bug reproduction or feature requirements, an implementation plan that needs explicit approval, and verified outcomes.
+description: Investigate or fix a GitHub issue identified by URL or number, reproduce bugs or define feature requirements, obtain explicit plan approval, hand off to write-plans and execute-plans, then verify and report the issue outcome.
 ---
 
 # Resolve GitHub Issues
+
+Own issue investigation, approval, and final assessment.
+After approval, use `write-plans` for the saved plan and its lifecycle, and `execute-plans` for implementation, validation, and authorized PR delivery.
 
 Use the issue URL or number supplied by the user.
 Use the current repository for a bare issue number.
@@ -48,17 +51,28 @@ Remove those copies and sandboxes before presenting the plan.
    For a bug, lead with the reproduction result and evidence.
    Do not implement until the user explicitly approves the plan, regardless of its verdict.
 
-## After Approval
+## After Approval: Plan and Execution Handoff
 
-1. Inspect the working tree and preserve unrelated changes.
-2. Implement a complete solution for the evidenced root cause or accepted requirements while preserving unrelated behavior.
-3. If the root cause, scope, risk, or acceptance criteria materially change, update the plan and obtain approval before continuing.
-4. Follow the target repository's test policy.
-   Where tests are allowed, add or update tests for changed executable behavior or regression coverage; they must fail without the solution.
+1. Load `write-plans` and save the approved plan using its location, format, and lifecycle rules.
+   Preserve the approved scope and acceptance criteria; include the issue URL, target repository, investigation evidence, verification requirements, and granted authorizations.
+2. Load `execute-plans` and pass the exact saved plan path for implementation, validation, and authorized delivery.
+   Pass this skill's execution safety and renewed-approval requirements as mandatory handoff constraints.
+   Apply the safety controls to every delegated check, including checks in a clean delivery checkout.
+   Preserve unrelated changes and follow the target repository's test policy.
+   Where tests are allowed, require tests for changed executable behavior or regression coverage that fail without the solution.
    If repository rules prohibit tests, use permitted behavior checks and state the coverage limit.
-5. Run focused verification and required repository checks, recheck the acceptance criteria, and inspect the final diff for unintended changes.
-6. Add a `bug` label only when a confirmed bug was reproduced, the repository uses that label, and the approved plan explicitly authorizes the metadata write.
-7. Summarize the solution, verification evidence, remaining risks, and unverified paths.
+   Plan approval alone does not authorize commits, pushes, PR creation, or issue metadata writes; follow `execute-plans`' authorization stops for missing delivery permissions.
+3. If the root cause, scope, risk, or acceptance criteria materially change, use `write-plans` to revise the plan and obtain approval before continuing execution.
+4. Return here after execution completes or stops, with the final diff, verification evidence, delivery status, and any blockers.
+   Do not treat plan completion or PR creation alone as proof that the issue is resolved.
+
+## Verification and Final Report
+
+1. Review the final diff and execution evidence against the approved issue acceptance criteria, focused checks, and required repository gates.
+   Confirm that results apply to the final source revision; rerun affected checks only when evidence is missing or invalidated, under the same execution safety controls.
+2. Add a `bug` label only when a confirmed bug was reproduced, the repository uses that label, and the approved plan explicitly authorizes the metadata write.
+3. Summarize the solution, verification evidence, delivery status and PR URL when applicable, remaining risks, and unverified paths.
+   Report missing implementation, authorization, or required verification rather than claiming resolution.
 
 ## Report and Phase Outcomes
 

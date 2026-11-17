@@ -32,7 +32,8 @@ Check authorization before every commit, push, and PR creation.
 If it is missing, stop, report the branch and any commits or uncommitted changes, and ask for approval.
 Do not ask again for approval already given.
 
-Get new approval only for unapproved changes that:
+Honor stricter approval requirements from the user or calling workflow.
+Otherwise, get new approval only for unapproved changes that:
 
 - Significantly expand the goal or scope, or weaken essential acceptance criteria.
 - Break a public compatibility contract or add significant security, data-loss, cost, or external-impact risk.
