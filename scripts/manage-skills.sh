@@ -18,17 +18,17 @@ case "$1" in
     if [[ -L "${target}" && "$(readlink -- "${target}")" == "${skills_dir}" ]]; then
       exit 0
     fi
+    physical_repo_dir="$(cd -- "${repo_dir}" && pwd -P)"
+    physical_skills_dir="$(cd -- "${skills_dir}" && pwd -P)"
+    target_dir="$(realpath -m -- "${target}")"
+    if [[ "${physical_repo_dir}/" == "${target_dir%/}/"* ||
+      "${physical_skills_dir}/" == "${target_dir%/}/"* ||
+      "${target_dir%/}/" == "${physical_skills_dir%/}/"* ]]; then
+      printf 'Refusing to replace %s: %s\n' "${target}" \
+        "it contains this checkout or overlaps its source skills directory." >&2
+      exit 1
+    fi
     if [[ -d "${target}" && ! -L "${target}" ]]; then
-      physical_repo_dir="$(cd -- "${repo_dir}" && pwd -P)"
-      physical_skills_dir="$(cd -- "${skills_dir}" && pwd -P)"
-      target_dir="$(cd -P -- "${target}" && pwd -P)"
-      if [[ "${physical_repo_dir}/" == "${target_dir%/}/"* ||
-        "${physical_skills_dir}/" == "${target_dir%/}/"* ||
-        "${target_dir%/}/" == "${physical_skills_dir%/}/"* ]]; then
-        printf 'Refusing to replace %s: %s\n' "${target}" \
-          "it contains this checkout or overlaps its source skills directory." >&2
-        exit 1
-      fi
       printf '%s\n' "${target} already exists as a directory." \
         "1. Back up" "2. Delete (permanently remove its contents)" "3. Cancel" >&2
       printf 'Choose [1-3] (default: 3): ' >&2
