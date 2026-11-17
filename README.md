@@ -52,9 +52,9 @@ included. Running `just install` again leaves the same link unchanged. The
 recipes call [`scripts/manage-skills.sh`](scripts/manage-skills.sh) to manage
 the symlink.
 
-Installation refuses to replace a directory that contains this checkout,
-including when the directory is the checkout itself. This check resolves
-symlinked parent paths and runs before the menu, backup, or deletion.
+Installation refuses to replace a directory that contains this checkout or its
+source `skills/` directory, including when the target equals either directory.
+This check resolves symlinks and runs before the menu, backup, or deletion.
 
 For other existing real directories, `just install` asks how to handle them,
 including directories created by the previous Stow-based recipe:

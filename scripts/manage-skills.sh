@@ -18,10 +18,12 @@ case "$1" in
     fi
     if [[ -d "${target}" && ! -L "${target}" ]]; then
       physical_repo_dir="$(cd -- "${repo_dir}" && pwd -P)"
+      physical_skills_dir="$(cd -- "${skills_dir}" && pwd -P)"
       target_dir="$(cd -- "${target}" && pwd -P)"
-      if [[ "${physical_repo_dir}/" == "${target_dir%/}/"* ]]; then
-        printf '%s\n' \
-          "Refusing to replace ${target}: it contains this checkout." >&2
+      if [[ "${physical_repo_dir}/" == "${target_dir%/}/"* ||
+        "${physical_skills_dir}/" == "${target_dir%/}/"* ]]; then
+        printf 'Refusing to replace %s: %s\n' "${target}" \
+          "it contains this checkout or its source skills directory." >&2
         exit 1
       fi
       printf '%s\n' "${target} already exists as a directory." \
