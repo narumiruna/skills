@@ -1,0 +1,14 @@
+{
+  "cases": [
+    {
+      "id": "summary-required",
+      "input": {
+        "instruction": "Summarize the note in a JSON object with a summary field.",
+        "note": "The library opens at 9 a.m."
+      },
+      "expected": {
+        "summary": "The library opens at 9 a.m."
+      }
+    }
+  ]
+}
