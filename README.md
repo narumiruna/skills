@@ -179,6 +179,7 @@ Source: `workflow/skills/`.
 
 | Skill | Use it for |
 | --- | --- |
+| `improve-agent-harnesses` | Running or resuming measured agent harness optimization with Self-Improvement Memory, including after a model or benchmark change. |
 | `use-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |
 | `write-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
 
