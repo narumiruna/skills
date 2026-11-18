@@ -57,7 +57,8 @@ case "$1" in
       exit 1
     fi
     mkdir -p -- "$(dirname -- "${target}")"
-    if ! ln -sT -- "${skills_dir}" "${target}"; then
+    # BSD and GNU ln support -n to avoid following an existing directory symlink.
+    if ! ln -sn -- "${skills_dir}" "${target}"; then
       if [[ -L "${target}" && "$(readlink -- "${target}")" == "${skills_dir}" ]]; then
         exit 0
       fi

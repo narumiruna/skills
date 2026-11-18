@@ -37,10 +37,8 @@ The former `optional/skills/` collection is now split across the six category ro
 ### Local checkout with a directory symlink
 
 Use this when you want `~/.agents/skills` to track a local checkout. Install
-[just](https://just.systems/) and Bash. The `ln` command must support
-`--no-target-directory` (`-T`), as provided by GNU Coreutils and uutils coreutils.
-On systems with BSD `ln`, put a compatible Coreutils `ln` on `PATH` first. Then
-run:
+[just](https://just.systems/) and Bash. The installer supports macOS BSD `ln`
+and GNU `ln`; no additional Coreutils installation is required. Then run:
 
 ```shell
 just install
