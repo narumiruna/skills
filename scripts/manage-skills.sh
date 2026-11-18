@@ -20,7 +20,30 @@ case "$1" in
     fi
     physical_repo_dir="$(cd -- "${repo_dir}" && pwd -P)"
     physical_skills_dir="$(cd -- "${skills_dir}" && pwd -P)"
-    target_dir="$(realpath -m -- "${target}")"
+    # Resolve existing directory symlinks and normalize missing components
+    # without GNU realpath -m, which is not available on macOS.
+    target_dir="$(pwd -P)"
+    if [[ "${target}" == /* ]]; then
+      target_dir=/
+    fi
+    remaining="${target}/"
+    while [[ -n "${remaining}" ]]; do
+      component="${remaining%%/*}"
+      remaining="${remaining#*/}"
+      case "${component}" in
+        "" | .) ;;
+        ..)
+          target_dir="${target_dir%/*}"
+          target_dir="${target_dir:-/}"
+          ;;
+        *)
+          target_dir="${target_dir%/}/${component}"
+          if [[ -d "${target_dir}" ]]; then
+            target_dir="$(cd -P -- "${target_dir}" && pwd -P)"
+          fi
+          ;;
+      esac
+    done
     if [[ "${physical_repo_dir}/" == "${target_dir%/}/"* ||
       "${physical_skills_dir}/" == "${target_dir%/}/"* ||
       "${target_dir%/}/" == "${physical_skills_dir%/}/"* ]]; then
