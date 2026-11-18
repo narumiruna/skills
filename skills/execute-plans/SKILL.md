@@ -1,6 +1,6 @@
 ---
 name: execute-plans
-description: Implement a selected plan on a focused new branch and deliver it as a pull request when the user requests the full plan-to-PR workflow, locating plans in write-plans' default directory when no full path is supplied, with checks and evidence for every requirement.
+description: Execute an implementation plan on a focused branch, use write-plans' default directory when no full path is supplied, and open a pull request by default after the required local checks pass.
 ---
 
 # Execute Plans
@@ -26,14 +26,16 @@ Different repositories can share this directory; its name alone does not identif
 
 ## Authorization and Limits
 
-A full plan-to-PR request authorizes branch creation, commits, pushes, and PR creation, subject to repository rules and narrower user limits.
-Loading this skill alone grants no authority.
-Check authorization before every commit, push, and PR creation.
-If it is missing, stop, report the branch and any commits or uncommitted changes, and ask for approval.
+A user request to execute a plan authorizes branch creation, commits, a push, and a PR by default.
+Loading the skill or asking to draft or review a plan does not authorize execution or delivery.
+Honor narrower limits and stricter approval requirements from the user, repository, or calling workflow.
+Check authorization before creating a branch, committing, pushing, or opening a PR.
+If the user declines PR delivery, keep the work local unless they request a push.
+If the next action is excluded, stop and report the local result without asking to override the limit.
+If a required approval is missing, stop, report the branch and any commits or uncommitted changes, and ask for that approval.
 Do not ask again for approval already given.
 
-Honor stricter approval requirements from the user or calling workflow.
-Otherwise, get new approval only for unapproved changes that:
+Get new approval for any unapproved change that:
 
 - Significantly expand the goal or scope, or weaken essential acceptance criteria.
 - Break a public compatibility contract or add significant security, data-loss, cost, or external-impact risk.

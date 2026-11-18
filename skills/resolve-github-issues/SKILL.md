@@ -61,7 +61,8 @@ Remove those copies and sandboxes before presenting the plan.
    Preserve unrelated changes and follow the target repository's test policy.
    Where tests are allowed, require tests for changed executable behavior or regression coverage that fail without the solution.
    If repository rules prohibit tests, use permitted behavior checks and state the coverage limit.
-   Plan approval alone does not authorize commits, pushes, PR creation, or issue metadata writes; follow `execute-plans`' authorization stops for missing delivery permissions.
+   For this handoff, override automatic delivery and require explicit permission to commit, push, or open a PR.
+   Plan approval alone does not grant those permissions or authorize issue metadata writes.
 3. If the root cause, scope, risk, or acceptance criteria materially change, use `write-plans` to revise the plan and obtain approval before continuing execution.
 4. Return here after execution completes or stops, with the final diff, verification evidence, delivery status, and any blockers.
    Do not treat plan completion or PR creation alone as proof that the issue is resolved.

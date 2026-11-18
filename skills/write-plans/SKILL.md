@@ -6,7 +6,7 @@ description: Draft, revise, or track implementation plan files for non-trivial w
 # Writing Plans
 
 This skill owns plan authoring, progress tracking, handoff, and cleanup, not implementation.
-Use `execute-plans` for an explicitly requested plan-to-PR workflow.
+For a request to execute a plan, use `execute-plans`, which opens a PR by default after required local checks pass.
 Do not infer implementation or publication permission from a request to draft, revise, or track a plan.
 
 Save a drafted plan to a file unless the user requests chat-only output.
