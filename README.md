@@ -22,6 +22,7 @@ Install the global skills and any category collections you need without linking 
 
 ```shell
 npx skills add narumiruna/skills/skills
+npx skills add narumiruna/skills/skills/sim
 npx skills add narumiruna/skills/writing/skills
 npx skills add narumiruna/skills/research/skills
 npx skills add narumiruna/skills/visuals/skills
@@ -31,6 +32,8 @@ npx skills add narumiruna/skills/workflow/skills
 ```
 
 Each command discovers skills from its selected source directory; deprecated skills live in `deprecated/` and remain available solely for repository reference or explicit local use.
+
+Install the two grouped SIM skills explicitly from `skills/sim/` when using `npx skills`; `just install` includes the group through the global directory symlink.
 
 The former `optional/skills/` collection is now split across the six category roots below; replace its old install command with the categories you need.
 
@@ -96,15 +99,18 @@ If Codex does not pick up a local skill change, restart Codex and try again.
 
 ### Global Skills
 
-Global skills live under `skills/<skill-name>/` and are linked by `just install`.
+Global skills live under `skills/` and are linked by `just install`.
+The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 
 | Skill | Use it for |
 | --- | --- |
 | `address-pr-feedback` | Triaging PR feedback, fixing in-scope issues, publishing fixes, and handling review threads, including follow-up pull requests after merge. |
 | `apply-google-style` | Writing, refactoring, and reviewing code and documentation with all guides in Google's style guide index. |
+| `collect-evolve-cases` | Explicitly previewing and importing reviewed evolve cases from local Pi sessions for one project. |
 | `configure-ghostty` | Configuring, validating, diagnosing, and operating Ghostty with version-aware file, keybinding, runtime, and launch guidance. |
 | `execute-plans` | Executing a plan on a focused branch and opening a PR by default after required local checks pass, with default-directory lookup when no full path is supplied; use `write-plans` to draft or track plan files. |
 | `give-language-feedback` | Proactive, one-sentence grammar or wording feedback in any language alongside the main task, without requiring a language-help request. |
+| `improve-agent-harnesses` | Testing and automatically applying measured improvements to skills under `~/.agents/skills/`, including itself, on request or after a reproducible skill failure. |
 | `lean-verify` | Formalizing claims and constructing or checking Lean 4 proofs for mathematical theorems, program properties, algorithm correctness, and other formal-verification tasks in `~/.agents/lean`. |
 | `prompt-gpt` | Creating, revising, and reviewing prompts with GPT-specific behavior, API constraints, and migration references for the user-specified or detected runtime model. |
 | `record-human-feedback` | Recording human corrections, tool or workflow preferences, and follow-up explanation or simplification requests in `~/.agents/human-feedback/`, with response context and frequency summaries. |
@@ -179,7 +185,6 @@ Source: `workflow/skills/`.
 
 | Skill | Use it for |
 | --- | --- |
-| `improve-agent-harnesses` | Running or resuming measured agent harness optimization with Self-Improvement Memory, including after a model or benchmark change. |
 | `use-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |
 | `write-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
 

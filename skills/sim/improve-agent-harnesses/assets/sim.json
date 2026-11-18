@@ -1,0 +1,29 @@
+{
+  "problems": [
+    {
+      "id": "P1",
+      "name": "The writer may declare completion without checking the output schema.",
+      "attempts": [
+        {
+          "run_id": "writer-schema-001",
+          "round": 1,
+          "model": "example-model-version",
+          "benchmark": "writer-schema",
+          "evolve_split": "evals/writer-schema/evolve/evolve.json",
+          "revision": "example-retained-revision",
+          "files": ["document-writer/SKILL.md"],
+          "what": "Ask the writer to check for the required summary field before finishing.",
+          "rationale": "A schema check can catch missing fields before submission.",
+          "predicted": ["summary-required"],
+          "fixed": ["summary-required"],
+          "missed": [],
+          "regressions": [],
+          "baseline_passed": 0,
+          "passed": 1,
+          "total": 1,
+          "evidence": "history/round-01.json"
+        }
+      ]
+    }
+  ]
+}
