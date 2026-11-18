@@ -54,12 +54,15 @@ Do not publish packages, create version tags, or dispatch release workflows.
    Remove the disposable checkout afterward.
    If plan tracking changes repository files after validation, commit those changes and repeat these checks on the new delivery commit before pushing.
    Keep each result tied to the commit actually checked; report the final commit's evidence in the PR rather than making another plan update just to record its ID.
-   If checks fail or cannot run, report the failure or blocker and stop before pushing.
-6. Push the validated commit to the verified repository and open a PR against the verified base.
+   If a required check fails or cannot run, find and fix the cause within the authorized scope, even if the same failure exists on the base branch.
+   Do not skip required checks or weaken what tests verify to make them pass.
+   Review and commit any file changes, then rerun the required local checks in a new clean checkout of the commit to be pushed.
+   If a fix needs approval or an external blocker remains, stop without pushing and report what failed and what is needed to continue.
+6. Push the validated commit to the verified repository and open a PR against the verified base only after all required local checks pass.
    Include a concise summary, verification evidence, and relevant risks or unverified paths.
    Use closing keywords only for resolved issues, such as `Closes #123`; link unresolved issues without them.
 7. Verify that the remote commit and PR target match the validated commit and verified base.
-   Run or inspect required remote checks.
+   Run or inspect required remote checks and apply the same fix and verification steps to any failures.
    Report the PR URL, commits, check results, and any remaining risks or unverified paths.
 
 ## Completion
