@@ -34,13 +34,14 @@ description: Create and maintain Agent Skills. Use when turning a repeatable wor
 
 - Run the target repository's checker and required gate for changes.
 - For the portable Agent Skills format, run the [bundled skills-ref CLI](scripts/skills-ref/pyproject.toml) with `uv` and Python 3.11 or later.
-  Set `skill_root` to the absolute path of this skill and `target_dir` to the directory being checked.
-  Use the local source in editable mode so validation picks up changes to the bundled CLI.
-  The first run may download dependencies.
+  Set `skill_root` to the absolute path of this trusted skill installation and `target_dir` to the absolute path of the skill being checked.
+  Run from the trusted skill directory, disable uv config discovery, and isolate Python imports from the target and `PYTHONPATH`.
+  Editable mode uses the current bundled source, and the first run may download dependencies.
 
   ```bash
-  uv run --no-project --with-editable "$skill_root/scripts/skills-ref" \
-    python -B -m skills_ref.cli validate "$target_dir"
+  uv --no-config --directory "$skill_root" run --no-project --isolated \
+    --with-editable "$skill_root/scripts/skills-ref" \
+    python -I -B -m skills_ref.cli validate -- "$target_dir"
   ```
 
   Use the [format and naming rules](references/format-and-naming.md) to verify optional field contents and bundled links separately.
