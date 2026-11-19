@@ -1,4 +1,4 @@
-# Local modification: add inline metadata for this repository's lint gate.
+# Local modifications: add lint metadata and escape XML location text.
 # /// script
 # requires-python = ">=3.11"
 # dependencies = []
@@ -53,7 +53,7 @@ def to_prompt(skill_dirs: list[Path]) -> str:
 
         skill_md_path = find_skill_md(skill_dir)
         lines.append("<location>")
-        lines.append(str(skill_md_path))
+        lines.append(html.escape(str(skill_md_path)))
         lines.append("</location>")
 
         lines.append("</skill>")

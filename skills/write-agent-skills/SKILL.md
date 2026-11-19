@@ -33,12 +33,14 @@ description: Create and maintain Agent Skills. Use when turning a repeatable wor
 ## Validate and report
 
 - Run the target repository's checker and required gate for changes.
-- For the portable Agent Skills format, run the [bundled skills-ref CLI](scripts/skills-ref/pyproject.toml) with `uvx`.
+- For the portable Agent Skills format, run the [bundled skills-ref CLI](scripts/skills-ref/pyproject.toml) with `uv` and Python 3.11 or later.
   Set `skill_root` to the absolute path of this skill and `target_dir` to the directory being checked.
-  The CLI needs Python 3.11+; `uvx` may download dependencies on the first run.
+  Use the local source in editable mode so validation picks up changes to the bundled CLI.
+  The first run may download dependencies.
 
   ```bash
-  uvx --from "$skill_root/scripts/skills-ref" skills-ref validate "$target_dir"
+  uv run --no-project --with-editable "$skill_root/scripts/skills-ref" \
+    python -B -m skills_ref.cli validate "$target_dir"
   ```
 
   Use the [format and naming rules](references/format-and-naming.md) to verify optional field contents and bundled links separately.

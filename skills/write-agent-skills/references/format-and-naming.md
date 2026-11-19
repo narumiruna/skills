@@ -21,7 +21,7 @@ Link resources directly from `SKILL.md` using paths relative to the skill root, 
 Check that each path resolves to an existing file inside the skill directory.
 The reference CLI checks frontmatter and naming conventions; it does not verify resource links or client behavior.
 The bundled CLI comes from [Agent Skills upstream at `83021e2`](https://github.com/agentskills/agentskills/tree/83021e2be457a9b6679148719c1f6074f0ad975e/skills-ref) under Apache-2.0.
-The local copy adds Python script metadata for repository linting without changing validation behavior.
+The local copy adds Python script metadata for linting and fixes frontmatter parsing, UTF-8 reads, directory-name checks, and XML output.
 
 ## Choose a name
 

@@ -1,4 +1,4 @@
-# Local modification: add inline metadata for this repository's lint gate.
+# Local modifications: add lint metadata and fix directory and UTF-8 checks.
 # /// script
 # requires-python = ">=3.11"
 # dependencies = []
@@ -10,7 +10,7 @@ from pathlib import Path
 from typing import Optional
 
 from .errors import ParseError
-from .parser import find_skill_md, parse_frontmatter
+from skills_ref import parser
 
 MAX_SKILL_NAME_LENGTH = 64
 MAX_DESCRIPTION_LENGTH = 1024
@@ -63,11 +63,13 @@ def _validate_name(name: str, skill_dir: Path) -> list[str]:
         )
 
     if skill_dir:
-        dir_name = unicodedata.normalize("NFKC", skill_dir.name)
+        basename = skill_dir.name
+        if basename in ("", ".."):
+            # Use the effective directory for dot paths, but keep named aliases.
+            basename = skill_dir.resolve().name
+        dir_name = unicodedata.normalize("NFKC", basename)
         if dir_name != name:
-            errors.append(
-                f"Directory name '{skill_dir.name}' must match skill name '{name}'"
-            )
+            errors.append(f"Directory name '{basename}' must match skill name '{name}'")
 
     return errors
 
@@ -169,13 +171,12 @@ def validate(skill_dir: Path) -> list[str]:
     if not skill_dir.is_dir():
         return [f"Not a directory: {skill_dir}"]
 
-    skill_md = find_skill_md(skill_dir)
+    skill_md = parser.find_skill_md(skill_dir)
     if skill_md is None:
         return ["Missing required file: SKILL.md"]
 
     try:
-        content = skill_md.read_text()
-        metadata, _ = parse_frontmatter(content)
+        metadata, _ = parser.read_frontmatter(skill_md)
     except ParseError as e:
         return [str(e)]
 
