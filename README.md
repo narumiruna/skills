@@ -95,6 +95,16 @@ location.
 
 If Codex does not pick up a local skill change, restart Codex and try again.
 
+## How To Use In Pi
+
+Run Pi from this checkout or use `just install` for global discovery.
+Run `/reload` in an open session after adding or renaming a skill.
+Use `/skill:<name>` to invoke a skill with arguments:
+
+```text
+/skill:propose-ranked-options skills/address-pr-feedback/ naming
+```
+
 ## 🧰 Skill Catalog
 
 ### Global Skills
@@ -113,6 +123,7 @@ The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 | `improve-agent-harnesses` | Testing and automatically applying measured improvements to skills under `~/.agents/skills/`, including itself, on request or after a reproducible skill failure. |
 | `lean-verify` | Formalizing claims and constructing or checking Lean 4 proofs for mathematical theorems, program properties, algorithm correctness, and other formal-verification tasks in `~/.agents/lean`. |
 | `prompt-gpt` | Creating, revising, and reviewing prompts with GPT-specific behavior, API constraints, and migration references for the user-specified or detected runtime model. |
+| `propose-ranked-options` | Explicitly requesting improvement proposals for a target, such as naming, code refactoring, or UI/UX, ranked by a total score out of 100. |
 | `record-human-feedback` | Recording human corrections, tool or workflow preferences, and follow-up explanation or simplification requests in `~/.agents/human-feedback/`, with response context and frequency summaries. |
 | `resolve-github-issues` | Investigating GitHub issues, obtaining explicit plan approval, handing off to `write-plans` and `execute-plans`, then verifying and reporting the issue outcome. |
 | `review-pull-requests` | Complete read-only PR assessments and merge verdicts, with pinned commits, base/head bug reproduction, impact, risks, and verification. |
