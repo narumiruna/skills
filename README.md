@@ -127,7 +127,7 @@ The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 | `record-human-feedback` | Recording human corrections, tool or workflow preferences, and follow-up explanation or simplification requests in `~/.agents/human-feedback/`, with response context and frequency summaries. |
 | `resolve-github-issues` | Investigating GitHub issues, obtaining explicit plan approval, handing off to `write-plans` and `execute-plans`, then verifying and reporting the issue outcome. |
 | `review-pull-requests` | Complete read-only PR assessments and merge verdicts, with pinned commits, base/head bug reproduction, impact, risks, and verification. |
-| `write-agent-skills` | Creating, naming, renaming, reviewing, revising, and explicitly scoring lean, discoverable agent skills. |
+| `write-agent-skills` | Creating and maintaining Agent Skills, including naming, reviewing, validating, and improving when they load and what they do. |
 | `write-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
 | `write-plans` | Drafting, revising, and tracking implementation plan files, completion evidence, external handoff, and completed-plan cleanup; use `execute-plans` for implementation-to-PR delivery. |
 
