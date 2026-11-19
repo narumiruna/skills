@@ -1,86 +1,65 @@
 ---
 name: write-agent-skills
-description: Create, name, rename, revise, or review agent skills for clear triggers, safe workflows, strong checks, lean content, and easy discovery, and score or numerically compare skills only when the user explicitly asks.
+description: Create and maintain Agent Skills. Use when turning a repeatable workflow into a skill, choosing a skill name, or revising, renaming, reviewing, or validating a skill. This includes fixing discovery, activation, and workflow. Score or numerically compare skills only on explicit request.
 ---
 
-# Writing Agent Skills
+# Write Agent Skills
 
-Create, name, rename, revise, review, or explicitly score a skill that another agent can find and use with little extra context.
-A review or score request is read-only unless the user also asks for changes.
+## Create or maintain a skill
 
-## Writing Rules
+1. Read the target repository's rules, nearby skills, discovery configuration, and any model guide that explicitly covers the target model.
+   Use the repository's scaffold if it has one.
+2. Define the task, the result, and what is outside the skill's scope.
+   Start from a successful run, user corrections, or reliable project artifacts such as runbooks, schemas, and failure reports.
+   When fixing an existing skill, reproduce the reported problem if practical.
+   Ask one question only if the purpose, trigger, or location cannot be determined safely.
+3. Choose a name and check the frontmatter against the [format and naming rules](references/format-and-naming.md).
+   Write the description around user intent: say what the skill does and when to load it.
+   Use terms users actually use and distinguish the nearest tasks that do not need the skill.
+4. Write the procedure the agent follows after loading the skill.
+   - Keep one sentence per line.
+   - Teach reusable steps and non-obvious constraints rather than generic advice or steps that fit only one example.
+   - Give a clear default and the conditions for using an alternative.
+   - Prescribe the order, approvals, and checks for fragile or irreversible steps; leave flexible decisions to the agent.
+   - State what evidence proves the task is done and where to stop.
+   - Keep critical rules in `SKILL.md` and link optional material directly with a condition for loading it.
+5. Add supporting files only when they have a job.
+   - Use `references/` for details needed on demand and `assets/` for templates or other files used in outputs.
+   - Read [script design](references/script-design.md) when adding or changing a command or moving repeatable logic into `scripts/`.
+   - Keep bundled files inside the skill directory; this boundary does not restrict task inputs, outputs, or files in the target repository.
+   - Do not add a separate README, changelog, or installation guide unless the framework needs it.
+6. Change the catalog or installation configuration only where the repository uses it for discovery and the change affects it.
 
-- Keep documents concise and clear.
-- Put one sentence on each line.
+## Validate and report
 
-## Choose the Mode
+- Run the target repository's checker and required gate for changes.
+- For the portable Agent Skills format, run the [bundled skills-ref CLI](scripts/skills-ref/pyproject.toml) with `uv` and Python 3.11 or later.
+  Set `skill_root` to the absolute path of this trusted skill installation and `target_dir` to the absolute path of the skill being checked.
+  Run from the trusted skill directory, disable uv config discovery, and isolate Python imports from the target and `PYTHONPATH`.
+  Editable mode uses the current bundled source, and the first run may download dependencies.
 
-- Use Build to create, revise, optimize, or convert a workflow.
-- Use Name or Rename to choose or change a skill name.
-- Use Review to check a skill without numerical ratings.
-- Use Score to give numerical ratings only when the user explicitly asks for them.
+  ```bash
+  uv --no-config --directory "$skill_root" run --no-project --isolated \
+    --with-editable "$skill_root/scripts/skills-ref" \
+    python -I -B -m skills_ref.cli validate -- "$target_dir"
+  ```
 
-Do not turn a normal review into a scorecard.
+  Use the [format and naming rules](references/format-and-naming.md) to verify optional field contents and bundled links separately.
+- Exercise changed scripts on safe, realistic inputs.
+- Read [skill evaluation](references/evaluate-skills.md) when creating a skill, changing its trigger or workflow, or investigating a behavioral failure.
+  Check discovery, activation, and output separately; a format check cannot verify them.
+- Report what changed, which checks ran, and which failed or could not run.
+  Do not claim runtime behavior without observing it.
 
-## Name or Rename
+## Handle requests that do not authorize edits
 
-Name the task and trigger that the skill represents instead of naming its implementation.
+Suggesting names, reviewing, and scoring are read-only unless the user also asks for changes.
+Use only non-mutating checks for read-only requests.
 
-- Read the description and workflow to find the action, subject, domain, and any needed product name.
-- Use lowercase kebab-case and a base-form action verb, not its `-ing` form.
-- Prefer `verb-object`, such as `write-proofs` or `review-code`.
-- Add a tool prefix only when it clarifies the skill’s scope or distinguishes it from similar skills, such as `lean-write-proofs`.
-- Allow `tool-verb`, such as `lean-verify`, when the tool and action make the task clear without an object.
-- Allow multiword objects, such as `generate-release-notes`.
-- Use meaningful digits only when needed.
-- Use single hyphens, and do not put a hyphen at either end.
-- Keep the directory name and frontmatter `name` the same, and follow the framework's length limit.
-- Avoid vague words such as `helper`, `utils`, `tools`, `assistant`, `magic`, `smart`, and `general`.
-- Use a product or organization name only when the trigger truly depends on it.
-- Preserve the user's meaning instead of forcing the preferred naming pattern.
-- Check nearby names and exact-name references, then compare a few choices for clarity, searchability, lasting value, and conflicts.
-- Lead with one recommended name and its main reason.
+- For name suggestions, use the [naming rules](references/format-and-naming.md#choose-a-name) and lead with one recommendation and its main reason.
+  When asked to rename, follow the [rename checks](references/format-and-naming.md#rename-an-existing-skill).
+- For review, lead with findings in order of importance and give evidence and a concrete fix for each.
+- Keep numerical ratings and rankings out of normal reviews unless explicitly requested.
 
-A naming recommendation does not give permission to rename files.
-Do not edit files when the user asks only for names or a review.
-For an approved rename, update the directory, frontmatter, catalog, links, examples, checks, and other exact-name references in one focused change.
-Keep a compatibility note when outside users still depend on the old name.
-For one skill, lead with the recommended name and reason; for several skills, use a current, recommended, and reason table.
-List only conflicts or compatibility work that affects use.
-
-## Build or Review
-
-1. Read the repository rules, skill folders, nearby skills, catalog, validators, and the model guide that applies.
-2. Ask one question only when the purpose, trigger, or location is too unclear to choose safely.
-3. Check the name with the rules above.
-4. Keep only files with a clear job.
-   - Use `SKILL.md` for the trigger and the instructions followed after the skill triggers.
-   - Use `references/` for details loaded only when needed.
-   - Use `scripts/` instead of prompt instructions whenever a script can do the work.
-     - Keep only the guidance needed to run the script and use its output in `SKILL.md`.
-   - Use `assets/` for material copied into or used by outputs.
-   - Keep every bundled local document or script linked or imported by a skill file inside the directory containing `SKILL.md`; a nested resource may use `../` only when the resolved target remains inside that directory.
-   - Do not apply this boundary to task inputs, outputs, target-repository files, or system paths.
-   - Do not add a skill README, changelog, installation guide, or quick reference unless the framework requires it.
-5. Use the repository's official scaffold when one exists, and keep edits inside the skill and required discovery files.
-6. Write or check `SKILL.md` with the following rules.
-   - Put `name` and a clear what-and-when `description` in supported YAML frontmatter.
-   - Put trigger conditions in `description` instead of a body section about when to use the skill.
-   - State each instruction once, with the result, hard limits, approval needs, required evidence, and stopping point.
-   - Keep an example only when it proves a requirement or prevents a known mistake.
-   - Link each resource directly, say when to use it, and do not copy its details into `SKILL.md`.
-7. Update catalog or installation files only when the repository uses them for discovery.
-8. For requested changes, run the documented checker, realistic examples for changed scripts, practical tests for subtle workflows, and the required repository gate.
-   For review or scoring without requested changes, use only non-mutating checks; do not run auto-fix, update, or other writing hooks.
-9. Report every unavailable or failing check honestly.
-10. In Review mode, lead with the most important findings, show evidence, and give a clear fix for each one.
-11. Make requested local edits and safe checks without extra approval.
-12. Ask before external writes, destructive or costly actions, or a large increase in scope.
-
-## Completion Criteria
-
-- The skill has one clear purpose, an easy-to-recognize trigger, and a specific name that keeps the intended meaning.
-- The body is useful only after the skill triggers, with no repeated rules, generic background, decorative examples, or files without a clear job.
-- The finished document follows the writing rules above.
-- Requested local edits and checks are complete, while risky or outside actions still need approval.
-- Frontmatter, catalog text, resources, check results, and claims about real behavior agree.
+Make requested local edits and safe checks without extra approval.
+Ask before external writes, destructive or costly actions, or a material increase in scope.
