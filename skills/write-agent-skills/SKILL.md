@@ -77,11 +77,6 @@ List only conflicts or compatibility work that affects use.
 11. Make requested local edits and safe checks without extra approval.
 12. Ask before external writes, destructive or costly actions, or a large increase in scope.
 
-## Scoring Reference
-
-For Score mode, read the [scoring workflow and rubric](references/rubric.md).
-Load it only for numerical scoring or work on the scoring guidance itself.
-
 ## Completion Criteria
 
 - The skill has one clear purpose, an easy-to-recognize trigger, and a specific name that keeps the intended meaning.
