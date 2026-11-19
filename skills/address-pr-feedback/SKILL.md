@@ -1,6 +1,6 @@
 ---
 name: address-pr-feedback
-description: Triage pull request feedback, fix in-scope issues, publish fixes, and handle review threads when asked to address PR comments or complete review follow-up, including follow-up pull requests after merge.
+description: Address pull request feedback when asked to handle PR comments or complete review follow-up. Fix and publish in-scope changes, respond to review threads, and repeat for new feedback while bot reviews are active. Do not wait for human reviewers. Supports follow-up pull requests after merge.
 ---
 
 # Address PR Feedback
@@ -84,8 +84,30 @@ Report the exact tool, authentication, permission, or validation blocker if deli
    - Keep a thread open while an actionable fix is unpublished or unverified, evidence or a decision is missing, or a required action is genuinely blocked.
      State exactly what is needed to close it.
      Do not resolve an uncertain item merely by labeling it not adopted.
-5. Refresh the original open pull request or the new follow-up pull request once after publishing code or review outcomes.
-   Report the pull request URL, commit, checks, fixed items, deferred items, clarification requests, and blockers.
+
+## Follow new feedback
+
+Use this loop only for the full workflow, not for triage or review alone.
+
+1. After each round, refresh the PR, its current head SHA, and its feedback.
+   If fixes went to a follow-up PR, monitor that PR for re-review.
+   If the head changed, recheck the diff and discard evidence that applies only to the old head.
+   Stop on a closed, unmerged PR and report any remaining work.
+2. Run another round for new or materially changed feedback or reopened threads.
+   Match feedback by its GitHub ID and compare content and thread state with the review ledger.
+   Do not count your own replies or status-only edits as new feedback.
+3. If there is no new feedback, use the [bot review signals](references/bot-review-signals.md) to check for active bot reviews on the current head of the open PR.
+   If any are queued or running, poll every 20 seconds, for at most five minutes of total waiting across all rounds.
+   Refresh the PR head, feedback, and bot status at each poll.
+   If there is no confirmed active bot, do not wait, even for a requested human review or a bot with unknown status.
+4. When no confirmed bot is active or the time limit is reached, read the feedback one last time before stopping.
+   Process any new feedback that is already visible even if the wait limit is reached.
+   If a bot is still active at the time limit, report it as pending.
+   Report failed checks, API errors, or missing status for a known bot without claiming that its review succeeded.
+   No new feedback does not mean the PR is approved.
+
+Report the PR URL, head SHA, feedback outcomes, checks, outstanding bot reviews, and blockers.
+Report why the loop stopped.
 
 ## Repeat Invocations
 
@@ -93,4 +115,4 @@ First check for changes to the pull request state, commits, feedback, checks, re
 Reuse previously reviewed material confirmed unchanged; inspect and validate only changed or missing evidence.
 
 Complete any pending fixes, publication, replies, or thread resolutions even when no new feedback exists.
-If nothing changed and no such action can proceed, report the existing outcomes and any specific blockers, then stop without duplicate replies or repeated validation.
+If nothing changed and no such action can proceed, use [Follow new feedback](#follow-new-feedback) without duplicate replies or repeated validation.

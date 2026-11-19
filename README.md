@@ -114,7 +114,7 @@ The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 
 | Skill | Use it for |
 | --- | --- |
-| `address-pr-feedback` | Triaging PR feedback, fixing in-scope issues, publishing fixes, and handling review threads, including follow-up pull requests after merge. |
+| `address-pr-feedback` | Handling PR comments, publishing in-scope fixes, and processing new feedback in a bounded bot review loop without waiting for human reviewers. Supports follow-up PRs after merge. |
 | `apply-google-style` | Writing, refactoring, and reviewing code and documentation with all guides in Google's style guide index. |
 | `collect-evolve-cases` | Explicitly previewing and importing reviewed evolve cases from local Pi sessions for one project. |
 | `configure-ghostty` | Configuring, validating, diagnosing, and operating Ghostty with version-aware file, keybinding, runtime, and launch guidance. |
