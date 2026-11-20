@@ -4,13 +4,15 @@ Reusable agent skills for coding, writing, research, and slide work. This repo i
 
 ## 🚀 Quick Start
 
-Install the default global collection:
+The `./skills/` directory is my global skill collection. `just install` links
+it to `~/.agents/skills/`. To install the collection globally without a local
+checkout, run:
 
 ```shell
-npx skills add narumiruna/skills/skills
+npx skills add narumiruna/skills/skills --global
 ```
 
-Add grouped skills and category collections as needed with the commands in [Standard install](#standard-install-with-npx-skills).
+Add [project skills](#project-skills) as needed for each project.
 
 Then open Codex and run `/skills` to inspect what was installed. Invoke a skill explicitly with `$skill-name`, or describe the task normally and let Codex choose a match.
 
@@ -18,24 +20,30 @@ Then open Codex and run `/skills` to inspect what was installed. Invoke a skill 
 
 ### Standard install with `npx skills`
 
-Install the global skills and any category collections you need without linking a local checkout:
+When using `npx skills`, install the global groups under `skills/design/` and
+`skills/sim/` separately as needed. `just install` includes both groups.
 
 ```shell
-npx skills add narumiruna/skills/skills
-npx skills add narumiruna/skills/skills/design
-npx skills add narumiruna/skills/skills/sim
-npx skills add narumiruna/skills/writing/skills
-npx skills add narumiruna/skills/research/skills
-npx skills add narumiruna/skills/visuals/skills
-npx skills add narumiruna/skills/design/skills
-npx skills add narumiruna/skills/code-quality/skills
-npx skills add narumiruna/skills/workflow/skills
+npx skills add narumiruna/skills/skills/design --global
+npx skills add narumiruna/skills/skills/sim --global
 ```
 
-Each command discovers skills from its selected source directory; deprecated skills live in `deprecated/` and remain available solely for repository reference or explicit local use.
+#### Project skills
 
-With `npx skills`, install the global groups under `skills/design/` and `skills/sim/` separately as needed.
-`just install` includes both groups through the global directory symlink.
+The other active skills are grouped by category for installation into individual
+projects. From your project directory, run
+`npx skills add narumiruna/skills/<category>`, replacing `<category>` with a
+top-level directory name such as `writing`. Omit `--global` to install into the
+current project.
+
+```shell
+npx skills add narumiruna/skills/writing
+npx skills add narumiruna/skills/research
+npx skills add narumiruna/skills/visuals
+npx skills add narumiruna/skills/design
+npx skills add narumiruna/skills/code-quality
+npx skills add narumiruna/skills/workflow
+```
 
 The former `optional/skills/` collection is now split across the six category roots below; replace its old install command with the categories you need.
 
@@ -230,7 +238,8 @@ External skills recorded in [`skills-lock.json`](skills-lock.json):
 
 ## 🗄️ Deprecated Skills
 
-Deprecated skills remain in `deprecated/<skill-name>/` for reference and are excluded from standard discovery.
+Retired skills are kept in `./deprecated/` for reference. `npx skills add`
+does not discover them.
 
 | Skill | Notes |
 | --- | --- |
