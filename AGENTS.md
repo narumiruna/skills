@@ -52,7 +52,7 @@ Follow global defaults; this file contains only repository-specific additions an
 
 ## Repository structure
 
-- [UNREVIEWED] Keep global skills directly in `skills/<skill-name>/SKILL.md` except for the two SIM skills under `skills/sim/<skill-name>/SKILL.md`.
+- [UNREVIEWED] Keep global skills directly in `skills/<skill-name>/SKILL.md` except for grouped skills under `skills/design/<skill-name>/SKILL.md` and `skills/sim/<skill-name>/SKILL.md`.
 - [UNREVIEWED] Keep category skills directly in `<category>/skills/<skill-name>/SKILL.md`, using only the active category roots listed above without deeper category directories.
 - Keep deprecated skills in `deprecated/<skill-name>/SKILL.md`, outside active discovery.
 - Keep optional supporting material inside its skill directory under `references/`, `scripts/`, `assets/`, or `agents/`.

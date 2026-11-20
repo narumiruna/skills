@@ -4,13 +4,13 @@ Reusable agent skills for coding, writing, research, and slide work. This repo i
 
 ## 🚀 Quick Start
 
-Install the global skills:
+Install the default global collection:
 
 ```shell
 npx skills add narumiruna/skills/skills
 ```
 
-Add category collections as needed with the commands in [Standard install](#standard-install-with-npx-skills).
+Add grouped skills and category collections as needed with the commands in [Standard install](#standard-install-with-npx-skills).
 
 Then open Codex and run `/skills` to inspect what was installed. Invoke a skill explicitly with `$skill-name`, or describe the task normally and let Codex choose a match.
 
@@ -22,6 +22,7 @@ Install the global skills and any category collections you need without linking 
 
 ```shell
 npx skills add narumiruna/skills/skills
+npx skills add narumiruna/skills/skills/design
 npx skills add narumiruna/skills/skills/sim
 npx skills add narumiruna/skills/writing/skills
 npx skills add narumiruna/skills/research/skills
@@ -33,7 +34,8 @@ npx skills add narumiruna/skills/workflow/skills
 
 Each command discovers skills from its selected source directory; deprecated skills live in `deprecated/` and remain available solely for repository reference or explicit local use.
 
-Install the two grouped SIM skills explicitly from `skills/sim/` when using `npx skills`; `just install` includes the group through the global directory symlink.
+With `npx skills`, install the global groups under `skills/design/` and `skills/sim/` separately as needed.
+`just install` includes both groups through the global directory symlink.
 
 The former `optional/skills/` collection is now split across the six category roots below; replace its old install command with the categories you need.
 
@@ -110,6 +112,7 @@ Use `/skill:<name>` to invoke a skill with arguments:
 ### Global Skills
 
 Global skills live under `skills/` and are linked by `just install`.
+`curate-ui-styles` is grouped under `skills/design/`.
 The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 
 | Skill | Use it for |
@@ -118,7 +121,7 @@ The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 | `apply-google-style` | Writing, refactoring, and reviewing code and documentation with all guides in Google's style guide index. |
 | `collect-evolve-cases` | Explicitly previewing and importing reviewed evolve cases from local Pi sessions for one project. |
 | `configure-ghostty` | Configuring, validating, diagnosing, and operating Ghostty with version-aware file, keybinding, runtime, and launch guidance. |
-| `curate-ui-styles` | Create, compare, and fine-tune reusable UI style skills through a layered visual interview with three HTML previews per question. |
+| `curate-ui-styles` | Create, compare, and fine-tune reusable UI style skills with three HTML options per question, served through a local browser link. |
 | `execute-plans` | Executing a plan on a focused branch and opening a PR by default after required local checks pass, with default-directory lookup when no full path is supplied; use `write-plans` to draft or track plan files. |
 | `give-language-feedback` | Proactive, one-sentence grammar or wording feedback in any language alongside the main task, without requiring a language-help request. |
 | `improve-agent-harnesses` | Testing and automatically applying measured improvements to skills under `~/.agents/skills/`, including itself, on request or after a reproducible skill failure. |
