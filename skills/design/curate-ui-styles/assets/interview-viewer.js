@@ -24,7 +24,7 @@ function showState(state) {
     form.reset();
     if (state) {
       const frame = document.createElement('iframe');
-      frame.title = '目前題目的視覺預覽';
+      frame.title = 'Current interview preview';
       frame.setAttribute('sandbox', '');
       frame.addEventListener('load', () => {
         frameReady = true;
@@ -42,15 +42,16 @@ function showState(state) {
   choices.disabled = !frameReady || submitting || Boolean(state?.answer);
 
   if (!state) {
-    setStatus('等待第一個預覽。');
+    setStatus('Waiting for the first preview.');
   } else if (state.mode === 'review') {
-    setStatus('請查看整理後的風格，並在 Pi 確認是否儲存。');
+    setStatus('Review the style, then confirm in Pi if you want to save it.');
   } else if (state.answer) {
-    setStatus(`已收到 ${state.answer}，請在此等候下一題。如 Pi 已停止等待，請在 Pi 輸入「繼續」。`);
+    setStatus(`Answer ${state.answer} received. Keep this tab open for the next question. ` +
+        'If Pi stopped waiting, type "continue" in Pi.');
   } else if (frameReady && !submitting) {
-    setStatus('新題目已就緒。');
+    setStatus('The question is ready.');
   } else if (!frameReady) {
-    setStatus('正在開啟預覽。');
+    setStatus('Opening the preview.');
   }
 }
 
@@ -74,7 +75,7 @@ async function poll() {
   } catch {
     if (!submitting) {
       choices.disabled = true;
-      setStatus('暫時無法連到 Pi 的預覽服務，會自動重試。');
+      setStatus('Cannot reach the preview server. Retrying automatically.');
     }
   } finally {
     polling = false;
@@ -99,7 +100,7 @@ form.addEventListener('submit', async (event) => {
   submitting = true;
   submissionVersion += 1;
   choices.disabled = true;
-  setStatus('正在送出答案。');
+  setStatus('Submitting your answer.');
   try {
     const response = await fetch('/answer', {
       method: 'POST',
@@ -108,7 +109,7 @@ form.addEventListener('submit', async (event) => {
       signal: AbortSignal.timeout(4000),
     });
     if (response.status === 409) {
-      setStatus('這題已回答或已換題，正在更新頁面。');
+      setStatus('This question was already answered or replaced. Updating the preview.');
       return;
     }
     if (!response.ok) {
@@ -117,7 +118,7 @@ form.addEventListener('submit', async (event) => {
     showState({...question, answer: choice});
   } catch {
     choices.disabled = false;
-    setStatus('未能確認是否送出。請稍候，或回到 Pi 回答。');
+    setStatus('Could not confirm submission. Wait a moment or answer in Pi.');
   } finally {
     submitting = false;
   }

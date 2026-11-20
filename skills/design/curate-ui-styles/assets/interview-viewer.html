@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>UI 風格訪談</title>
+  <title>UI Style Interview</title>
   <script defer src="/viewer.js"></script>
   <style>
     :root {
@@ -72,18 +72,18 @@
 </head>
 <body>
   <header>
-    <h1>UI 風格訪談</h1>
-    <p id="status" role="status">等待第一個預覽。</p>
+    <h1>UI Style Interview</h1>
+    <p id="status" role="status">Waiting for the first preview.</p>
     <form id="answer" hidden>
       <fieldset disabled>
-        <legend>比較下面的選項後，選擇 A、B 或 C。</legend>
+        <legend>Compare the options below, then choose A, B, or C.</legend>
         <label><input type="radio" name="choice" value="A" required> A</label>
         <label><input type="radio" name="choice" value="B" required> B</label>
         <label><input type="radio" name="choice" value="C" required> C</label>
-        <button type="submit">送出答案</button>
+        <button type="submit">Submit answer</button>
       </fieldset>
     </form>
-    <noscript>請開啟 JavaScript，或使用 Pi 裡的單題連結並在 Pi 回答。</noscript>
+    <noscript>Enable JavaScript, or open the preview link from Pi and answer there.</noscript>
   </header>
   <main id="preview"></main>
 </body>
