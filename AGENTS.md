@@ -9,7 +9,7 @@ Follow global defaults; this file contains only repository-specific additions an
 - Explain the main idea simply before adding necessary detail.
 - Keep information accurate.
 - Make documented rules specific and verifiable.
-- Follow the model-selection policy in `./skills/prompt-gpt/SKILL.md` when creating, revising, or reviewing skills and other agent-facing prompts.
+- Follow the model-selection policy in `./writing/skills/prompt-gpt/SKILL.md` when creating, revising, or reviewing skills and other agent-facing prompts.
 - Keep external positioning, installation flows, and skill discovery in `README.md`, and keep maintainer workflow in this file.
 - Update the README catalog when a skill is added, deprecated, renamed, recategorized, or materially changes its trigger.
 - Update installation documentation and executable recipes only in the files that own the affected flow.
