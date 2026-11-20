@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UI 風格訪談：邊角形狀</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #f5f3ee;
+      color: #242229;
+      font: 1rem/1.6 system-ui, sans-serif;
+      margin: 0;
+    }
+
+    main {
+      inline-size: min(100%, 69rem);
+      margin-inline: auto;
+      padding: clamp(1rem, 4vw, 3rem);
+    }
+
+    header {
+      margin-block-end: 2rem;
+    }
+
+    h1 {
+      font-size: clamp(2rem, 5vw, 3.25rem);
+      line-height: 1.15;
+      margin-block: 0.3em;
+    }
+
+    .eyebrow {
+      color: #584572;
+      font-size: 0.875rem;
+      font-weight: 700;
+    }
+
+    header p,
+    .reply-hint {
+      color: #504b58;
+      margin-block: 0.5rem;
+    }
+
+    fieldset {
+      border: 0;
+      margin: 0;
+      min-inline-size: 0;
+      padding: 0;
+    }
+
+    legend {
+      font-size: 1.125rem;
+      font-weight: 700;
+      padding: 0;
+    }
+
+    .choices {
+      display: grid;
+      gap: 1rem;
+      margin-block: 0.75rem 1rem;
+    }
+
+    @media (min-width: 52rem) {
+      .choices {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .choice {
+      position: relative;
+    }
+
+    .choice input {
+      block-size: 1.25rem;
+      inline-size: 1.25rem;
+      inset-block-start: 1.3rem;
+      inset-inline-start: 1rem;
+      margin: 0;
+      position: absolute;
+    }
+
+    .choice input:focus-visible {
+      outline: 2px solid #52359a;
+      outline-offset: 3px;
+    }
+
+    .choice input:checked + label {
+      border-color: #52359a;
+    }
+
+    .choice label {
+      background: #fff;
+      border: 2px solid #a39cab;
+      border-radius: 0.75rem;
+      cursor: pointer;
+      display: block;
+      min-block-size: 3rem;
+      padding: 1rem;
+    }
+
+    .choice-name {
+      display: block;
+      font-weight: 700;
+      padding-inline-start: 1.75rem;
+    }
+
+    .choice-note {
+      color: #504b58;
+      display: block;
+      font-size: 0.875rem;
+      margin-block-start: 0.25rem;
+    }
+
+    .sample {
+      background: #edeaf4;
+      border-radius: 0.5rem;
+      display: grid;
+      margin-block-start: 0.75rem;
+      padding: clamp(0.75rem, 2vw, 1.25rem);
+      place-items: center;
+    }
+
+    .sample-card {
+      background: #fff;
+      border: 1px solid #c0b8ca;
+      border-radius: var(--card-radius);
+      display: grid;
+      gap: 0.35rem;
+      inline-size: min(100%, 14rem);
+      padding: 1rem;
+    }
+
+    .sample-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+
+    .sample-detail {
+      color: #504b58;
+      font-size: 0.875rem;
+    }
+
+    .sample-action {
+      background: #242229;
+      border-radius: var(--action-radius);
+      color: #fff;
+      font-size: 0.875rem;
+      font-weight: 700;
+      justify-self: start;
+      margin-block-start: 0.25rem;
+      padding: 0.375rem 0.75rem;
+    }
+
+    .square {
+      --action-radius: 0;
+      --card-radius: 0;
+    }
+
+    .rounded {
+      --action-radius: 0.5rem;
+      --card-radius: 1rem;
+    }
+
+    .asymmetric {
+      --action-radius: 0.875rem 0 0.875rem 0;
+      --card-radius: 2rem 0 2rem 0;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <span class="eyebrow">UI 風格訪談 · 細節（近）· 第 9 / 12 題示例</span>
+      <h1>你喜歡哪種邊角？</h1>
+      <p>三張卡片的內容、配色和尺寸都相同，只有卡片和按鈕的邊角不同。</p>
+    </header>
+    <fieldset aria-describedby="reply-hint">
+      <legend>比較三種邊角</legend>
+      <div class="choices">
+        <div class="choice">
+          <input type="radio" id="a" name="corner-shape" value="square">
+          <label class="square" for="a">
+            <span class="choice-name">A. 直角</span>
+            <span class="sample" aria-hidden="true">
+              <span class="sample-card">
+                <span class="sample-title">設計週報</span>
+                <span class="sample-detail">本週有 3 則更新</span>
+                <span class="sample-action">查看週報</span>
+              </span>
+            </span>
+            <span class="choice-note">卡片和按鈕都是直角。</span>
+          </label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="b" name="corner-shape" value="rounded">
+          <label class="rounded" for="b">
+            <span class="choice-name">B. 圓角</span>
+            <span class="sample" aria-hidden="true">
+              <span class="sample-card">
+                <span class="sample-title">設計週報</span>
+                <span class="sample-detail">本週有 3 則更新</span>
+                <span class="sample-action">查看週報</span>
+              </span>
+            </span>
+            <span class="choice-note">四個角都有相同的弧度。</span>
+          </label>
+        </div>
+        <div class="choice">
+          <input type="radio" id="c" name="corner-shape" value="asymmetric">
+          <label class="asymmetric" for="c">
+            <span class="choice-name">C. 不對稱</span>
+            <span class="sample" aria-hidden="true">
+              <span class="sample-card">
+                <span class="sample-title">設計週報</span>
+                <span class="sample-detail">本週有 3 則更新</span>
+                <span class="sample-action">查看週報</span>
+              </span>
+            </span>
+            <span class="choice-note">左上、右下是圓角，另外兩角是直角。</span>
+          </label>
+        </div>
+      </div>
+      <p id="reply-hint" class="reply-hint">這裡的點選只供比較，不會送出。請回到對話回答 A、B 或 C；也可以說「跳過」或描述想看的樣式。</p>
+    </fieldset>
+  </main>
+</body>
+</html>

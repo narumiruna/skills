@@ -176,6 +176,7 @@ Source: `design/skills/`.
 
 | Skill | Use it for |
 | --- | --- |
+| `curate-ui-styles` | Create, compare, and fine-tune reusable UI style skills through a layered visual interview with three HTML previews per question. |
 | `design-user-experiences` | Design, review, or implement bounded interfaces and approval-gated end-to-end digital experiences. |
 | `grill-designs` | Evidence-informed, one-decision-at-a-time design grilling. |
 | `write-roadmap` | Creating, revising, reviewing, and tracking evidence-grounded strategic roadmaps, then deleting them when complete. |
