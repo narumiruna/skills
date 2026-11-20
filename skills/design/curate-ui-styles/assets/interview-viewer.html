@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UI 風格訪談</title>
+  <script defer src="/viewer.js"></script>
+  <style>
+    :root {
+      color-scheme: light dark;
+      font: 1rem/1.5 system-ui, sans-serif;
+    }
+
+    body {
+      background: Canvas;
+      color: CanvasText;
+      display: grid;
+      grid-template-rows: auto minmax(0, 1fr);
+      margin: 0;
+      min-block-size: 100vh;
+      min-block-size: 100dvh;
+    }
+
+    header {
+      border-block-end: 1px solid GrayText;
+      padding: 0.75rem clamp(1rem, 3vw, 2rem);
+    }
+
+    h1 {
+      font-size: 1.125rem;
+      margin: 0;
+    }
+
+    #status {
+      margin-block: 0.35rem 0;
+    }
+
+    fieldset {
+      align-items: center;
+      border: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem 1rem;
+      margin: 0.35rem 0 0;
+      padding: 0;
+    }
+
+    label,
+    button {
+      align-items: center;
+      display: inline-flex;
+      font: inherit;
+      min-block-size: 2.75rem;
+    }
+
+    label {
+      gap: 0.25rem;
+      min-inline-size: 2.75rem;
+    }
+
+    #preview {
+      min-block-size: 0;
+    }
+
+    iframe {
+      block-size: 100%;
+      border: 0;
+      display: block;
+      inline-size: 100%;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>UI 風格訪談</h1>
+    <p id="status" role="status">等待第一個預覽。</p>
+    <form id="answer" hidden>
+      <fieldset disabled>
+        <legend>比較下面的選項後，選擇 A、B 或 C。</legend>
+        <label><input type="radio" name="choice" value="A" required> A</label>
+        <label><input type="radio" name="choice" value="B" required> B</label>
+        <label><input type="radio" name="choice" value="C" required> C</label>
+        <button type="submit">送出答案</button>
+      </fieldset>
+    </form>
+    <noscript>請開啟 JavaScript，或使用 Pi 裡的單題連結並在 Pi 回答。</noscript>
+  </header>
+  <main id="preview"></main>
+</body>
+</html>

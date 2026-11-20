@@ -1,6 +1,6 @@
 ---
 name: curate-ui-styles
-description: Create, compare, and fine-tune reusable UI style skills through a visual preference interview with three HTML options per question and local browser links. Use when the user wants to choose a UI look, save a style for future interfaces, or manage a collection of UI styles; not for one-off layout fixes.
+description: Create, compare, and fine-tune reusable UI style skills through a visual preference interview with three HTML options per question and in-browser answers on one local page. Use when the user wants to choose a UI look, save a style for future interfaces, or manage a collection of UI styles; not for one-off layout fixes.
 ---
 
 # Curate UI styles
@@ -42,24 +42,35 @@ Keep drafts separate from saved styles.
 ## Serve the previews
 
 Save question and review pages in a `previews/` subdirectory beside `interview.md`, using lowercase kebab-case filenames such as `01-page-composition.html`.
-Keep only self-contained generated preview pages in that directory, not drafts, saved skills, or other project content.
-On resume, if the current preview predates this layout, copy only that preview into `previews/` and preserve its A/B/C mapping.
+Keep drafts, saved skills, and other project content outside `previews/`; the server manages its own state files there.
+On resume, if the current preview predates this layout, copy it into `previews/` and preserve its A/B/C mapping.
 
-After writing the first preview, start the [preview server](scripts/serve_previews.py) with `uv` and Python 3.10 or later.
-Set `skill_dir` to the absolute path of this installed skill and `session_dir` to the directory containing `interview.md`.
+Use the [preview server](scripts/serve_previews.py) with `uv` and Python 3.10 or later.
+Set `skill_dir` to the absolute path of this installed skill and `preview_dir` to the interview's `previews/` directory.
 
 ```bash
-uv run --no-project "$skill_dir/scripts/serve_previews.py" "$session_dir/previews"
+uv run --no-project "$skill_dir/scripts/serve_previews.py" "$preview_dir"
 ```
 
-Run it in a managed background process and keep its stop handle for this interview only.
-If using a shell, start it with `nohup` and `&`, redirect input from `/dev/null` and output to a log outside `previews/`, and keep `$!` so you can stop that process.
-Append `/` and the exact preview filename to the printed `http://127.0.0.1:<port>` address, and check that the URL returns HTTP 200 before sharing it.
-Reuse the same server for new question and review files instead of restarting it per question.
-Preview pages use inline HTML/CSS and optional embedded images; the server blocks scripts and external assets.
-If the client cannot keep a server running or the user's browser cannot reach loopback, give the local HTML path and a short description of the options instead.
+Start the command once in a managed background process, or use `nohup` with input redirected from `/dev/null` and output to a fresh log outside `previews/`, and keep the stop handle for this interview.
+Check that the printed `http://127.0.0.1:<port>/` returns HTTP 200, then give it to the user once and ask them to keep that tab open.
+For each completed question file, publish its exact filename as `question_html` and wait for the browser answer with a tool timeout above 180 seconds:
+
+```bash
+uv run --no-project "$skill_dir/scripts/serve_previews.py" "$preview_dir" --show-question "$question_html"
+uv run --no-project "$skill_dir/scripts/serve_previews.py" "$preview_dir" --wait-for-answer "$question_html"
+```
+
+Tell the user the URL before entering the first wait, using a user-visible progress message if supported.
+If the client cannot show the URL before blocking, end the turn with the URL and ask the user to say `continue` once after opening it or submitting.
+Treat the returned letter like a chat answer, record it in the draft, and publish the next question without ending the turn or sending a new link.
+On exit code 3, leave the tab open and tell the user they can still submit, then say `continue` in chat so you can read the pending answer for that same question.
+If the user resumes a pending question, reuse its filename so a browser answer already submitted is not lost.
+For a review file, use `--show-review "$review_html"` instead, which replaces the preview in the same tab without offering A/B/C.
+Keep generated previews self-contained and isolated; only the viewer handles submissions.
+If the browser cannot reach loopback or run the viewer, offer a direct preview URL, or a local HTML path and short descriptions, and collect the answer in chat.
 Do not expose the server on the network or create a tunnel without explicit authorization.
-Stop only the process started for this interview when the user pauses, cancels, or finishes; for a manual foreground run, press Ctrl+C.
+Stop only this interview's server when the user explicitly pauses, cancels, or finishes; for a foreground run, press Ctrl+C.
 
 ## Ask one visual question at a time
 
@@ -67,11 +78,10 @@ Stop only the process started for this interview when the user pauses, cancels, 
 2. Generate one self-contained HTML file with exactly three rendered options labeled A, B, and C, using the [comparison preview](assets/compare-question.html) as a starting point.
 3. Keep the copy, preview frame, viewport conditions, and settled choices the same; change only properties needed to show the named axis.
 4. For a refinement, include the current style as one of the options if it is viable, and make the other two clearly distinct on the same axis.
-5. Give the user the preview's HTTP link, or use the local-file fallback above.
-6. Ask the user to reply in chat with A, B, or C, and wait before generating the next question.
-   - Accept skip, go back, replace the variants, describe a custom choice, or finish early as reply actions, not additional visual options.
-   - A preview-only click does not submit a choice to chat or save a preference.
-7. Update the draft after each reply and before presenting the next question.
+5. Publish the question and wait for an explicit A/B/C submission in the browser, or use the chat fallback above.
+   - Accept skip, go back, replace the variants, custom choices, or early finish in chat, not as additional visual options.
+   - Show A/B/C in the generated preview as labels, not as a second set of answer controls.
+6. Update the draft after each reply and before presenting the next question.
    - Record the actual design choice, not just the letter.
    - Record a skip as unresolved or as “keep current” for refinement.
    - When revising a question, write a new preview file and keep each letter tied to the file it was shown in.
@@ -84,7 +94,7 @@ Never trade contrast, focus visibility, or required UI behavior for a preference
 
 ## Review and save
 
-1. Combine the decisions into one representative HTML preview, link it as above, and summarize the confirmed rules by layer.
+1. Combine the decisions into one representative HTML preview, show it in the same tab as above, and summarize the confirmed rules by layer.
 2. For refinement, show the before and after on the same content and name what stays unchanged.
 3. Separate confirmed preferences from unresolved or unasked items; do not turn a skipped choice into a rule.
    - If no preference was confirmed, do not create an empty style or rewrite the base style.

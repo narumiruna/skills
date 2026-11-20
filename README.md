@@ -121,7 +121,7 @@ The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 | `apply-google-style` | Writing, refactoring, and reviewing code and documentation with all guides in Google's style guide index. |
 | `collect-evolve-cases` | Explicitly previewing and importing reviewed evolve cases from local Pi sessions for one project. |
 | `configure-ghostty` | Configuring, validating, diagnosing, and operating Ghostty with version-aware file, keybinding, runtime, and launch guidance. |
-| `curate-ui-styles` | Create, compare, and fine-tune reusable UI style skills with three HTML options per question, served through a local browser link. |
+| `curate-ui-styles` | Create, compare, and fine-tune reusable UI style skills by comparing and answering A/B/C questions in one local browser tab. |
 | `execute-plans` | Executing a plan on a focused branch and opening a PR by default after required local checks pass, with default-directory lookup when no full path is supplied; use `write-plans` to draft or track plan files. |
 | `give-language-feedback` | Proactive, one-sentence grammar or wording feedback in any language alongside the main task, without requiring a language-help request. |
 | `improve-agent-harnesses` | Testing and automatically applying measured improvements to skills under `~/.agents/skills/`, including itself, on request or after a reproducible skill failure. |
