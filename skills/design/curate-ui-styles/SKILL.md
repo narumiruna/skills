@@ -16,8 +16,9 @@ Run the interview and manage its output without changing product code, installin
 - **Manage:** List or show saved styles, compare them on the same surface, or copy one under a new ID without changing the original.
 - **Export:** Copy a selected style skill to a user-approved local destination without overwriting an existing skill.
 
-Work in the current project unless the user supplies a different workspace.
-Keep source styles in `ui-styles/ui-style-<id>/SKILL.md` by default, not in the installed meta skill.
+Run the interview in the current project unless the user supplies a different workspace.
+For a new style, propose `~/.agents/skills/design/ui-style-<id>/SKILL.md` unless the user specifies another destination.
+When refining an existing style, keep its current path.
 Read the [style skill format](references/style-skill.md) before creating, refining, comparing, copying, or exporting a style.
 
 ## Set up an interview
@@ -99,6 +100,8 @@ Never trade contrast, focus visibility, or required UI behavior for a preference
 3. Separate confirmed preferences from unresolved or unasked items; do not turn a skipped choice into a rule.
    - If no preference was confirmed, do not create an empty style or rewrite the base style.
 4. Ask for confirmation of the preview, style name, and destination before creating or updating the saved style.
+   - If a symlink changes where the destination points, show the resolved path as well.
+   - For a new style, require an unused directory; do not overwrite an existing skill.
 5. Write the style skill only after confirmation, or retain only the draft if the user pauses or cancels.
 6. Check that the saved skill has valid frontmatter, uses the confirmed choices without contradictions, and can stand alone without the interview files.
 7. Report the saved skill path and how to reuse it, or report the draft path and how to resume if nothing was saved.

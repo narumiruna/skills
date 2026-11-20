@@ -112,7 +112,7 @@ Use `/skill:<name>` to invoke a skill with arguments:
 ### Global Skills
 
 Global skills live under `skills/` and are linked by `just install`.
-`curate-ui-styles` is grouped under `skills/design/`.
+`curate-ui-styles` and the [saved UI styles](#saved-ui-styles) are grouped under `skills/design/`.
 The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 
 | Skill | Use it for |
@@ -202,6 +202,16 @@ Source: `workflow/skills/`.
 | --- | --- |
 | `use-jira-cli` | Read-only Jira inspection and precisely authorized CLI mutations. |
 | `write-git-commits` | Drafting, validating, or creating focused Conventional Commits from diffs. |
+
+### Saved UI Styles
+
+Install the repository's saved styles from `skills/design/` with `npx skills`; `just install` includes them.
+`curate-ui-styles` saves new styles to `~/.agents/skills/design/ui-style-<id>/SKILL.md` by default, after you confirm the destination.
+To use a style, name it explicitly or ask the agent to read its `SKILL.md`.
+
+| Skill | Use it for |
+| --- | --- |
+| [Minimalist](skills/design/ui-style-minimalist/SKILL.md) | Apply the Minimalist style to web app overviews and dashboards only when explicitly selected by name or path. |
 
 ### External Skills
 
