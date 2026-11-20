@@ -1,6 +1,6 @@
 ---
 name: curate-ui-styles
-description: Create, compare, and fine-tune reusable UI style skills through a visual preference interview with three HTML previews per question. Use when the user wants to choose a UI look, save a style for future interfaces, or manage a collection of UI styles; not for one-off layout fixes.
+description: Create, compare, and fine-tune reusable UI style skills through a visual preference interview with three HTML options per question and local browser links. Use when the user wants to choose a UI look, save a style for future interfaces, or manage a collection of UI styles; not for one-off layout fixes.
 ---
 
 # Curate UI styles
@@ -39,13 +39,35 @@ Record the mode, target and base style (if any), limits, ordered question IDs, c
 For a refinement, also record a fingerprint or snapshot of the starting style so a resumed interview can detect outside edits.
 Keep drafts separate from saved styles.
 
+## Serve the previews
+
+Save question and review pages in a `previews/` subdirectory beside `interview.md`, using lowercase kebab-case filenames such as `01-page-composition.html`.
+Keep only self-contained generated preview pages in that directory, not drafts, saved skills, or other project content.
+On resume, if the current preview predates this layout, copy only that preview into `previews/` and preserve its A/B/C mapping.
+
+After writing the first preview, start the [preview server](scripts/serve_previews.py) with `uv` and Python 3.10 or later.
+Set `skill_dir` to the absolute path of this installed skill and `session_dir` to the directory containing `interview.md`.
+
+```bash
+uv run --no-project "$skill_dir/scripts/serve_previews.py" "$session_dir/previews"
+```
+
+Run it in a managed background process and keep its stop handle for this interview only.
+If using a shell, start it with `nohup` and `&`, redirect input from `/dev/null` and output to a log outside `previews/`, and keep `$!` so you can stop that process.
+Append `/` and the exact preview filename to the printed `http://127.0.0.1:<port>` address, and check that the URL returns HTTP 200 before sharing it.
+Reuse the same server for new question and review files instead of restarting it per question.
+Preview pages use inline HTML/CSS and optional embedded images; the server blocks scripts and external assets.
+If the client cannot keep a server running or the user's browser cannot reach loopback, give the local HTML path and a short description of the options instead.
+Do not expose the server on the network or create a tunnel without explicit authorization.
+Stop only the process started for this interview when the user pauses, cancels, or finishes; for a manual foreground run, press Ctrl+C.
+
 ## Ask one visual question at a time
 
 1. State the layer, progress, and the one visual decision, in the user's language.
 2. Generate one self-contained HTML file with exactly three rendered options labeled A, B, and C, using the [comparison preview](assets/compare-question.html) as a starting point.
 3. Keep the copy, preview frame, viewport conditions, and settled choices the same; change only properties needed to show the named axis.
 4. For a refinement, include the current style as one of the options if it is viable, and make the other two clearly distinct on the same axis.
-5. Open or link the preview in a client that can show it, or give its local path and a short text description of each option if HTML cannot be displayed inline.
+5. Give the user the preview's HTTP link, or use the local-file fallback above.
 6. Ask the user to reply in chat with A, B, or C, and wait before generating the next question.
    - Accept skip, go back, replace the variants, describe a custom choice, or finish early as reply actions, not additional visual options.
    - A preview-only click does not submit a choice to chat or save a preference.
@@ -62,7 +84,7 @@ Never trade contrast, focus visibility, or required UI behavior for a preference
 
 ## Review and save
 
-1. Combine the decisions into one representative HTML preview and summarize the confirmed rules by layer.
+1. Combine the decisions into one representative HTML preview, link it as above, and summarize the confirmed rules by layer.
 2. For refinement, show the before and after on the same content and name what stays unchanged.
 3. Separate confirmed preferences from unresolved or unasked items; do not turn a skipped choice into a rule.
    - If no preference was confirmed, do not create an empty style or rewrite the base style.
