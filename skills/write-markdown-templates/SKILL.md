@@ -28,8 +28,11 @@ Replace its sample headings and prompts with ones specific to the document.
 
 - Put required sections in reading order and add optional sections only when they cover a distinct need.
   Mark those headings `(optional)` and explain when to include them.
-- Use descriptive `[Placeholder]` text for values that need to be replaced.
-  Keep the project's existing syntax when a convention or renderer requires it.
+- Use descriptive names for placeholders.
+  - Use `{{ ... }}` for required values, such as `{{ Document title }}`.
+    Replace every required placeholder in the finished document.
+  - Use `[ ... ]` for optional values, such as `[Supporting link]`.
+    If no value applies, remove the placeholder and any label or Markdown used only for that value.
 - Use HTML comments for short writing prompts.
   Tell the writer what to include or how to tell the section is complete; do not repeat the heading or add a second placeholder that says the same thing.
 - Show the expected Markdown structure when it matters, such as a task checkbox or a table row.
@@ -37,7 +40,7 @@ Replace its sample headings and prompts with ones specific to the document.
 
 ## Check and deliver
 
-Fill a representative example in memory to check that the required sections work and that an optional section can be removed cleanly.
+Fill a representative example in memory to check that all required content can be supplied and optional content can be omitted cleanly.
 Check that the finished example has no unresolved placeholders, instructional comments, or `(optional)` markers.
 Keep those aids in the template itself.
 Verify the filename, Markdown structure, and any new or changed link to the template.

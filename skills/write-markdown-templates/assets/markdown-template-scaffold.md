@@ -1,8 +1,10 @@
-# [Document title]
+# {{ Document title }}
 
 ## Required section
 
 <!-- State what this section must contain and how to tell it is complete. -->
+
+Reference: [Supporting link]
 
 ## Optional section (optional)
 
