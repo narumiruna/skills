@@ -30,7 +30,8 @@ Keep `Created` unchanged and set `Updated` to the current local date whenever th
 
 Ground the plan in relevant repository evidence and state assumptions or unknowns only when they affect execution or validation.
 Always include `Goal`, `Plan`, and `Completion Checklist`.
-Add only useful optional sections: `Context`; `Architecture` for system boundaries, ownership, data flow, APIs, state, permissions, storage, or deployment; `Tech Stack` for tool, runtime, or package choices; `Non-Goals`; `Assumptions`; `Unknowns`; and `Risks`.
+Use the template's optional sections only when useful.
+Use `Architecture` for system boundaries, ownership, data flow, APIs, state, permissions, storage, or deployment.
 Include `Rollback / Recovery` for production data, migrations, infrastructure, releases, or public APIs.
 
 ## Tasks
@@ -43,10 +44,9 @@ Keep dependent tasks blocked when a missing external prerequisite prevents safe 
 
 ## External Handoff
 
-When work cannot be performed by the agent, record it without completion checkboxes in an optional `External Handoff` section instead of making it an agent task or completion check.
+Record work the agent cannot perform in the optional `External Handoff` section using the template's bullet format.
 This includes human-operated physical-device tests, subjective visual or usability acceptance, unavailable platform or native UI checks, account-owner actions such as MFA and credential setup, unauthorized external or costly operations, and external approvals or upstream dependencies.
 Create agent tasks to prepare available evidence, such as before/after captures for visual review, and the handoff, not to wait for another actor.
-For each external item, name the responsible role, prerequisite, action, expected result, unverified behavior, and any release restriction.
 Do not require user acceptance merely to close the coding plan; preserve acceptance requirements explicitly imposed by the user or higher-priority instructions, even when they block completion.
 External handoff does not authorize external writes, costly operations, or requests for secrets in chat.
 
@@ -64,6 +64,6 @@ While tracking authorized implementation:
 Declare agent-plan completion only when every task and completion check has valid evidence, required gates pass or have an authorized exception, material unknowns and risks have a clear disposition, and external handoff preparation is complete.
 Agent-plan completion does not establish product acceptance or release readiness.
 Before deleting a completed saved plan, preserve unresolved external items in an appropriate retained repository document, using an existing acceptance or operations document when suitable, or in an explicitly requested chat-only handoff.
-Do not require a new file or external issue for every plan, or write to an external tracker without authorization.
+Do not require a new file or external issue for every plan.
 Report verified work, unverified external checks, release restrictions, and the retained handoff location when applicable.
 Only then delete the completed saved plan and report its path; never delete a chat-only plan or one with missing completion evidence.
