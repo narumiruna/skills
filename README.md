@@ -126,7 +126,6 @@ The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 | Skill | Use it for |
 | --- | --- |
 | `address-pr-feedback` | Handling PR comments, publishing in-scope fixes, and processing new feedback in a bounded bot review loop without waiting for human reviewers. Supports follow-up PRs after merge. |
-| `apply-google-style` | Writing, refactoring, and reviewing code and documentation with all guides in Google's style guide index. |
 | `collect-evolve-cases` | Explicitly previewing and importing reviewed evolve cases from local Pi sessions for one project. |
 | `configure-ghostty` | Configuring, validating, diagnosing, and operating Ghostty with version-aware file, keybinding, runtime, and launch guidance. |
 | `curate-ui-styles` | Create, compare, and fine-tune reusable UI style skills by comparing and answering A/B/C questions in one local browser tab. |
@@ -143,7 +142,6 @@ The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 | `write-plans` | Drafting, revising, and tracking implementation plan files, completion evidence, external handoff, and completed-plan cleanup; use `execute-plans` for implementation-to-PR delivery. |
 
 The former `create-agent-skills` skill is now named `write-agent-skills`.
-The former `apply-google-rust-style` and `apply-google-typescript-style` skills are merged into `apply-google-style`.
 
 ### Category Skills
 
@@ -198,9 +196,12 @@ Source: `code-quality/skills/`.
 
 | Skill | Use it for |
 | --- | --- |
+| `apply-google-style` | Writing, refactoring, and reviewing code and documentation with all guides in Google's style guide index. |
 | `harden-code-paths` | Confirming and fixing code-path failure modes or verified security findings, with bounded same-pattern checks. |
 | `improve-codebase-architecture` | Evidence-led codebase architecture assessment and behavior-preserving refactoring. |
 | `review-code` | Evidence-led ordinary code review with baseline security checks and authorized hardening handoff. |
+
+The former `apply-google-rust-style` and `apply-google-typescript-style` skills are merged into `apply-google-style`.
 
 #### Project and Git Workflow
 
