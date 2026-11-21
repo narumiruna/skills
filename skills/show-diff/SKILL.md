@@ -45,13 +45,13 @@ Do not present an excerpt as complete or invent a patch when there are no files 
 
 ## Remember format preferences by comparison type
 
-Update only [references/preferences.md](references/preferences.md) in this skill directory, not a copy in the repository being compared.
-Record the comparison type and primary format only: Git-style summary, Markdown table, or Mermaid.
-Do not save subject names, raw patches, quotes, or conversation details.
+Update only the skill's [preference file](references/preferences.md), not a copy in the repository being compared.
+Save only the comparison type and primary format: Git-style summary, Markdown table, or Mermaid.
+Omit subject names, raw patches, quotes, and conversation details.
 
-- If the user asks to switch the current comparison to a different primary format, apply it now and record it as a candidate for the relevant type.
-  Do not change an existing confirmed default on the basis of a candidate, even if the request is repeated.
-- If the user explicitly sets a default for future comparisons of a type, update that type's confirmed format and clear its candidate.
+- When the user asks to switch the current comparison's primary format, apply it and save it as a candidate for that type.
+  Leave the confirmed default unchanged, even if the user requests the same switch again.
+- When the user explicitly sets a default for a type, save it as confirmed and clear the candidate.
 - Do not save a preference if the request is one-time, applicable rules prohibit writes, only the level of detail changes, or the comparison type is unclear.
 
 Reuse an existing type when it fits; add a narrower row when the user states a distinct preference.
