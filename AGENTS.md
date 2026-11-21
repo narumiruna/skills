@@ -37,7 +37,7 @@ Follow global defaults; this file contains only repository-specific additions an
 - Ask before writing to external systems, taking destructive or costly actions, or materially expanding the scope.
 - Ask before running `scripts/download_human_interface_guidelines.py` because its default mode downloads a large external corpus; when maintaining the archiver, enumerate the DocC navigator and page JSON under `/tutorials/data/` instead of recursively downloading HTML.
 - Treat ignored `build/` content as generated output; do not hand-edit or commit it.
-- [UNREVIEWED] Treat `skills/` and `{writing,research,visuals,design,code-quality,workflow}/skills/` as the active source roots; `.agents/skills` is a tracked local-discovery symlink to `skills/`, not a second copy to edit.
+- Treat `skills/` and `{writing,research,visuals,design,code-quality,workflow}/skills/` as the active source roots; `.agents/skills` is a tracked local-discovery symlink to `skills/`, not a second copy to edit.
 - Do not introduce root-level marketplace or plugin metadata unless corresponding repository files and workflows exist.
 
 ## Testing
@@ -52,8 +52,8 @@ Follow global defaults; this file contains only repository-specific additions an
 
 ## Repository structure
 
-- [UNREVIEWED] Keep global skills directly in `skills/<skill-name>/SKILL.md` except for grouped skills under `skills/design/<skill-name>/SKILL.md` and `skills/sim/<skill-name>/SKILL.md`.
-- [UNREVIEWED] Keep category skills directly in `<category>/skills/<skill-name>/SKILL.md`, using only the active category roots listed above without deeper category directories.
+- Keep global skills directly in `skills/<skill-name>/SKILL.md` except for grouped skills under `skills/design/<skill-name>/SKILL.md` and `skills/sim/<skill-name>/SKILL.md`.
+- Keep category skills directly in `<category>/skills/<skill-name>/SKILL.md`, using only the active category roots listed above without deeper category directories.
 - Keep deprecated skills in `deprecated/<skill-name>/SKILL.md`, outside active discovery.
 - Keep optional supporting material inside its skill directory under `references/`, `scripts/`, `assets/`, or `agents/`.
 - Keep source slides and visual examples under `examples/`.
