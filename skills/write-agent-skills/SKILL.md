@@ -18,8 +18,9 @@ description: Create and maintain Agent Skills. Use when turning a repeatable wor
    Use terms users actually use and distinguish the nearest tasks that do not need the skill.
 4. Write the procedure the agent follows after loading the skill.
    - Keep one sentence per line.
-   - Teach reusable steps and non-obvious constraints rather than generic advice or steps that fit only one example.
-   - Give a clear default and the conditions for using an alternative.
+   - If the user’s prompt already defines a workable flow, keep it.
+   - Give the agent one default path.
+   - Add a step, branch, or exception only if omitting it would change the required outcome, cross an authorization boundary, or leave success unclear.
    - Prescribe the order, approvals, and checks for fragile or irreversible steps; leave flexible decisions to the agent.
    - State what evidence proves the task is done and where to stop.
    - Keep critical rules in `SKILL.md` and link optional material directly with a condition for loading it.
