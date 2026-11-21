@@ -1,14 +1,14 @@
 ---
 name: show-diff
-description: Show changes or compare two named things when the user asks for a diff, patch, or before-and-after comparison. Default to a high-level Git-style diff for code, documents, or concepts such as algorithms. Expand details or show the actual patch when requested and available.
+description: Compare two or more subjects when the user asks to compare them, asks how they differ, or asks which to choose between them. Plain requests such as “compare Python and Rust” count; no format or diff keyword is required. Also use to show Git changes, PR comparisons, or raw patches. Choose a Git-style summary, table, or Mermaid diagram based on the comparison unless the user requests a format.
 ---
 
 # Show Diff
 
 ## Resolve the comparison
 
-1. Identify the two sides before comparing them.
-   - For named concepts, products, or approaches, compare them in the order given under the same assumptions.
+1. Identify what the user wants to compare.
+   - For concepts, products, or approaches, compare the subjects in the order given under the same assumptions.
      State versions, variants, or defaults when they affect the comparison.
    - For repository changes, use the supplied diff or resolve the requested files, commits, or branches.
      - If no subjects or range are given, inspect staged, unstaged, and relevant untracked changes.
@@ -19,16 +19,44 @@ description: Show changes or compare two named things when the user asks for a d
 2. Report only supported differences and distinguish intended behavior from verified results where applicable.
    For a verified addition or deletion, treat the absent side as empty.
    If there are no material differences or required information is missing, say so.
-3. Do not edit files, stage changes, or commit as part of showing the diff.
+3. Keep comparisons read-only except for the preference updates defined below.
+   Do not stage, commit, or push those updates.
 
-## Choose the level of detail
+## Choose the format and level of detail
 
-- For a plain request such as “show diff,” use the high-level summary below.
-- For more detail, expand the requested parts.
-  Use exact excerpts for file changes when useful and label them as partial.
-  For a concept comparison, add concrete examples, formulas, or source details as relevant.
-- For a raw diff, complete patch, or line-by-line comparison, show the actual diff for the requested scope without paraphrasing.
-  Do not present an excerpt as complete or invent a patch when there are no files to compare.
+Honor the user's requested format.
+If a follow-up only changes the format, keep the same subjects and scope.
+Otherwise, use the most specific matching confirmed preference from [preferences.md](references/preferences.md) in this skill directory.
+If no confirmed preference clearly applies, choose one primary format:
+
+- Use a high-level Git-style diff for a bare “show diff” request, repository changes, or a before-and-after comparison.
+  Also use it for two subjects with a few clear contrasts that read well as `-` and `+` pairs.
+- Use a Markdown table when readers need to scan the same attributes or trade-offs across alternatives.
+  Put one comparison criterion per row and one subject per column.
+  Label differences in text instead of relying on color or icons alone.
+- Use Mermaid when the key difference is easier to see as a path, dependency, interaction order, or state transition.
+  Focus on the relationships that differ and state the main takeaway in text.
+
+Unless the user asks for both formats, add a second format only if it clarifies an important difference without repeating the full comparison.
+For more detail, expand the requested parts with exact excerpts, examples, formulas, or source details as useful.
+Label diff excerpts as partial.
+For a raw diff, complete patch, or line-by-line file comparison, show the actual diff for the requested scope without paraphrasing or adding visuals.
+Do not present an excerpt as complete or invent a patch when there are no files to compare.
+
+## Remember format preferences by comparison type
+
+Update only [references/preferences.md](references/preferences.md) in this skill directory, not a copy in the repository being compared.
+Record the comparison type and primary format only: Git-style summary, Markdown table, or Mermaid.
+Do not save subject names, raw patches, quotes, or conversation details.
+
+- If the user asks to switch the current comparison to a different primary format, apply it now and record it as a candidate for the relevant type.
+  Do not change an existing confirmed default on the basis of a candidate, even if the request is repeated.
+- If the user explicitly sets a default for future comparisons of a type, update that type's confirmed format and clear its candidate.
+- Do not save a preference if the request is one-time, applicable rules prohibit writes, only the level of detail changes, or the comparison type is unclear.
+
+Reuse an existing type when it fits; add a narrower row when the user states a distinct preference.
+If the file cannot be updated, apply the requested format without saving it.
+When a preference changes, briefly say what was recorded so the user can review it in Git.
 
 ## Format the high-level summary
 
@@ -42,17 +70,6 @@ description: Show changes or compare two named things when the user asks for a d
   Include an unmarked context line only when shared behavior helps explain a difference.
 - Summarize the important changes in plain language.
   Preserve material conditions, exceptions, and compatibility effects; omit incidental wording and formatting edits.
-
-## Add a visual when it helps
-
-Honor requests for a specific format.
-Otherwise, add a table or Mermaid diagram to the text diff only if it clarifies an important difference.
-
-- Use a Markdown table to compare the same attributes, settings, or trade-offs side by side.
-  Label differences in text instead of relying on color or icons alone.
-- Use Mermaid to show changes to paths, dependencies, interaction order, or state transitions.
-  Keep the diagram focused on the changed relationships, such as a new cache-hit path that skips the database.
-- Do not repeat the full summary in another format or add a visual to a raw-patch-only response.
 
 ## Examples
 
@@ -115,7 +132,17 @@ Partial diff (`config/retention.conf` only):
 
 For “Show the full raw patch,” show the complete actual diff for the same comparison, not this excerpt.
 
-### Comparing two algorithms
+### Comparing alternatives across shared criteria
+
+Request: “Compare Python and Rust.”
+
+| Criterion | Python | Rust |
+| --- | --- | --- |
+| Type checking | Dynamic by default; optional type hints can be checked with separate tools. | Static; the compiler checks types before the program runs. |
+| Memory management | The runtime manages object lifetimes automatically. | Ownership and borrowing rules are checked at compile time. |
+| Typical uses | Automation, data analysis, and prototyping. | Native CLI tools, system components, and performance-sensitive services. |
+
+### Comparing two algorithms in diff format
 
 Request: “Show diff between Adam and RMSProp.”
 

@@ -140,7 +140,7 @@ The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 | `refine-docs` | Polishing wording, reorganizing sections, or removing repeated ideas within or across specified documents (Markdown by default), without changing meaning or verifying claims against code. |
 | `resolve-github-issues` | Investigating GitHub issues, obtaining explicit plan approval, handing off to `write-plans` and `execute-plans`, then verifying and reporting the issue outcome. |
 | `review-pull-requests` | Complete read-only PR assessments and merge verdicts, with pinned commits, base/head bug reproduction, impact, risks, and verification. |
-| `show-diff` | Showing repository changes or comparing two named things in a high-level Git-style diff, with optional tables or Mermaid diagrams and the actual patch on request when available. |
+| `show-diff` | Comparing subjects or repository changes, even without a diff request. Chooses a Git-style summary, table, or Mermaid diagram, with versioned format preferences by comparison type. Shows the actual patch on request when available. |
 | `write-agent-skills` | Creating and maintaining Agent Skills, including naming, reviewing, validating, and improving when they load and what they do. |
 | `write-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
 | `write-markdown-templates` | Creating or revising reusable Markdown document templates, including filenames, sections, placeholders, and writing prompts, rather than filling them in. |
