@@ -28,6 +28,8 @@ Animation is an enhancement; the reorder works without it. To animate, wrap the 
 
 Use `view-transition-name: match-element` so you do not need to generate a name per item.
 
+MANDATORY: Always respect user preferences for reduced motion using the `prefers-reduced-motion` media query.
+
 Baseline status for View transitions: Newly available. It's been Baseline since 2025-10-14.
 Supported by: Chrome 111 (Mar 2023), Edge 111 (Mar 2023), Firefox 144 (Oct 2025), and Safari 18 (Sep 2024).
 
