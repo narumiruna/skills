@@ -72,7 +72,7 @@ Remove those copies and sandboxes before presenting the plan.
 1. Review the final diff and execution evidence against the approved issue acceptance criteria, focused checks, and required repository gates.
    Confirm that results apply to the final source revision; rerun affected checks only when evidence is missing or invalidated, under the same execution safety controls.
 2. Add a `bug` label only when a confirmed bug was reproduced, the repository uses that label, and the approved plan explicitly authorizes the metadata write.
-3. Summarize the solution, verification evidence, delivery status and PR URL when applicable, remaining risks, and unverified paths.
+3. Use the [issue outcome template](assets/issue-outcome.md) for the final report after execution completes or stops.
    Report missing implementation, authorization, or required verification rather than claiming resolution.
 
 ## Report and Phase Outcomes
