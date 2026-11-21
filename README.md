@@ -128,6 +128,7 @@ The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 | `address-pr-feedback` | Handling PR comments, publishing in-scope fixes, and processing new feedback in a bounded bot review loop without waiting for human reviewers. Supports follow-up PRs after merge. |
 | `collect-evolve-cases` | Explicitly previewing and importing reviewed evolve cases from local Pi sessions for one project. |
 | `configure-ghostty` | Configuring, validating, diagnosing, and operating Ghostty with version-aware file, keybinding, runtime, and launch guidance. |
+| `create-docs` | Creating a new ADR, RFC, PRD, project README, or glossary from a Markdown template when the target document does not already exist. |
 | `curate-ui-styles` | Create, compare, and fine-tune reusable UI style skills by comparing and answering A/B/C questions in one local browser tab. |
 | `execute-plans` | Executing a plan on a focused branch and opening a PR by default after required local checks pass, with default-directory lookup when no full path is supplied; use `write-plans` to draft or track plan files. |
 | `give-language-feedback` | Proactive, one-sentence grammar or wording feedback in any language alongside the main task, without requiring a language-help request. |
