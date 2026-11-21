@@ -1,4 +1,4 @@
-# [Repository or directory name] guidelines
+# {{ Repository or directory name }} guidelines
 
 ## Communication (optional)
 
@@ -16,7 +16,7 @@
 
 <!-- Give verified commands, working directories, and prerequisites for common tasks. -->
 
-## Boundaries
+## Boundaries (optional)
 
 <!-- If the project needs an action policy, write it here in one block.
 Distinguish read-only requests from requests that authorize local changes.

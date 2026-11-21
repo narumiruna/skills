@@ -39,7 +39,9 @@ For the default ADR path, use the next four-digit number (start at `0001`) and a
    Use project terms consistently and separate current behavior, proposals, confirmed decisions, and open questions.
    Do not invent approvals, requirements, metrics, commands, or definitions.
    When a material fact is missing, identify it as unresolved instead of treating it as settled.
-4. Remove unused sections and template comments, and replace all placeholders.
+4. Replace every required placeholder.
+   Fill optional placeholders only when a value applies; otherwise remove them and any text or markup used only for those fields.
+   Remove unused sections and template comments.
    Check local links, verify technical claims against sources, and run only safe, non-destructive examples when practical.
    Say what could not be verified.
 5. Return the draft in chat if requested; otherwise create the new local document.

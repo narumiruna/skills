@@ -1,6 +1,6 @@
 ---
 # Optional metadata. Omit the block if the project does not track status here.
-status: "{{Status}}"
+status: "[Status]"
 ---
 
 <!-- Adapted from MADR 4.0.0: https://github.com/adr/madr/tree/4.0.0/template -->

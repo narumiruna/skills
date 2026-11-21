@@ -20,7 +20,9 @@ Separate fields with underscores and use concise lowercase kebab-case within eac
 ## Plan Content
 
 For new plans, start from the [implementation plan template](assets/PLAN.md), including for chat-only drafts.
-Replace all placeholders and remove template comments, unused sections, and section markers such as `(optional)`.
+Replace every required placeholder.
+Fill optional placeholders only when a value applies; otherwise remove them and any text or markup used only for those fields.
+Remove template comments, unused sections, and `(optional)` markers.
 
 Below the plan title, include `Created: YYYY-MM-DD` and `Updated: YYYY-MM-DD`, each on its own line.
 Set both fields to the current local date when creating the plan.

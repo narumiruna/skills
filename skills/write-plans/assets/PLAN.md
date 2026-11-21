@@ -41,9 +41,10 @@ Updated: {{YYYY-MM-DD}}
 
 - [ ] {{Action and target}} — expect {{result}}; verify with {{acceptance check}}.
 
-## Rollback / Recovery (when required)
+## Rollback / Recovery (optional)
 
-<!-- State when to stop or roll back, how to restore the previous state, and how to verify recovery. -->
+<!-- Include this section for work involving production data, migrations, infrastructure, releases, or public APIs.
+State when to stop or roll back, how to restore the previous state, and how to verify recovery. -->
 
 ## Completion Checklist
 
@@ -55,4 +56,4 @@ Updated: {{YYYY-MM-DD}}
 
 <!-- Use bullets, not checkboxes, for work outside the agent's capabilities or authorization. -->
 
-- **{{Responsible role}}** — Prerequisite: {{prerequisite}}. Action: {{action}}. Expected result: {{result}}. Unverified behavior: {{behavior}}. Release restriction: {{restriction, if any}}.
+- **{{Responsible role}}** — Prerequisite: {{prerequisite}}. Action: {{action}}. Expected result: {{result}}. Unverified behavior: {{behavior}}. Release restriction: [Release restriction].
