@@ -130,6 +130,7 @@ The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 | `configure-ghostty` | Configuring, validating, diagnosing, and operating Ghostty with version-aware file, keybinding, runtime, and launch guidance. |
 | `create-docs` | Creating a new ADR, RFC, PRD, project README, glossary, or contributor guide (`CONTRIBUTING.md`) from a Markdown template when the target document does not already exist. |
 | `curate-ui-styles` | Create, compare, and fine-tune reusable UI style skills by comparing and answering A/B/C questions in one local browser tab. |
+| `eli5` | Short, plain-language explanations with no assumed background, including “explain like I’m five” requests. Use `explain-step-by-step` for a detailed walkthrough. |
 | `execute-plans` | Executing a plan on a focused branch and opening a PR by default after required local checks pass, with default-directory lookup when no full path is supplied; use `write-plans` to draft or track plan files. |
 | `give-language-feedback` | Proactive, one-sentence grammar or wording feedback in any language alongside the main task, without requiring a language-help request. |
 | `improve-agent-harnesses` | Testing and automatically applying measured improvements to skills under `~/.agents/skills/`, including itself, on request or after a reproducible skill failure. |
