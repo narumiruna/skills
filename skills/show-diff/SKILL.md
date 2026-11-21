@@ -7,19 +7,18 @@ description: Show changes or compare two named things when the user asks for a d
 
 ## Resolve the comparison
 
-1. Identify the two sides before choosing how to compare them.
-   - For named concepts, products, or approaches, compare them in the order given, under the same assumptions.
+1. Identify the two sides before comparing them.
+   - For named concepts, products, or approaches, compare them in the order given under the same assumptions.
      State versions, variants, or defaults when they affect the comparison.
-   - For a repository diff, use the supplied diff or resolve the requested files, commits, or branches.
-     For a bare request with no named subjects or range, inspect the current staged and unstaged changes and any relevant untracked files.
-   - For changes proposed by a branch or open PR, compare the common ancestor of the target and feature branches with the feature tip.
-   - To compare two branch snapshots directly, compare their tips.
-   - For a merged PR's actual effect, compare the target branch immediately before and after integration, not the PR head against the current target tip.
-     Verify both endpoints; if either is unknown, say what is missing.
-2. Compare both sides before summarizing.
-   Report only differences you can support; distinguish intended behavior from verified results where applicable.
-   Treat a verified addition or deletion as having an empty side.
-   If there are no material differences or required information is unavailable, say so.
+   - For repository changes, use the supplied diff or resolve the requested files, commits, or branches.
+     - If no subjects or range are given, inspect staged, unstaged, and relevant untracked changes.
+     - For changes proposed by a branch or open PR, compare the branches' common ancestor with the feature tip.
+     - For a direct comparison of two branch snapshots, compare their tips.
+     - For a merged PR, verify the target branch's state immediately before and after the merge, then compare those two states.
+       Do not compare the PR head with the current target tip.
+2. Report only supported differences and distinguish intended behavior from verified results where applicable.
+   For a verified addition or deletion, treat the absent side as empty.
+   If there are no material differences or required information is missing, say so.
 3. Do not edit files, stage changes, or commit as part of showing the diff.
 
 ## Choose the level of detail
@@ -37,17 +36,17 @@ description: Show changes or compare two named things when the user asks for a d
 - For file changes, use `diff --git a/<old-path> b/<new-path>` with repository-relative paths.
   Show `rename from` and `rename to` only when the rename is established.
 - For concepts, use `--- <first subject>` and `+++ <second subject>` instead of inventing Git paths.
-  Here `-` and `+` identify the two sides; they do not imply replacement or rank.
 - Group related differences under short labels such as `@@ Scope @@` or `@@ Workflow @@`, without line numbers.
 - Use `-` and `+` for the first and second sides, respectively.
+  In concept comparisons, these markers do not imply replacement or rank.
   Include an unmarked context line only when shared behavior helps explain a difference.
 - Summarize the important changes in plain language.
   Preserve material conditions, exceptions, and compatibility effects; omit incidental wording and formatting edits.
 
 ## Add a visual when it helps
 
-Keep the high-level text diff as the default.
-Add a table or Mermaid diagram only if it makes an important difference easier to understand, unless the user requests a specific format.
+Honor requests for a specific format.
+Otherwise, add a table or Mermaid diagram to the text diff only if it clarifies an important difference.
 
 - Use a Markdown table to compare the same attributes, settings, or trade-offs side by side.
   Label differences in text instead of relying on color or icons alone.
