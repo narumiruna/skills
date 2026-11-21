@@ -55,8 +55,10 @@ Report only the automatically maintained rules that changed.
 
 ## Templates
 
-Read the [section and action-policy templates](references/templates.md) when creating or restructuring a guide, or when adding an action policy.
-For bounded edits and reviews, load only a relevant template instead of the full checklist.
+Use the [AGENTS.md template](assets/agents.md) when creating or restructuring a guide.
+Check every unmarked section and keep the template order among sections you retain.
+For bounded edits, reviews, or action-policy changes, use only the relevant section.
+Include only verified guidance the agent needs, then replace placeholders and remove prompts, unused sections, and any `(optional)` markers from the finished guide.
 
 ## Writing Rules
 

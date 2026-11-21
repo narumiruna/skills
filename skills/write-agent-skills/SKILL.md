@@ -26,6 +26,7 @@ description: Create and maintain Agent Skills. Use when turning a repeatable wor
    - Keep critical rules in `SKILL.md` and link optional material directly with a condition for loading it.
 5. Add supporting files only when they have a job.
    - Use `references/` for details needed on demand and `assets/` for templates or other files used in outputs.
+   - When creating or revising a bundled Markdown document template, use `write-markdown-templates` for its filename, structure, and writing prompts if the skill is available.
    - Read [script design](references/script-design.md) when adding or changing a command or moving repeatable logic into `scripts/`.
    - Keep bundled files inside the skill directory; this boundary does not restrict task inputs, outputs, or files in the target repository.
    - Do not add a separate README, changelog, or installation guide unless the framework needs it.
