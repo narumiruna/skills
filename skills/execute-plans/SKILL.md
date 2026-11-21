@@ -26,7 +26,9 @@ Different repositories can share this directory; its name alone does not identif
 
 ## Authorization and Limits
 
-A user request to execute a plan authorizes branch creation, commits, a push, and a PR by default.
+A user request to execute a plan authorizes creating and switching branches in the current working tree, committing, pushing, and opening a PR by default.
+It does not authorize creating or using another working tree.
+Do not run `git worktree` or `git clone` for the task unless the user explicitly approves the method, exact destination, and purpose and the repository rules permit it.
 Loading the skill or asking to draft or review a plan does not authorize execution or delivery.
 Honor narrower limits and stricter approval requirements from the user, repository, or calling workflow.
 Check authorization before creating a branch, committing, pushing, or opening a PR.
@@ -45,18 +47,25 @@ Do not publish packages, create version tags, or dispatch release workflows.
 ## Workflow
 
 1. Read the full plan and repository instructions before changing files.
-   Inspect the working tree, preserve unrelated work, and confirm the repository and base branch; ask if either is unclear.
-2. Create a focused new branch from that base and implement every requirement, including repository-permitted tests, documentation, and plausible in-scope failure cases.
+   Use the repository working tree that contains the current working directory when execution begins.
+   Inspect that working tree and confirm the repository and base branch before switching branches.
+   Leave unrelated changes untouched and ask how to proceed if they block implementation, branch switching, or validation.
+   Do not stash, discard, or move unrelated changes without approval.
+   If the repository or base branch is unclear, or the current working tree cannot be used, explain the blocker and ask how to proceed instead of moving the task elsewhere.
+   Obtain explicit approval for the location and purpose before using any other working tree, including an existing copy.
+2. In that working tree, create and switch to a focused new branch from the verified base and implement every requirement, including repository-permitted tests, documentation, and plausible in-scope failure cases.
    During execution, apply `write-plans` tracking to the resolved plan, recording completed tasks and their acceptance evidence.
 3. Review the full diff for correctness, security, lifecycle safety, compatibility, regressions, and scope.
 4. Stage only intended changes, inspect the staged diff, and commit them.
-5. Run focused and required local checks in a clean disposable checkout of the exact delivery commit, using only committed source and documented prerequisites.
-   Remove the disposable checkout afterward.
+5. Run focused and required local checks on the exact delivery commit in the same working tree, using only committed source and documented prerequisites.
+   If unrelated changes or local artifacts would affect the checks, or a required check needs a separate working tree, ask how to proceed unless the user has already approved a suitable location for validation.
+   Approval to validate in another working tree does not authorize implementation there.
+   After validation, remove only the disposable copy created for this task with the user's approval.
    If plan tracking changes repository files after validation, commit those changes and repeat these checks on the new delivery commit before pushing.
    Keep each result tied to the commit actually checked; report the final commit's evidence in the PR rather than making another plan update just to record its ID.
    If a required check fails or cannot run, find and fix the cause within the authorized scope, even if the same failure exists on the base branch.
    Do not skip required checks or weaken what tests verify to make them pass.
-   Review and commit any file changes, then rerun the required local checks in a new clean checkout of the commit to be pushed.
+   Review and commit any file changes, then rerun the required local checks on the new delivery commit under the same working-tree rules.
    If a fix needs approval or an external blocker remains, stop without pushing and report what failed and what is needed to continue.
 6. Push the validated commit to the verified repository and open a PR against the verified base only after all required local checks pass.
    Include a concise summary, verification evidence, and relevant risks or unverified paths.
