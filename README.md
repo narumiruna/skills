@@ -137,7 +137,7 @@ The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 | `propose-ranked-options` | Explicitly requesting improvement proposals for a target, such as naming, code refactoring, or UI/UX, ranked by a total score out of 100. |
 | `prune-code-comments` | Auditing and pruning source comments, tracking workarounds as issues, moving decisions to ADRs, and preventing new comments with a lint baseline. |
 | `prune-docs` | Explicitly pruning documentation by removing or simplifying claims that code confirms are redundant, incorrect, or outdated. Deletes wholly outdated documents, leaves code unchanged, and reports the diff. |
-| `remove-doc-repetition` | Finding and removing repeated ideas, claims, or rules within or across specified files or folders (Markdown by default), with a Git diff. |
+| `refine-docs` | Polishing wording, reorganizing sections, or removing repeated ideas within or across specified documents (Markdown by default), without changing meaning or verifying claims against code. |
 | `resolve-github-issues` | Investigating GitHub issues, obtaining explicit plan approval, handing off to `write-plans` and `execute-plans`, then verifying and reporting the issue outcome. |
 | `review-pull-requests` | Complete read-only PR assessments and merge verdicts, with pinned commits, base/head bug reproduction, impact, risks, and verification. |
 | `write-agent-skills` | Creating and maintaining Agent Skills, including naming, reviewing, validating, and improving when they load and what they do. |
