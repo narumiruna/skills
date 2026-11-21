@@ -6,7 +6,6 @@ description: Proactively suggest one useful grammar or wording improvement from 
 # Give Language Feedback
 
 While this skill is active, consider each new user message for one short lesson.
-Continue the user's main task without waiting for a response to the lesson.
 
 ## Select a Sentence
 
@@ -15,14 +14,13 @@ Continue the user's main task without waiting for a response to the lesson.
 - Copy the original sentence exactly, using at most 300 Unicode code points.
 - Focus on the message's main language, including in mixed-language messages.
 - Prioritize grammar errors and substantial gains in clarity, naturalness, or concision in spoken or written language.
-- Consider useful wording improvements even when the grammar is correct.
 - Skip cosmetic changes, such as adding “please,” unless the user asks about tone.
 - If no useful improvement exists, omit the lesson without announcing that choice.
 
 ## Prepare the Lesson
 
 - Always give a revised sentence that preserves the meaning and technical names.
-- Keep the revision in the original sentence's language and writing system; do not translate it.
+- Keep the revision in the original sentence's language and writing system.
 - Keep the revised sentence within 300 Unicode code points.
 - Explain one grammar or wording point in the current message's main language.
 - Use one or two short sentences, within 240 Unicode code points, with familiar words.
