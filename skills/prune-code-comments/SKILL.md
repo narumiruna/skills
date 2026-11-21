@@ -23,8 +23,8 @@ Keep the comment if deleting it would lose a live warning with no durable handof
 
 ## Enforce the Ban
 
-Write a small, syntax-aware Python linter for the same scope and register it with the project's existing pre-commit setup: `prek.toml`, `.pre-commit-config.yaml`, or Husky.
-If the project has no configured or preferred runner, ask before adding one.
+Use a syntax-aware linter for the same scope, implemented in a language that fits the project’s tooling.
+Add it to the project's pre-commit hook setup.
 Baseline only the remaining non-exempt comments and shrink the baseline as they are removed.
 Reject new or edited comments, even if the total stays the same, and do not allow the baseline to grow after setup.
 Verify through the hook that retained comments pass and new or replacement comments fail.
