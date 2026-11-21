@@ -64,11 +64,10 @@ When a preference changes, briefly say what was recorded so the user can review 
 - For file changes, use `diff --git a/<old-path> b/<new-path>` with repository-relative paths.
   Show `rename from` and `rename to` only when the rename is established.
 - For concepts, use `--- <first subject>` and `+++ <second subject>` instead of inventing Git paths.
-- Use `@@ <scope> @@ <key difference> [<optional note>]` for each group of related differences.
+- Use `@@ <scope> @@ <key difference>` for each group of related differences.
   Put a short topic or scope between the markers, without line numbers.
-  After the closing marker, state what changed or how the subjects differ.
-  Add a separate sentence only if a material condition or effect needs a short explanation.
-  Put longer details in the body of the group.
+  After the closing marker, state one key difference.
+  Put conditions, exceptions, and supporting details in the body unless leaving them out of the heading would misstate the scope of the change.
 - Use `-` and `+` for the first and second sides, respectively.
   In concept comparisons, these markers do not imply replacement or rank.
   Include an unmarked context line only when shared behavior helps explain a difference.
@@ -116,9 +115,10 @@ Target branch before → after (summary, not a patch):
 
 ```diff
 diff --git a/config/retention.conf b/config/retention.conf
-@@ Log retention @@ Application logs are kept for 30 days instead of 7. Audit logs still expire after 7 days.
+@@ Log retention @@ Application logs now expire after 30 days instead of 7.
 - Keep application logs for 7 days.
 + Keep application logs for 30 days.
+  Audit logs still expire after 7 days.
 ```
 
 ### Follow-up asking for exact lines
