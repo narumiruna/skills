@@ -64,7 +64,11 @@ When a preference changes, briefly say what was recorded so the user can review 
 - For file changes, use `diff --git a/<old-path> b/<new-path>` with repository-relative paths.
   Show `rename from` and `rename to` only when the rename is established.
 - For concepts, use `--- <first subject>` and `+++ <second subject>` instead of inventing Git paths.
-- Group related differences under short labels such as `@@ Scope @@` or `@@ Workflow @@`, without line numbers.
+- Use `@@ <scope> @@ <key difference> [<optional note>]` for each group of related differences.
+  Put a short topic or scope between the markers, without line numbers.
+  After the closing marker, state what changed or how the subjects differ.
+  Add a separate sentence only if a material condition or effect needs a short explanation.
+  Put longer details in the body of the group.
 - Use `-` and `+` for the first and second sides, respectively.
   In concept comparisons, these markers do not imply replacement or rank.
   Include an unmarked context line only when shared behavior helps explain a difference.
@@ -85,7 +89,7 @@ High-level diff (summary, not a patch):
 diff --git a/docs/setup.md b/docs/quickstart.md
 rename from docs/setup.md
 rename to docs/quickstart.md
-@@ Setup @@
+@@ First-run setup @@ Setup works with defaults.
 - Ask readers to edit the configuration before the first run.
 + Start with defaults and document configuration as optional.
 ```
@@ -98,7 +102,7 @@ Request: “Show what `feature/export` adds to `origin/main` for the PR.”
 
 ```diff
 diff --git a/docs/export.md b/docs/export.md
-@@ Export formats @@
+@@ Export formats @@ Export adds JSON support.
 - Export supports CSV only.
 + Export also supports JSON.
 ```
@@ -112,9 +116,9 @@ Target branch before → after (summary, not a patch):
 
 ```diff
 diff --git a/config/retention.conf b/config/retention.conf
-@@ Log retention @@
-- Keep all logs for 7 days.
-+ Keep application logs for 30 days; audit logs still expire after 7 days.
+@@ Log retention @@ Application logs are kept for 30 days instead of 7. Audit logs still expire after 7 days.
+- Keep application logs for 7 days.
++ Keep application logs for 30 days.
 ```
 
 ### Follow-up asking for exact lines
@@ -151,11 +155,11 @@ Concept comparison (original Adam vs. basic RMSProp without optional momentum):
 ```diff
 --- Adam
 +++ RMSProp
-@@ Gradient used for the step @@
+@@ Gradient for the update @@ Adam averages gradients; RMSProp uses the current gradient.
 - Uses a moving average of gradients before per-parameter scaling.
 + Uses the current gradient before per-parameter scaling.
 
-@@ Moving averages @@
+@@ Bias correction @@ Only Adam corrects the initial bias.
   Both track a moving average of squared gradients to scale each parameter's step.
 - Corrects the initial bias of both moving averages.
 + Does not apply Adam-style bias correction.
@@ -170,11 +174,11 @@ Concept comparison (typical systems; constitutional details vary):
 ```diff
 --- Parliamentary system
 +++ Presidential system
-@@ Government leadership @@
+@@ Executive leadership @@ Only the prime minister needs the legislature's confidence.
 - A prime minister leads the government, which depends on the legislature's confidence.
 + A separately elected president leads the executive without needing the legislature's confidence to stay in office.
 
-@@ Early removal @@
+@@ Early removal @@ Loss of legislative support alone cannot remove a president.
 - A vote of no confidence can bring down the government.
 + Loss of legislative support alone does not end the president's fixed term; early removal follows a separate constitutional process.
 ```
