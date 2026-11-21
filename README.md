@@ -135,6 +135,7 @@ The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 | `improve-agent-harnesses` | Testing and automatically applying measured improvements to skills under `~/.agents/skills/`, including itself, on request or after a reproducible skill failure. |
 | `lean-verify` | Formalizing claims and constructing or checking Lean 4 proofs for mathematical theorems, program properties, algorithm correctness, and other formal-verification tasks in `~/.agents/lean`. |
 | `propose-ranked-options` | Explicitly requesting improvement proposals for a target, such as naming, code refactoring, or UI/UX, ranked by a total score out of 100. |
+| `prune-code-comments` | Auditing and pruning source comments, tracking workarounds as issues, moving decisions to ADRs, and preventing new comments with a lint baseline. |
 | `record-human-feedback` | Recording human corrections, tool or workflow preferences, and follow-up explanation or simplification requests in `~/.agents/human-feedback/`, with response context and frequency summaries. |
 | `resolve-github-issues` | Investigating GitHub issues, obtaining explicit plan approval, handing off to `write-plans` and `execute-plans`, then verifying and reporting the issue outcome. |
 | `review-pull-requests` | Complete read-only PR assessments and merge verdicts, with pinned commits, base/head bug reproduction, impact, risks, and verification. |
