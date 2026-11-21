@@ -1,6 +1,6 @@
 ---
 name: create-docs
-description: Create a new architecture decision record (ADR), request for comments (RFC), product requirements document (PRD), project README, or project glossary from a Markdown template. Use only when the target document does not already exist. Do not use to revise or review an existing document.
+description: Create a new architecture decision record (ADR), request for comments (RFC), product requirements document (PRD), project README, glossary, or contributor guide (CONTRIBUTING.md) from a Markdown template. Use only when the target document does not already exist. Do not use to revise or review an existing document.
 ---
 
 # Create Docs
@@ -16,12 +16,14 @@ Use the document type the user requests, or choose one by the outcome they need.
 | Define a user problem, product requirements, and how to verify them | [PRD](assets/PRD.md) | `docs/prd/<topic>.md` |
 | Explain what a project or package does and help a reader get started | [README](assets/README.md) | `README.md` at the project or package root |
 | Define shared project terms and distinguish similar concepts | [Glossary](assets/GLOSSARY.md) | `GLOSSARY.md` at the project or package root |
+| Explain how to report issues, verify changes, and contribute | [Contributor guide](assets/CONTRIBUTING.md) | `CONTRIBUTING.md` at the repository root |
 
 Use `write-plans` for an implementation task list and `write-agents-md` for agent instructions instead.
 
 ## Check that the document is new
 
 Before reading a template, check the requested path and look for the target document where the project keeps documents of that type.
+For a contributor guide, also check for existing `CONTRIBUTING` files at the repository root and in `.github/` and `docs/`, regardless of case or file extension.
 Use the default path only when neither the user nor the project specifies one.
 If the target document already exists, report its path and stop without overwriting it or creating a duplicate.
 For the default ADR path, use the next four-digit number (start at `0001`) and a lowercase title with hyphens.
