@@ -140,6 +140,7 @@ The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 | `review-pull-requests` | Complete read-only PR assessments and merge verdicts, with pinned commits, base/head bug reproduction, impact, risks, and verification. |
 | `write-agent-skills` | Creating and maintaining Agent Skills, including naming, reviewing, validating, and improving when they load and what they do. |
 | `write-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
+| `write-markdown-templates` | Creating or revising reusable Markdown document templates, including filenames, sections, placeholders, and writing prompts, rather than filling them in. |
 | `write-plans` | Drafting, revising, and tracking implementation plan files, completion evidence, external handoff, and completed-plan cleanup; use `execute-plans` for implementation-to-PR delivery. |
 
 The former `create-agent-skills` skill is now named `write-agent-skills`.
