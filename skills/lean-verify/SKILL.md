@@ -1,11 +1,19 @@
 ---
 name: lean-verify
-description: Formalize claims and construct or check Lean 4 proofs when mathematical theorems, program properties, algorithm correctness, or other claims need formal verification, using a persistent project under ~/.agents/lean.
+description: Use for requests to prove a mathematical claim, even when the user does not mention Lean or formal verification. Also use for formal verification of claims such as program properties and algorithm correctness, or to construct or check Lean 4 proofs. Skip requests for intuition or definitions alone, or when the user asks not to use Lean.
 ---
 
 # Lean Verification
 
 Verify the intended claim, not only a simpler replacement that Lean can prove.
+
+## Choose the Verification Scope
+
+- For a mathematical proof request that does not ask for formal verification, give a readable proof and check the claim with the Lean setup already available, when possible.
+  Use an installed toolchain and available imports, and run the check from standard input with `lean --stdin` without creating or modifying files or installing anything.
+  Inspect the checked theorem's axiom dependencies with `#print axioms`.
+  In the reply, distinguish a Lean check of the claim from the written proof, and say if the claim was not checked.
+- For explicit formal-verification or Lean proof requests, follow the workspace and reporting steps below.
 
 ## Define the Claim
 

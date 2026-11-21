@@ -133,7 +133,7 @@ The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 | `execute-plans` | Executing a plan on a focused branch and opening a PR by default after required local checks pass, with default-directory lookup when no full path is supplied; use `write-plans` to draft or track plan files. |
 | `give-language-feedback` | Proactive, one-sentence grammar or wording feedback in any language alongside the main task, without requiring a language-help request. |
 | `improve-agent-harnesses` | Testing and automatically applying measured improvements to skills under `~/.agents/skills/`, including itself, on request or after a reproducible skill failure. |
-| `lean-verify` | Formalizing claims and constructing or checking Lean 4 proofs for mathematical theorems, program properties, algorithm correctness, and other formal-verification tasks in `~/.agents/lean`. |
+| `lean-verify` | Mathematical proof requests, even without an explicit Lean request, and formal verification of claims such as program properties and algorithm correctness. For ordinary proof requests, check with Lean when an existing setup is sufficient. |
 | `propose-ranked-options` | Explicitly requesting improvement proposals for a target, such as naming, code refactoring, or UI/UX, ranked by a total score out of 100. |
 | `prune-code-comments` | Auditing and pruning source comments, tracking workarounds as issues, moving decisions to ADRs, and preventing new comments with a lint baseline. |
 | `resolve-github-issues` | Investigating GitHub issues, obtaining explicit plan approval, handing off to `write-plans` and `execute-plans`, then verifying and reporting the issue outcome. |
