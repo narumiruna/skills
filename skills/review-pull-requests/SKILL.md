@@ -6,10 +6,12 @@ description: Review a hosted pull request for correctness, impact, risks, and ve
 # Review Pull Requests
 
 Do not intentionally edit tracked files, write to the hosting platform (including comments, reviews, or approvals), or merge.
-For reproduction across commits, use isolated temporary copies and keep setup, build, and test artifacts in those copies.
-Run any command that imports or executes code from the reviewed repository only in a fresh disposable sandbox for each reviewed revision.
+For reproduction, use `git clone --no-checkout` to create a fresh copy of the verified repository in a unique directory under `/tmp/repos/` for each revision, if repository rules permit it.
+Check out each pinned commit inside its own fresh disposable sandbox.
+Run any command that imports or executes code from the reviewed repository only inside that revision's sandbox.
 This includes setup, dependency installation, builds, tests, and reproduction on both the base and head commits.
-Expose only those copies and the required read-only toolchain.
+Keep setup, build, and test artifacts in that revision's clone.
+Expose only that clone and the required read-only toolchain.
 Start with a clean environment.
 Do not expose host credentials, home directories, unrelated host files, host sockets, or shared services.
 Disable network access unless a specific destination is required for the check.

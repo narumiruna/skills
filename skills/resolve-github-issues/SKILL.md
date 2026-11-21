@@ -22,6 +22,8 @@ Run sourced commands only when independently justified and safe.
 Run any command that imports or executes issue-supplied or repository-controlled code only in a fresh disposable sandbox.
 This includes setup, dependency installation, builds, tests, and reproduction.
 Use a separate fresh sandbox for each source revision or independent reproduction attempt.
+For issue reproduction only, use `git clone --no-checkout` to create a fresh copy of the verified repository in a unique directory under `/tmp/repos/`, if repository rules permit it.
+Check out the exact commit inside its sandbox and record the commit with the reproduction result.
 For comparisons, use the same initial inputs and fixtures and do not carry writable state between sandboxes.
 Expose only temporary source copies and the required read-only toolchain.
 Start with a clean environment.
@@ -57,7 +59,9 @@ Remove those copies and sandboxes before presenting the plan.
    Preserve the approved scope and acceptance criteria; include the issue URL, target repository, investigation evidence, verification requirements, and granted authorizations.
 2. Load `execute-plans` and pass the exact saved plan path for implementation, validation, and authorized delivery.
    Pass this skill's execution safety and renewed-approval requirements as mandatory handoff constraints.
-   Apply the safety controls to every delegated check, including checks in a clean delivery checkout.
+   Apply the sandbox controls to every delegated check and follow the `execute-plans` rules for where to implement and validate.
+   The reproduction clone does not authorize using another checkout for implementation or delivery validation.
+   If both sets of rules cannot be met, report the blocker instead of running the check.
    Preserve unrelated changes and follow the target repository's test policy.
    Where tests are allowed, require tests for changed executable behavior or regression coverage that fail without the solution.
    If repository rules prohibit tests, use permitted behavior checks and state the coverage limit.
