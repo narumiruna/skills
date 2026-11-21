@@ -20,12 +20,12 @@ Do not stage or commit changes.
    - `DUPLICATE`: The statements convey the same information under the same conditions; remove the redundant occurrence if it serves no separate purpose.
    - `PARTIAL_OVERLAP`: The statements share some information but are not equivalent; merge them or trim the repeated information.
    - `UNRELATED`: The statements share no substantive information; leave them unchanged.
-4. **Consolidate:** Save the current contents of each file before editing so the diff excludes earlier changes.
+4. **Consolidate:** Save the current contents of each file before editing.
    Prefer deletion to rewriting, and preserve all unique information, original intent, conditions, exceptions, and document structure.
    Before removing a cross-file repeat, check each document's purpose and keep repetition needed for standalone use.
    Leave the original text unchanged if you cannot confirm the edit is safe.
 5. **Verify:** Reread the changed passages in context and compare them with their pre-edit contents.
-   Check that the edits preserve meaning, links, and structure, introduce no new repetition, and touch no unrelated content.
+   Check that the edits meet the preservation rules above, preserve links, introduce no new repetition, and touch no unrelated content.
 6. **Report:** Summarize changes and important candidates left intact, then show the unified Git diff for this run only.
    Generate the patch with `git diff`, or use `git diff --no-index` against the pre-edit contents if `git diff` would include earlier changes or miss an edited file.
    If there are no edits, say so instead of showing an empty diff.
