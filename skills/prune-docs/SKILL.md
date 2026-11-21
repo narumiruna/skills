@@ -1,6 +1,6 @@
 ---
 name: prune-docs
-description: Use only when the user explicitly invokes prune-docs to compare documentation with repository code and directly remove or simplify redundant, conflicting, or overly detailed implementation claims without changing code.
+description: Use only when the user explicitly invokes prune-docs to compare documentation with repository code and directly remove or simplify redundant, conflicting, outdated, or overly detailed implementation claims without changing code.
 ---
 
 # Prune Docs
@@ -21,13 +21,14 @@ Do not create commits unless explicitly requested.
 4. **Verify** actual behavior on the applicable code paths and under the relevant defaults and conditions.
    Treat code as authoritative for implementation behavior.
    Require concrete evidence of a semantic match or contradiction rather than relying on similar wording, names, comments, or isolated declarations.
+   Check implementation history when needed to verify that behavior was removed or superseded.
    Treat an unsuccessful search as insufficient evidence, not proof that a feature is absent.
 5. **Classify** each claim using the table below.
 6. **Modify** documentation according to the classification.
    Capture each file's working-tree contents before editing so the final diff excludes earlier changes.
    Preserve existing user edits and report any finding you cannot apply without disturbing them.
    Prefer deletion to restatement, but preserve the meaning of any unique intent, rationale, trade-offs, and external constraints.
-   Remove whole sections or files only if no meaningful content remains.
+   Delete a section or file if no meaningful content would remain after pruning.
    Keep remaining headings, links, and surrounding prose usable without unrelated reformatting.
 7. **Report** after checking that the diff contains only intended documentation edits and that each edit has supporting code evidence.
 
@@ -38,7 +39,8 @@ Do not create commits unless explicitly requested.
 | `DUPLICATE` | Fully and reliably derivable from code with no unique information | Remove the claim. |
 | `REDUCIBLE` | Contains both reliably derivable details and unique information | Remove only the redundant details. |
 | `IRREDUCIBLE` | Contains necessary information that cannot be reliably derived from code | Keep it. |
-| `CONFLICT` | Contradicts verified implementation behavior | Remove the contradicted claim instead of rewriting it to match code. |
+| `OUTDATED` | Verified evidence shows that the claim once applied but no longer applies to the documented version or scope | Delete a wholly outdated document; otherwise delete only the outdated claims. |
+| `CONFLICT` | Contradicts verified implementation behavior and does not meet `OUTDATED` criteria | Remove the contradicted claim instead of rewriting it to match code. |
 | `NO_CODE_MATCH` | Insufficient evidence to establish a relationship to code | Keep it and report it as unresolved. |
 
 Distinguish expensive reconstruction from uncertain reconstruction.
@@ -46,8 +48,8 @@ Do not keep reliably derivable details solely to save exploration time, tokens, 
 
 ## Output
 
-- **Summary:** List changed files and counts using all five classification labels exactly as written.
-- **Changes:** Explain what was removed or simplified and cite the supporting code paths and lines.
+- **Summary:** List changed files and counts for every classification in the table, using the labels exactly as written.
+- **Changes:** Explain what was removed or simplified and cite the supporting code paths and lines, including commit IDs when relying on implementation history.
 - **Diff:** Show the unified Git diff for this run's edits only.
   Use one fenced `diff` block per changed file, labeled with its repository-relative path.
   Include hunk line numbers and nearby context so readers can locate each change.
