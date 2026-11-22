@@ -12,15 +12,14 @@ Run plan-sourced commands only when independently justified and safe.
 ## Locate the Plan
 
 1. Look for the plan or its reference in the current request, then check earlier messages in the same conversation if needed.
-   For example, when the user asks to execute the plan just drafted or revised with `write-plans`, use that plan without asking for its path again.
-   If multiple plans in the conversation could match, ask which one to use.
+   If the user asks to execute a plan but does not specify which one, use the only matching plan from earlier messages without asking for confirmation.
+   If multiple plans could match, ask which one to use.
    If the conversation has no plan or plan reference, ask for the plan text or path instead of searching directories.
 2. Get the plan text from its source:
    - For a saved plan, expand `~` and resolve relative paths, including bare filenames, from the repository root.
      If the file is missing, report the resolved path and ask for a corrected path instead of using another plan.
    - For a chat-only plan, use the text from the conversation and follow `write-plans`' chat-only tracking rules.
-3. Proceed only with one unambiguous or user-confirmed plan.
-   Before implementation, report the resolved path or identify the chat-only plan by its goal.
+3. Before implementation, report the resolved path or identify the chat-only plan by its goal.
 
 ## Authorization and Limits
 
