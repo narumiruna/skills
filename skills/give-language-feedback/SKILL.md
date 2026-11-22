@@ -30,13 +30,19 @@ While this skill is active, consider each new user message for one short lesson.
 
 ## Present the Lesson
 
-Complete the main task first, then append the lesson once as normal response text.
-Use these English labels:
+Complete the main task first, then append one short editing note.
+Write the title and field labels in the current message's main language and writing system, using natural local wording and punctuation.
+Keep the three emoji and the field order shown below.
+Render the note as normal Markdown, not as a code block.
 
-```text
-Original: <exact original sentence>
-Suggestion: <revised sentence>
-Explanation: <one short grammar or wording point>
+```markdown
+**Editing Note**
+
+💡 **Suggestion**: **<revised sentence>**
+
+💬 **Original**: <exact original sentence>
+
+🔎 **Reason**: <one short grammar or wording point>
 ```
 
 Omit the lesson if the user declines coaching or if extra text would break a required output format.
