@@ -120,7 +120,7 @@ Use `/skill:<name>` to invoke a skill with arguments:
 ### Global Skills
 
 Global skills live under `skills/` and are linked by `just install`.
-`curate-ui-styles` and the [saved UI styles](#saved-ui-styles) are grouped under `skills/design/`.
+`curate-ui-styles`, `refine-uiux`, and the [saved UI styles](#saved-ui-styles) are grouped under `skills/design/`.
 The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 
 | Skill | Use it for |
@@ -139,6 +139,7 @@ The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 | `prune-code-comments` | Auditing and pruning source comments, tracking workarounds as issues, moving decisions to ADRs, and preventing new comments with a lint baseline. |
 | `prune-docs` | Explicitly pruning documentation by removing or simplifying claims that code confirms are redundant, incorrect, or outdated. Deletes wholly outdated documents, leaves code unchanged, and reports the diff. |
 | `refine-docs` | Polishing wording, reorganizing sections, or removing repeated ideas within or across specified documents (Markdown by default), without changing meaning or verifying claims against code. |
+| [`refine-uiux`](skills/design/refine-uiux/SKILL.md) | Finding what gets in the way in an existing app, web flow, or terminal UI (TUI), then making small, verified fixes or showing comparable samples when the user needs to choose between approaches. |
 | `resolve-github-issues` | Investigating GitHub issues, obtaining explicit plan approval, handing off to `write-plans` and `execute-plans`, then verifying and reporting the issue outcome. |
 | `review-pull-requests` | Complete read-only PR assessments and merge verdicts, with pinned commits, base/head bug reproduction, impact, risks, and verification. |
 | `show-diff` | Comparing subjects or repository changes, even without a diff request. Chooses a Git-style summary, table, or Mermaid diagram, with versioned format preferences by comparison type. Shows the actual patch on request when available. |
