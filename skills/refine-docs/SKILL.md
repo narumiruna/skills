@@ -26,8 +26,13 @@ Do not stage or commit changes.
 3. **Verify:** Reread the edited passages in context and review the diff.
    Check that prerequisites still come first, links and heading references still work, and unrelated content is unchanged.
 4. **Report:** Use the saved pre-edit contents as the baseline and report only this run's changes.
-   Use the format the user requests.
-   Otherwise, give a brief Git-style summary in a fenced `diff` block with `-` for before and `+` for after.
-   Label it as a summary, not an apply-ready patch.
-   If nothing changed, say so instead.
+   If nothing changed, say so.
+   Otherwise, use the requested format or this default:
+   - Show a GitHub-style line count for each changed file, for example: `docs/guide.md: +12 −8 🟩🟩🟩🟥🟥 (net +4)`.
+     Use five squares to approximate the share of additions (green) and deletions (red), with green first.
+     Keep the exact counts in text because the squares are only a visual guide.
+     Count actual changed lines against the saved pre-edit contents, not lines in the summary or unrelated working-tree changes.
+     Include totals when more than one file changed.
+   - Give a brief Git-style summary in a fenced `diff` block with `-` for before and `+` for after.
+     Label it as a summary, not an apply-ready patch.
    Report any unresolved issues.
