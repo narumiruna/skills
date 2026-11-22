@@ -43,6 +43,14 @@ Label diff excerpts as partial.
 For a raw diff, complete patch, or line-by-line file comparison, show the actual diff for the requested scope without paraphrasing or adding visuals.
 Do not present an excerpt as complete or invent a patch when there are no files to compare.
 
+## Show before and after in one Mermaid diagram
+
+When using Mermaid for a before-and-after comparison, put both states in one diagram rather than drawing separate diagrams.
+Show unchanged components, steps, or participants once when practical.
+Label additions, removals, or changes in text so the reader can tell what stays and what differs.
+Use labeled sections within the same diagram if combining the states would make ownership or message order unclear.
+Use color or dashed lines only to reinforce labels, and preserve the diagram type's normal arrow meanings.
+
 ## Remember format preferences by comparison type
 
 Update only the skill's [preference file](references/preferences.md), not a copy in the repository being compared.
@@ -135,6 +143,19 @@ Partial diff (`config/retention.conf` only):
 ```
 
 For “Show the full raw patch,” show the complete actual diff for the same comparison, not this excerpt.
+
+### Showing an added route in one Mermaid diagram
+
+Request: “Use Mermaid to show the invoice workflow before and after adding CSV export.”
+
+Filtering and manual copying stay the same; the plan adds another way to get the filtered results.
+
+```mermaid
+flowchart LR
+    Filter[Filter invoices] -->|Retained| Copy[Copy results manually]
+    Filter -. Proposed addition .-> Export[Click Export CSV]
+    Export -.-> Download[Download filtered invoices]
+```
 
 ### Comparing alternatives across shared criteria
 

@@ -50,6 +50,17 @@ Create agent tasks to prepare available evidence, such as before/after captures 
 Do not require user acceptance merely to close the coding plan; preserve acceptance requirements explicitly imposed by the user or higher-priority instructions, even when they block completion.
 External handoff does not authorize external writes, costly operations, or requests for secrets in chat.
 
+## Present the Plan
+
+After drafting or revising a plan, lead the reply with the plan's main goal and the specific changes it proposes, not a confirmation that the plan was written.
+Explain the practical difference between what happens now and what users, operators, or maintainers can expect after implementation; do not just list tasks.
+Unless the user requests another format, use a short `diff` block with `-` for current behavior and `+` for expected behavior, and label it as a summary, not a patch.
+Pair the summary with one compact Mermaid diagram when the diagram clarifies relationships the summary alone does not show.
+Choose the diagram type that fits the change, such as an architecture diagram for components and dependencies, a sequence diagram for message order, or a flowchart for steps and decisions.
+Show shared context once when practical, and label proposed additions, changes, or removals in the diagram.
+Use color or dashed lines only as a secondary cue, without changing the diagram type's normal arrow meanings.
+Name any external prerequisite that must be met for the expected change to take effect, and describe the change as expected, not verified.
+
 ## Tracking and Completion
 
 While tracking authorized implementation:
