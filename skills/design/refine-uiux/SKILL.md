@@ -9,52 +9,56 @@ Improve the user's main task without redesigning the interface.
 
 ## Observe the Current Task
 
-1. Use the requested interface or flow and its primary task.
-   If the task is omitted, state what you assume the user is trying to do and proceed.
-2. In a safe test environment, walk through the task from the same starting state using test data.
-   For graphical interfaces, use desktop and mobile layouts where supported.
-   For a TUI, use representative wide and narrow terminal sizes and exercise the relevant key sequences with a non-interactive test harness when available.
-   Before editing, record the test data, screen sizes (columns × rows for a TUI), and baseline screenshots or terminal captures of the affected steps.
-   If you cannot observe the task at all, report what blocked it and stop without editing.
-3. Identify up to three problems, ordered by how much they interfere with the task.
-   For each, name the step, describe what the user has to do or guess, and point to visible or interactive evidence.
+1. Identify the primary task for the requested interface or flow.
+   If the user did not specify a task, state your assumption and proceed.
+2. In a safe test environment, use test data and start each walkthrough from the same state.
+   - For graphical interfaces, test desktop and mobile layouts where supported.
+   - For a TUI, test representative wide and narrow terminal sizes.
+     Use a non-interactive test harness to exercise relevant key sequences when one is available.
+   - If you cannot observe the task at all, report the blocker and stop without editing.
+   - Before editing, record the test data and screen sizes (columns × rows for a TUI).
+     Capture the affected steps in screenshots or terminal output.
+3. List up to three problems in order of impact on the task.
+   For each, name the step, explain what the user has to do or guess, and cite what you saw or what happened during the interaction.
 
 ## Decide Whether to Edit
 
-- Recommend rather than implement changes when the cause is unclear or the fix requires a redesign, a change to the flow between screens, a permission change, or a change to how data is handled.
-  If a layout or terminal size is unavailable, make a fix only if you can reproduce the problem and verify the fix without relying on it.
-- Apply the smallest local fix directly when the cause and correction are clear, there is no meaningful choice, and the user did not ask for options.
-- Present options when the user asks for them, viable approaches have meaningful tradeoffs, or you can recommend changes but cannot implement them.
+- If a layout or terminal size is unavailable, edit only if you can reproduce the problem and verify the fix without it.
+- Recommend changes instead of implementing them if the cause is unclear or the fix requires a redesign or changes to navigation between screens, permissions, or data handling.
+- Present options when the user asks for them, viable approaches involve meaningful tradeoffs, or you can recommend a change but cannot make it.
+- Otherwise, apply the smallest local fix directly when the cause and correction are clear.
 
 ## Present Options and Samples
 
-1. Offer two or three distinct approaches to the same finding in a numbered list.
-   For each, explain what changes, what gets easier for the user, and the main tradeoff.
-   Recommend one and say why; if only one approach is viable, explain why instead of inventing alternatives.
-2. When feasible, show comparable samples before asking for a choice.
-   Use a standalone local preview or annotated mockup for a graphical interface, monospaced screen mockups for a TUI, or text examples when wording is the only difference.
-   Keep the task step, sample data, and screen size the same across options.
-   Label samples as proposals and keep them separate from product code and live actions.
-3. Ask the user which option they want and wait before editing that finding.
-   Keep options that exceed the current scope as recommendations unless the user explicitly authorizes the broader change.
+1. Give a numbered list of two or three distinct ways to address the same finding.
+   For each, state the change, the user benefit, and the main tradeoff.
+   Recommend one and explain why.
+   If only one approach is viable, explain why rather than invent alternatives.
+2. When feasible, show samples before asking the user to choose.
+   - Use a standalone local preview or annotated mockup for a graphical interface, a monospaced mockup for a TUI, or text examples for wording-only changes.
+   - Show the same task step, sample data, and screen size for each option.
+   - Label samples as proposals and keep them separate from product code and live actions.
+3. Ask the user to choose and wait for their answer before editing for that finding.
+   Keep out-of-scope options as recommendations unless the user explicitly authorizes the broader change.
 
 ## Make Small Fixes
 
-- To address a selected finding, make the current state, next action, and consequences clear where the user needs them.
-  Place warnings that affect a decision next to the relevant controls.
-- Remove duplicate information or collapse secondary details by default only when doing so addresses a selected finding.
-  Preserve distinct guidance and keep information needed for the task, a decision, or recovery easy to find.
-- Reuse existing UI patterns and leave unrelated behavior and styling unchanged.
 - If no finding qualifies for a fix now, report the findings or options and stop without editing product code.
+- For selected findings, make the current state, next action, and consequences clear where the user needs them.
+  Put warnings that affect a decision next to the relevant controls.
+- Remove repeated information or collapse secondary details by default only if doing so addresses a selected finding.
+  Preserve distinct guidance and keep information for the task, decisions, or recovery easy to find.
+- Reuse existing UI patterns and leave unrelated behavior and styling unchanged.
 
 ## Verify and Report
 
-1. Repeat the same task with the same test data, starting state, and available layouts or terminal sizes.
-   Recheck each fix at the step where the problem occurred.
-   Check keyboard operation, including focus order and visibility where applicable, and exercise affected error and empty states.
-   For a TUI, check affected key bindings and look for clipped text or controls at the tested sizes.
-   If a fix leaves the problem unresolved or introduces a regression, correct it within scope and recheck it, or undo only that fix and explain why.
-2. Provide before-and-after screenshots or terminal captures at matching steps and sizes.
-   If a capture or check is unavailable, report what is missing and why instead of implying it was verified.
-3. Explain what the user now does or guesses less, which findings remain recommendations, and what you did not verify.
-   Stop after reporting without expanding the scope.
+1. Repeat the task with the same test data, starting state, and available layouts or terminal sizes.
+   - Recheck each fix at the step where the problem occurred.
+   - Test keyboard operation and any affected error or empty states.
+     Check focus order and visibility where applicable.
+   - For a TUI, check affected key bindings and look for clipped text or controls at the tested sizes.
+   - If the problem persists or the fix introduces a regression, correct and recheck it within scope, or undo only that fix and explain why.
+2. Report what the user now does or guesses less and which findings remain recommendations.
+   Provide before-and-after screenshots or terminal captures at matching steps and sizes.
+   List any unverified scenarios and explain why any capture or check was unavailable.
+   Stop without expanding the scope.
