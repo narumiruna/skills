@@ -25,7 +25,7 @@ Do not create commits unless explicitly requested.
    Treat an unsuccessful search as insufficient evidence, not proof that a feature is absent.
 5. **Classify** each claim using the table below.
 6. **Modify** documentation according to the classification.
-   Capture each file's working-tree contents before editing so the final diff excludes earlier changes.
+   Capture each file's working-tree contents before editing so you can verify and summarize only this run's edits.
    Preserve existing user edits and report any finding you cannot apply without disturbing them.
    Prefer deletion to restatement, but preserve the meaning of any unique intent, rationale, trade-offs, and external constraints.
    Delete a section or file if no meaningful content would remain after pruning.
@@ -49,12 +49,11 @@ Do not keep reliably derivable details solely to save exploration time, tokens, 
 ## Output
 
 - **Summary:** List changed files and counts for every classification in the table, using the labels exactly as written.
-- **Changes:** Explain what was removed or simplified and cite the supporting code paths and lines, including commit IDs when relying on implementation history.
-- **Diff:** Show the unified Git diff for this run's edits only.
-  Use one fenced `diff` block per changed file, labeled with its repository-relative path.
-  Include hunk line numbers and nearby context so readers can locate each change.
-  Use `git diff --no-index` against pre-edit snapshots if the normal Git diff would include pre-existing changes or omit an edited untracked file.
-  Show repository-relative file names in diff headers instead of temporary snapshot paths.
+- **Changes:** Show a high-level Git-style diff of this run's edits only.
+  Label it as a summary, not a patch, and use one fenced `diff` block with `diff --git` headers for repository-relative paths.
+  Group related edits under `@@ <scope> @@ <key difference>` and use `-` and `+` lines to summarize what was removed or simplified and what remains, if anything.
+  Do not show raw patch hunks, hunk line numbers, or unchanged context.
+  Cite the supporting code paths and lines outside the block, including commit IDs when relying on implementation history.
   If nothing changed, say so instead of showing an empty diff.
 - **Unresolved:** List unverified claims and evidence gaps, plus any edits skipped to preserve user changes.
 
