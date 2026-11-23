@@ -11,14 +11,14 @@ Use the document type the user requests, or choose one by the outcome they need.
 
 | Outcome | Template | Default output if the project has no convention |
 | --- | --- | --- |
-| Preserve a specific architecture decision and why it was made | [ADR](assets/ADR.md) | `docs/decisions/NNNN-title-with-dashes.md` |
-| Propose a change and ask reviewers for feedback | [RFC](assets/RFC.md) | `docs/rfc/<topic>.md` |
-| Define a user problem, product requirements, and how to verify them | [PRD](assets/PRD.md) | `docs/prd/<topic>.md` |
-| Explain what a project or package does and help a reader get started | [README](assets/README.md) | `README.md` at the project or package root |
-| Define shared project terms and distinguish similar concepts | [Glossary](assets/GLOSSARY.md) | `GLOSSARY.md` at the project or package root |
-| Explain how to report issues, verify changes, and contribute | [Contributor guide](assets/CONTRIBUTING.md) | `CONTRIBUTING.md` at the repository root |
-| Report a problem, request a change, or track work | [Issue](assets/ISSUE.md) | Draft in chat |
-| Explain a change and how you verified it for reviewers | [Pull request](assets/PULL_REQUEST.md) | Draft in chat |
+| Preserve a specific architecture decision and why it was made | [ADR](assets/adr.md) | `docs/decisions/NNNN-title-with-dashes.md` |
+| Propose a change and ask reviewers for feedback | [RFC](assets/rfc.md) | `docs/rfc/<topic>.md` |
+| Define a user problem, product requirements, and how to verify them | [PRD](assets/prd.md) | `docs/prd/<topic>.md` |
+| Explain what a project or package does and help a reader get started | [README](assets/readme.md) | `README.md` at the project or package root |
+| Define shared project terms and distinguish similar concepts | [Glossary](assets/glossary.md) | `GLOSSARY.md` at the project or package root |
+| Explain how to report issues, verify changes, and contribute | [Contributor guide](assets/contributing.md) | `CONTRIBUTING.md` at the repository root |
+| Report a problem, request a change, or track work | [Issue](assets/issue.md) | Draft in chat |
+| Explain a change and how you verified it for reviewers | [Pull request](assets/pull-request.md) | Draft in chat |
 
 Use `write-plans` for an implementation task list and `write-agents-md` for agent instructions instead.
 
