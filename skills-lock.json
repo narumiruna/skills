@@ -15,6 +15,13 @@
       "computedHash": "63f55b279f1298d3cabe91999063920cdc2a2f16a671cb8fbd87ddecc7fde216",
       "commit": "792440e8a560a4a3f63748cdee70491ecd412982"
     },
+    "diagram-design": {
+      "source": "cathrynlavery/diagram-design",
+      "commit": "0eeda75a708f419560d5e032693618bb9954f17b",
+      "sourceType": "github",
+      "skillPath": "skills/diagram-design/SKILL.md",
+      "computedHash": "f5f88973e37f06c0f73afed09341205aa7175c45e41dac1259868428e77bf6bb"
+    },
     "modern-web-guidance": {
       "source": "GoogleChrome/modern-web-guidance",
       "sourceType": "github",
