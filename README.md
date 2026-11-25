@@ -238,6 +238,7 @@ External skills recorded in [`skills-lock.json`](skills-lock.json):
 | --- | --- |
 | `chrome-extensions` | [GoogleChrome/modern-web-guidance][googlechrome-skills] |
 | `correct` | [cursor/plugins][cursor-skills] |
+| [`diagram-design`](skills/diagram-design/SKILL.md) | [cathrynlavery/diagram-design](https://github.com/cathrynlavery/diagram-design) |
 | `modern-web-guidance` | [GoogleChrome/modern-web-guidance][googlechrome-skills] |
 | `security-audit` | [cloudflare/security-audit-skill][cloudflare-skills] |
 

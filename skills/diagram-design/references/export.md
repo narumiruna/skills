@@ -1,24 +1,23 @@
-# Export to PNG / SVG
+# Export to PNG, SVG, or PDF
 
-Convert a generated diagram HTML file into a portable `.svg` and/or `.png` next to it. **Manual only — never run unprompted.**
+Convert a diagram HTML file to SVG, PNG, or PDF. **Export only when the user asks.**
 
 ## Trigger
 
 Load this file when:
 
-- The user invokes `/diagram-design:export-diagram <html-file>` (the plugin's slash command — defined in `commands/export-diagram.md` at the repo root).
-- The user asks in natural language to export, save, rasterize, convert, or download a diagram in `.svg` or `.png` form. Typical phrasings:
+- The user invokes `/diagram-design:export-diagram <html-file>` in the upstream plugin.
+- The user asks to export, save, rasterize, convert, or download a diagram as SVG, PNG, or PDF. Typical phrasings:
   - "export this as PNG"
   - "save as SVG"
   - "give me a PNG of that diagram"
   - "rasterize it"
   - "convert to png and svg"
-
-The slash command is a thin wrapper that delegates here — both paths run the same procedure below.
+  - "export a printable PDF"
 
 ## Scope
 
-Both formats are **diagram-only** — just the `<svg>` node. Editorial wrappers (header, summary cards, footer in `-full` variants) are intentionally dropped: the export deliverable is the diagram itself, suitable for Figma, slides, social cards, or blog images.
+Exports contain only the diagram (the `<svg>` node) by default. For PDF, add `--full-page` to keep the header, summary cards, and footer from the HTML.
 
 The SVG-only export keeps the source `<title>` and `<desc>` with the diagram. Their per-diagram and per-variant prefixed IDs keep accessible names unique when several figures share a page.
 
@@ -328,6 +327,22 @@ The helper's overflow release matters for the wide presets. `min-width` equals t
 
 `example-architecture.html` → `example-architecture.png`, written next to the source. Honour explicit user-provided paths. The rasterizer encodes the absolute source path as a file URI, so literal `#` and `%` characters in filenames remain filename content.
 
+## PDF export procedure
+
+Render the original HTML with Playwright Chromium into a single-page vector PDF. Use the Python interpreter that passed the Playwright check above. Do not install Playwright or Chromium automatically.
+
+Run the helper by its absolute path. If only `python` passed the check, use it instead of `python3`:
+
+```
+python3 <skill-dir>/scripts/export_pdf.py <src.html> [<out.pdf>] [--page-size a4|a3|letter] [--full-page]
+```
+
+- **Default (exact viewBox bounds, diagram-only):** Requests `?motion=static`, awaits `document.fonts.ready` (with the same 15 s `networkidle` timeout and `window.stop()` stalled-webfont fallback warning as `export_png.py`), verifies `[data-motion-root]` is `data-frame="static"`, keeps screen media colors with `print_background=True` so dark skins retain their palette, isolates the first top-level `<svg>` at 1 CSS px per viewBox unit, and writes a zero-margin single-page vector PDF.
+- **`--page-size a4|a3|letter`:** Switches to print media and fits the diagram cleanly onto a landscape A4, A3, or US Letter sheet with 10 mm margins.
+- **`--full-page`:** Retains the editorial header, summary cards, and footer from `-full` variants while removing motion controls and decorative overlays. With `--page-size`, the whole layout is scaled down to fit the same sheet, so it still prints on one page.
+- **Refusals (exit 2):** Refuses missing files, gallery `assets/index.html`, files without an `<svg>`, and root `<svg>` elements lacking a nonzero finite `viewBox`.
+- **Upstream plugin only:** `/diagram-design:export-diagram` still exports SVG and PNG by default. Add `--pdf` to include PDF, or `--pdf-only` to export only PDF. Do not combine the `--svg-only`, `--png-only`, and `--pdf-only` flags.
+
 ## Sizing the export
 
 The PNG's pixel dimensions are the SVG's `viewBox` × `device_scale_factor`. The rasterizer establishes the capture viewport from the finite, nonzero viewBox dimensions so page CSS cannot enlarge or shrink the promised output. So the size decision was already made when the diagram was drawn — see [`output-spec.md` §2](output-spec.md) for the presets. Export only picks the multiplier.
@@ -358,14 +373,14 @@ If the target aspect ratio doesn't match the `viewBox` aspect ratio, say so and 
 
 - **Source is `assets/index.html`** (the gallery, multiple SVGs in one file): refuse the export and ask the user which specific diagram file they meant. Don't guess.
 - **No `<svg>` block found**: the source isn't a diagram file. Tell the user; don't write anything.
-- **Surrounding HTML matters to the user**: they want cards/header in the image. Tell them this skill exports diagrams only, and recommend a browser-based full-page screenshot (or a separate PDF print).
+- **The user wants the surrounding HTML**: use PDF with `--full-page`, or suggest a full-page browser screenshot if they need an image.
 - **Source is missing fonts at runtime**: Playwright will substitute, the screenshot will look off. Check that the source HTML has the `<link href="...fonts.googleapis.com...">` tag in `<head>`. If absent, the file isn't from a current template — fix the source rather than working around it in export.
 
 ## What this command never does
 
 - Modifies the source HTML.
 - Adds export buttons or `<script>` tags. Static diagrams remain script-free; an already motion-enabled source may retain the scoped controller from [`animation.md`](animation.md), but export never injects another controller.
-- Auto-emits `.svg` or `.png` alongside HTML generation. Manual on every call.
+- Exports SVG, PNG, or PDF automatically when it generates HTML.
 - Embeds an HTML wrapper (cards, headers) into the SVG via `foreignObject`. Too fragile across renderers.
 
 The exporter preserves `@font-face` and scopes ordinary rules within block at-rules such as `@supports`, `@media`, `@layer`, and `@container` without flattening their conditions. Groups containing only keyframes or font faces are also retained, including nested groups, so references outside the group keep their definitions. Declaration-only unsupported blocks are dropped with a warning rather than aborting the export. System-font mode continues to omit custom font-face declarations. Semicolons inside parenthesized CSS functions, including unquoted data URLs, remain value text instead of ending a statement.

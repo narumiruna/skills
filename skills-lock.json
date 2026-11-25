@@ -17,10 +17,10 @@
     },
     "diagram-design": {
       "source": "cathrynlavery/diagram-design",
-      "commit": "0eeda75a708f419560d5e032693618bb9954f17b",
+      "commit": "b228c5d77794a84150fca41b22940bb316b1398d",
       "sourceType": "github",
       "skillPath": "skills/diagram-design/SKILL.md",
-      "computedHash": "f5f88973e37f06c0f73afed09341205aa7175c45e41dac1259868428e77bf6bb"
+      "computedHash": "186dff1f5c079a23fb994e5196f65c86a437373cc45777703b956c736cd79203"
     },
     "modern-web-guidance": {
       "source": "GoogleChrome/modern-web-guidance",
