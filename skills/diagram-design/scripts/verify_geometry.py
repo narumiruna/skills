@@ -1,4 +1,9 @@
-#!/usr/bin/env python3
+#!/usr/bin/env -S uv run --script
+# /// script
+# requires-python = ">=3.10"
+# dependencies = []
+# ///
+
 """Verify no diagram label mask is clipped by a node painted after it.
 
 SKILL.md §6 keeps an arrow label 6-10px clear of its connector, and §5 fixes the
@@ -124,7 +129,7 @@ def contained(inner: Rect, outer: Rect) -> bool:
 
 
 TAG_RE = re.compile(
-    r"<!--[\s\S]*?-->|<(?P<close>/?)(?P<tag>g|svg|defs|symbol|marker|pattern|clipPath|mask|rect|path|line)\b(?P<attrs>(?:\"[^\"]*\"|'[^']*'|[^'\">])*?)(?P<empty>/?)>",
+    r"<!--(?:-?>|[\s\S]*?--!?>)|<(?P<close>/?)(?P<tag>g|svg|defs|symbol|marker|pattern|clipPath|mask|rect|path|line)\b(?P<attrs>(?:\"[^\"]*\"|'[^']*'|[^'\">])*?)(?P<empty>/?)>",
     re.IGNORECASE,
 )
 ATTR_RE = re.compile(r'''([^\s"'>/=]+)(?:\s*=\s*(?:"([^"]*)"|'([^']*)'|[^\s>]*))?''')
