@@ -143,6 +143,7 @@ The two Self-Improvement Memory (SIM) skills are grouped under `skills/sim/`.
 | `resolve-github-issues` | Investigating GitHub issues, obtaining explicit plan approval, handing off to `write-plans` and `execute-plans`, then verifying and reporting the issue outcome. |
 | `review-pull-requests` | Complete read-only PR assessments and merge verdicts, with pinned commits, base/head bug reproduction, impact, risks, and verification. |
 | `show-diff` | Comparing subjects or repository changes, even without a diff request. Chooses a Git-style summary, table, or Mermaid diagram, with versioned format preferences by comparison type. Shows the actual patch on request when available. |
+| [`terminal-browser`](skills/terminal-browser/SKILL.md) | Showing websites or local HTML in a terminal split and interacting with open tabs. Requires the [Terminal Browser CLI](https://github.com/zenbu-labs/terminal-browser); this skill comes from [v0.16.3](https://github.com/zenbu-labs/terminal-browser/releases/tag/v0.16.3). |
 | `write-agent-skills` | Creating and maintaining Agent Skills, including naming, reviewing, validating, and improving when they load and what they do. |
 | `write-agents-md` | Creating, reviewing, and automatically maintaining lean, evidence-backed `AGENTS.md` guidance at the narrowest applicable scope. |
 | `write-markdown-templates` | Creating or revising reusable Markdown document templates, including filenames, sections, placeholders, and writing prompts, rather than filling them in. |
